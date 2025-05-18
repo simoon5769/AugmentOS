@@ -44,27 +44,32 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 19
-        versionName "1.9.0"
+        versionName "1.9.1"
         multiDexEnabled true  // Add this if your app exceeds 64K method limit
     }
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+        release {
+            storeFile file("lingpu-augment-os.jks")
+            storePassword "augment-os.lingpu"
+            keyAlias "lingpu-augment-os"
+            keyPassword "augment-os.lingpu"
         }
     }
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-            debuggable true
-            profileable true
-        }
         release {
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // 启用代码混淆和优化
+            minifyEnabled false
+            // 启用资源压缩
+            shrinkResources false
+            // 指定混淆规则文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 配置签名信息（可选，也可通过 Generate Signed Bundle/APK 自动注入）
+            signingConfig signingConfigs.release
+        }
+        debug {
+//            signingConfig signingConfigs.debug
+//            minifyEnabled enableProguardInReleaseBuilds
+//            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             debuggable true
             profileable true
         }
@@ -102,6 +107,7 @@ dependencies {
     implementation project(':react-native-ble-manager')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-webview')
+    implementation project(':react-native-localize')
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     
     implementation(project(':react-native-camera')) {

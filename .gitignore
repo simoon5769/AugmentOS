@@ -18,6 +18,8 @@ yarn-error.log*
 /.changelog
 .npm/
 augmentos_npm/
+package-lock.json
+./augmentos_manager/package-lock.json
 
 ### PYTHON
 #

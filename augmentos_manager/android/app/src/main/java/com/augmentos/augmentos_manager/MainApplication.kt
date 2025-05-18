@@ -25,6 +25,7 @@ import com.lugg.RNCConfig.RNCConfigPackage
 import org.reactnative.camera.RNCameraPackage
 import com.augmentos.augmentos_manager.logcapture.LogcatCapturePackage
 import com.reactnativecommunity.webview.RNCWebViewPackage
+import com.zoontek.rnlocalize.RNLocalizePackage
 
 // import com.augmentos.augmentos_manager.NotificationServicePackage
 
@@ -38,6 +39,7 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> {
             return listOf(
                 MainReactPackage(),
+                RNLocalizePackage(),
                 RNBluetoothClassicPackage(),
                 BleManagerPackage(),
                 ReanimatedPackage(),
