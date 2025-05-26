@@ -5,6 +5,7 @@ import { checkNotificationAccessSpecialPermission } from '../utils/NotificationS
 import { checkFeaturePermissions, PermissionFeatures } from '../logic/PermissionsUtils';
 import { showAlert } from '../utils/AlertUtils';
 import { useRoute } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 interface HeaderProps {
   isDarkTheme: boolean;
@@ -18,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   const [hasCalendarPermission, setHasCalendarPermission] = useState(true);
   const [appState, setAppState] = useState(AppState.currentState);
   const route = useRoute();
+  const { t } = useTranslation(['home']);
 
   // Check permissions when component mounts
   // and when app comes back to foreground
@@ -108,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   return (
     <View style={styles.headerContainer}>
       <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
-        AugmentOS
+        {t('AugmentOS')}
       </Text>
       
       {(!hasNotificationListenerPermission || !hasCalendarPermission) && (

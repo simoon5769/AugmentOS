@@ -1,5 +1,17 @@
 {
+  "AugmentOS": "智能眼镜系统",
   "RunningAppsList": {
-    "Active Apps": "激活的应用 - 中文"
+    "Active Apps": "激活的应用",
+    "Tap on an app below to start it": "点击下面的应用可以激活它。"
+  },
+  "YourAppsList": {
+    "Inactive Apps": "未激活的应用"
+  },
+  "Homepage": {
+    "Loading your apps": "加载您的应用程序"
+  },
+  "ConnectedDeviceInfo": {
+    "No Glasses Paired": "无可配对的眼镜",
+    "Connect Glasses": "连接眼镜"
   }
 }

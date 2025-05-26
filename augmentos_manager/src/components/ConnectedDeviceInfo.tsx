@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getGlassesImage } from '../logic/getGlassesImage';
 import GlobalEventEmitter from '../logic/GlobalEventEmitter';
 import { getBatteryColor, getBatteryIcon } from '../logic/getBatteryIcon';
+import { useTranslation } from 'react-i18next';
 
 
 interface ConnectedDeviceInfoProps {
@@ -26,6 +27,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
 
   const [isConnectButtonDisabled, setConnectButtonDisabled] = useState(false);
   const [isDisconnectButtonDisabled, setDisconnectButtonDisabled] = useState(false);
+  const { t } = useTranslation(['home']);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -262,9 +264,9 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
                 </View>
               ) : (
                 <View style={styles.noGlassesContent}>
-                  <Text style={styles.noGlassesText}>{"No Glasses Paired"}</Text>
+                  <Text style={styles.noGlassesText}>{t("ConnectedDeviceInfo.No Glasses Paired")}</Text>
                   <TouchableOpacity style={styles.connectButton} onPress={connectGlasses}>
-                    <Text style={styles.buttonText}>{"Connect Glasses"}</Text>
+                    <Text style={styles.buttonText}>{t('ConnectedDeviceInfo.Connect Glasses')}</Text>
                   </TouchableOpacity>
                 </View>
               )}

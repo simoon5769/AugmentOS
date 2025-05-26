@@ -20,6 +20,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import AppIcon from './AppIcon';
 import {NavigationProps} from './types';
 import {useAppStatus} from '../providers/AppStatusProvider';
+import { useTranslation } from 'react-i18next';
 
 interface YourAppsListProps {
   isDarkTheme: boolean;
@@ -71,6 +72,8 @@ const YourAppsList: React.FC<YourAppsListProps> = ({isDarkTheme}) => {
   const textColor = isDarkTheme ? '#FFFFFF' : '#000000';
 
   const backendComms = BackendServerComms.getInstance();
+
+  const { t } = useTranslation(['home']);
 
   // console.log('%%% appStatus', appStatus);
 
@@ -456,7 +459,7 @@ const YourAppsList: React.FC<YourAppsListProps> = ({isDarkTheme}) => {
     <View style={styles.appsContainer}>
       <View style={styles.titleContainer}>
         <Text style={[styles.sectionTitle, {color: textColor}]}>
-          Inactive Apps
+          {t('YourAppsList.Inactive Apps')}
         </Text>
       </View>
 

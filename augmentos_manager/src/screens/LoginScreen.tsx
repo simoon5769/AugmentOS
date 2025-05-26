@@ -404,7 +404,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               )}
               <Animated.Text
                 style={[styles.title, { opacity, transform: [{ translateY }] }]}>
-                AugmentOS
+                AugmentOS..
               </Animated.Text>
               <Animated.Text
                 style={[styles.subtitle, { opacity, transform: [{ translateY }] }]}>

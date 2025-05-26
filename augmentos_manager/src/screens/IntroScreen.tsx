@@ -94,7 +94,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
         <View style={styles.card}>
           <Animated.Text
             style={[styles.title, {opacity, transform: [{translateY}]}]}>
-            AugmentOS
+            AugmentOS...
           </Animated.Text>
           <Animated.Text
             style={[styles.subtitle, {opacity, transform: [{translateY}]}]}>

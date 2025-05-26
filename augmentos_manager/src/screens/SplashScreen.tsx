@@ -65,7 +65,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ }) => {
         </View>
       ) : (
         <View>
-          <Text style={styles.text}>AugmentOS</Text>
+          <Text style={styles.text}>AugmentOS.</Text>
           <Text style={styles.subText}>Please log in to continue</Text>
         </View>
       )}

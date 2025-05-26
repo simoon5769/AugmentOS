@@ -27,6 +27,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SensingDisabledWarning from '../components/SensingDisabledWarning';
 import { SETTINGS_KEYS } from '../consts';
 import NonProdWarning from '../components/NonProdWarning';
+import { useTranslation } from 'react-i18next';
 
 interface HomepageProps {
   isDarkTheme: boolean;
@@ -46,6 +47,7 @@ const Homepage: React.FC<HomepageProps> = ({ isDarkTheme, toggleTheme }) => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [nonProdBackend, setNonProdBackend] = useState(false);
   const route = useRoute();
+  const { t } = useTranslation(['home']);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(-50)).current;
@@ -270,7 +272,7 @@ const Homepage: React.FC<HomepageProps> = ({ isDarkTheme, toggleTheme }) => {
                   <AnimatedSection>
                     <View style={currentThemeStyles.loadingContainer}>
                       <Text style={currentThemeStyles.loadingText}>
-                        Loading your apps...
+                        {t('Homepage.Loading your apps')}...
                       </Text>
                     </View>
                   </AnimatedSection>

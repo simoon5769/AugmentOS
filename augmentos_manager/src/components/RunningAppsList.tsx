@@ -107,7 +107,7 @@ const RunningAppsList: React.FC<RunningAppsListProps> = ({isDarkTheme}) => {
             >
               <View style={styles.noAppsContent}>
                 <Text style={[styles.noAppsText, {color: '#000000'}]}>
-                  Tap on an app below to start it.
+                  {t("RunningAppsList.Tap on an app below to start it")}
                 </Text>
               </View>
             </LinearGradient>

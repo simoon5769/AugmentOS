@@ -1,5 +1,17 @@
 {
+  "AugmentOS": "AugmentOS",
   "RunningAppsList": {
-    "Active Apps": "Active Apps - English"
+    "Active Apps": "Active Apps - English",
+    "Tap on an app below to start it": "Tap on an app below to start it."
+  },
+  "YourAppsList": {
+    "Inactive Apps": "Inactive Apps - English"
+  },
+  "Homepage": {
+    "Loading your apps": "Loading your apps"
+  },
+  "ConnectedDeviceInfo": {
+    "No Glasses Paired": "No Glasses Paired",
+    "Connect Glasses": "Connect Glasses"
   }
 }
