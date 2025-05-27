@@ -5,6 +5,7 @@ import GlobalEventEmitter from '../logic/GlobalEventEmitter';
 import {loadSetting} from '../logic/SettingsHelper';
 import {SETTINGS_KEYS} from '../consts';
 import {AppInterface} from '../providers/AppStatusProvider';
+import i18n from '../i18n/config';
 
 interface Callback {
   onSuccess: (data: any) => void;
@@ -266,7 +267,8 @@ export default class BackendServerComms {
       //console.error('Error starting app:', error.message || error);
       //GlobalEventEmitter.emit('SHOW_BANNER', { message: 'Error starting app: ' + error.message || error, type: 'error' })
       GlobalEventEmitter.emit('SHOW_BANNER', {
-        message: `Could not connect to ${packageName}`,
+        // message: `Could not connect to ${packageName}`,
+        message: i18n.t('home:BackendServerComms.Could not connect to packageName', {packageName: packageName}),
         type: 'error',
       });
       throw error;

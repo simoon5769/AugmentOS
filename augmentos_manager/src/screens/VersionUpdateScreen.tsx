@@ -19,6 +19,7 @@ import InstallApkModule from '../bridge/InstallApkModule';
 import { saveSetting } from '../logic/SettingsHelper';
 import { Linking } from 'react-native';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 
 interface VersionUpdateScreenProps {
   route: {
@@ -42,6 +43,8 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
   const [isVersionMismatch, setIsVersionMismatch] = useState(!!initialLocalVersion && !!initialCloudVersion);
   const [localVersion, setLocalVersion] = useState<string | null>(initialLocalVersion || null);
   const [cloudVersion, setCloudVersion] = useState<string | null>(initialCloudVersion || null);
+  
+  const { t } = useTranslation(['home']);
 
   // Prevent navigation using the hardware back button
   useFocusEffect(
@@ -151,9 +154,9 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
     .catch((error) => {
       console.error('Error opening installation website:', error);
       showAlert(
-        "Browser Error",
-        "Could not open the installation website. Please visit https://augmentos.org/install manually.",
-        [{ text: "OK", onPress: () => {} }]
+        t("VersionUpdateScreen.Browser Error"),
+        t("VersionUpdateScreen.Could not open the installation website"),
+        [{ text: t("OK"), onPress: () => {} }]
       );
     });
   };
@@ -185,7 +188,7 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             isDarkTheme ? styles.lightText : styles.darkText,
           ]}
         >
-          Checking for updates...
+          {t("VersionUpdateScreen.Checking for updates")}
         </Text>
       </View>
     );
@@ -229,10 +232,10 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             ]}
           >
             {connectionError
-              ? 'Connection Error'
+              ? t('ConnectingToPuckComponent.Connection Error')
               : isVersionMismatch
-                ? 'Update Required'
-                : 'Up to Date'}
+                ? t('VersionUpdateScreen.Update Required')
+                : t('VersionUpdateScreen.Up to Date')}
           </Text>
 
           <Text
@@ -242,10 +245,10 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             ]}
           >
             {connectionError
-              ? 'Could not connect to the server. Please check your connection and try again.'
+              ? t('VersionUpdateScreen.Could not connect to the server')
               : isVersionMismatch
-                ? 'AugmentOS is outdated. An update is required to continue using the application.'
-                : 'Your AugmentOS is up to date. Returning to home...'}
+                ? t('VersionUpdateScreen.AugmentOS is outdated')
+                : t('VersionUpdateScreen.Your AugmentOS is up to date')}
           </Text>
         </View>
 
@@ -258,10 +261,10 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
               iconName={connectionError ? 'reload' : 'download'}
             >
               {isUpdating
-                ? 'Updating...'
+                ? t('VersionUpdateScreen.Updating...')
                 : connectionError
-                  ? 'Retry Connection'
-                  : 'Update AugmentOS'}
+                  ? t('ConnectingToPuckComponent.Retry Connection')
+                  : t('VersionUpdateScreen.Update AugmentOS')}
             </Button>
 
           {isVersionMismatch &&
@@ -280,7 +283,7 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
                isDarkTheme={isDarkTheme}
                iconName="skip-next"
                disabled={false}>
-               Skip Update
+               {t('VersionUpdateScreen.Skip Update')}
              </Button>
             </View>
             }                                                

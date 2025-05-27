@@ -12,6 +12,7 @@ import GlassesDisplayMirror from '../components/GlassesDisplayMirror';
 import { useStatus } from '../providers/AugmentOSStatusProvider';
 import { useGlassesMirror } from '../providers/GlassesMirrorContext';
 import { NavigationProps } from '../components/types';
+import { useTranslation } from 'react-i18next';
 
 interface GlassesMirrorProps {
   isDarkTheme: boolean;
@@ -21,6 +22,7 @@ const GlassesMirror: React.FC<GlassesMirrorProps> = ({ isDarkTheme }) => {
   const { status } = useStatus();
   const { events } = useGlassesMirror(); // From context
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation(['home']);
 
   // Helper to check if we have a glasses model name
   const isGlassesConnected = !!status.glasses_info?.model_name;
@@ -57,7 +59,7 @@ const GlassesMirror: React.FC<GlassesMirrorProps> = ({ isDarkTheme }) => {
               isDarkTheme ? styles.titleTextDark : styles.titleTextLight,
             ]}
           >
-            Glasses Mirror
+            {t('GlassesMirror.Glasses Mirror')}
           </Text>
           
           {isGlassesConnected && lastEvent && (
@@ -66,7 +68,7 @@ const GlassesMirror: React.FC<GlassesMirrorProps> = ({ isDarkTheme }) => {
               onPress={navigateToFullScreen}
             >
               <Text style={styles.fullscreenButtonText}>
-                Enter Fullscreen
+                {t('GlassesMirror.Enter Fullscreen')}
               </Text>
             </TouchableOpacity>
           )}
@@ -84,7 +86,7 @@ const GlassesMirror: React.FC<GlassesMirrorProps> = ({ isDarkTheme }) => {
               ) : (
                 <View style={styles.fallbackContainer}>
                   <Text style={[isDarkTheme ? styles.darkText : styles.lightText, styles.fallbackText]}>
-                    No display events available
+                    {t('GlassesMirror.No display events available')}
                   </Text>
                 </View>
               )}
@@ -92,7 +94,7 @@ const GlassesMirror: React.FC<GlassesMirrorProps> = ({ isDarkTheme }) => {
           ) : (
             <View style={styles.fallbackContainer}>
               <Text style={[isDarkTheme ? styles.darkText : styles.lightText, styles.fallbackText]}>
-                Connect glasses to use the Glasses Mirror
+                {t('GlassesMirror.Connect glasses to use the Glasses Mirror')}
               </Text>
             </View>
           )}

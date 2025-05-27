@@ -26,6 +26,8 @@ import {
   handlePreviouslyDeniedPermission
 } from '../logic/PermissionsUtils';
 import { showAlert } from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
+
 interface GlassesPairingGuidePreparationScreenProps {
   isDarkTheme: boolean;
   toggleTheme: () => void;
@@ -44,6 +46,7 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
   const route = useRoute();
   const { glassesModelName } = route.params as { glassesModelName: string };
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation(['home']);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
@@ -118,15 +121,15 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
             if (anyNeverAskAgain) {
               // Show "previously denied" dialog for Bluetooth
               showAlert(
-                'Permission Required',
-                'Bluetooth permissions are required but have been denied previously. Please enable them in Settings to continue.',
+                t('GlassesPairingGuidePreparationScreen.Permission Required'),
+                t('GlassesPairingGuidePreparationScreen.Bluetooth permissions are required but have been denied previously'),
                 [
                   { 
-                    text: 'Open Settings', 
+                    text: t('GlassesPairingGuidePreparationScreen.Open Settings'), 
                     onPress: () => Linking.openSettings() 
                   },
                   {
-                    text: 'Cancel',
+                    text: t('Cancel'),
                     style: 'cancel'
                   }
                 ]
@@ -134,9 +137,9 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
             } else {
               // Show standard permission required dialog
               showAlert(
-                'Permission Required',
-                'Bluetooth permissions are required to connect to glasses',
-                [{ text: 'OK' }]
+                t('GlassesPairingGuidePreparationScreen.Permission Required'),
+                t('GlassesPairingGuidePreparationScreen.Bluetooth permissions are required to connect to glasses'),
+                [{ text: t('OK') }]
               );
             }
             return;
@@ -179,9 +182,9 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
     } catch (error) {
       console.error('Error requesting permissions:', error);
       showAlert(
-        'Error',
-        'Failed to request necessary permissions',
-        [{ text: 'OK' }]
+        t('Error'),
+        t('GlassesPairingGuidePreparationScreen.Failed to request necessary permissions'),
+        [{ text: t('OK') }]
       );
       return;
     }
@@ -192,9 +195,9 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
       if (!requirementsCheck.isReady) {
         // Show alert about missing requirements
         showAlert(
-          'Connection Issue',
-          requirementsCheck.message || 'Cannot connect to glasses - check Bluetooth and Location settings',
-          [{ text: 'OK' }]
+          t('GlassesPairingGuidePreparationScreen.Connection Issue'),
+          requirementsCheck.message || t('GlassesPairingGuidePreparationScreen.Cannot connect to glasses'),
+          [{ text: t('OK') }]
         );
         
         return;
@@ -218,7 +221,7 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
       </ScrollView>
       <View style={styles.buttonContainer}>
         <Button onPress={advanceToPairing} disabled={false}>
-          <Text>Continue</Text>
+          <Text>{t('Continue')}</Text>
         </Button>
       </View>
     </View>

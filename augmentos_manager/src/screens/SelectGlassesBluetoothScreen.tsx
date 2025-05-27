@@ -25,6 +25,7 @@ import GlobalEventEmitter from '../logic/GlobalEventEmitter';
 import { useSearchResults } from '../providers/SearchResultsContext';
 import { requestFeaturePermissions, PermissionFeatures } from '../logic/PermissionsUtils';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 // import NavigationBar from '../components/NavigationBar'; // if needed
 
 interface SelectGlassesBluetoothScreenProps {
@@ -41,6 +42,7 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
   const { glassesModelName } = route.params as { glassesModelName: string };
   const navigation = useNavigation<NavigationProps>();
   const { searchResults, setSearchResults } = useSearchResults();
+  const { t } = useTranslation(['home']);
 
  // Create a ref to track the current state of searchResults
  const searchResultsRef = useRef<string[]>(searchResults);
@@ -93,16 +95,16 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
       console.log(JSON.stringify(searchResults));
       if (searchResultsRef.current.length === 0) {
         showAlert(
-          "No " + modelName + " found",
-          "Retry search?",
+          t("SelectGlassesBluetoothScreen.No modelName found", {modelName: modelName}),
+          t("SelectGlassesBluetoothScreen.Retry search"),
           [
             {
-              text: "No",
+              text: t("No"),
               onPress: () => navigation.goBack(), // Navigate back if user chooses "No"
               style: "cancel",
             },
             {
-              text: "Yes",
+              text: t("Yes"),
               onPress: () =>
                 coreCommunicator.sendSearchForCompatibleDeviceNames(glassesModelName), // Retry search
             },
@@ -165,9 +167,9 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
       if (!hasLocationPermission) {
         // Inform the user that location permission is required for Bluetooth scanning
         showAlert(
-          'Location Permission Required',
-          'Location permission is required to scan for and connect to smart glasses on Android. This is a requirement of the Android Bluetooth system.',
-          [{ text: 'OK' }]
+          t('SelectGlassesBluetoothScreen.Location Permission Required'),
+          t('SelectGlassesBluetoothScreen.Location permission is required to scan for and connect to smart glasses on Android'),
+          [{ text: t('OK') }]
         );
         return; // Stop the connection process
       }
@@ -180,9 +182,9 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
     if (!hasMicPermission) {
       // Inform the user that microphone permission is required
       showAlert(
-        'Microphone Permission Required',
-        'Microphone permission is required to connect to smart glasses. Voice control and audio features are essential for the AR experience.',
-        [{ text: 'OK' }]
+        t('SelectGlassesBluetoothScreen.Microphone Permission Required'),
+        t('SelectGlassesBluetoothScreen.Microphone permission is required to connect to smart glasses'),
+        [{ text: t('OK') }]
       );
       return; // Stop the connection process
     }

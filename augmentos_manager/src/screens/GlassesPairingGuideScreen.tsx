@@ -16,6 +16,7 @@ import PairingDeviceInfo from '../components/PairingDeviceInfo';
 import GlassesTroubleshootingModal from '../components/GlassesTroubleshootingModal';
 import GlassesPairingLoader from '../components/GlassesPairingLoader';
 import { getPairingGuide } from '../logic/getPairingGuide';
+import { useTranslation } from 'react-i18next';
 
 interface GlassesPairingGuideScreenProps {
   isDarkTheme: boolean;
@@ -35,6 +36,7 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
     const [pairingInProgress, setPairingInProgress] = useState(true);
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const hasAlertShownRef = useRef(false);
+    const { t } = useTranslation(['home']);
 
     // Timer to show help message after 30 seconds
     useEffect(() => {
@@ -64,16 +66,16 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
     useEffect(() => {
       if (showHelpAlert) {
         Alert.alert(
-          "Need Some Help?",
-          `Having trouble pairing your ${glassesModelName}? Wanna see some tips?`,
+          t("GlassesPairingGuideScreen.Need Some Help"),
+          t("GlassesPairingGuideScreen.Having trouble pairing your glassesModelName", {glassesModelName: glassesModelName}),
           [
             {
-              text: "No, thanks.",
+              text: t("GlassesPairingGuideScreen.No thanks"),
               style: "cancel",
               onPress: () => setShowHelpAlert(false)
             },
             {
-              text: "Help Me!",
+              text: t("GlassesPairingGuideScreen.Help Me"),
               onPress: () => {
                 setShowTroubleshootingModal(true);
                 setShowHelpAlert(false);
@@ -133,7 +135,7 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
                 onPress={() => setShowTroubleshootingModal(true)}
               >
                 <Icon name="question-circle" size={16} color="#FFFFFF" style={styles.helpIcon} />
-                <Text style={styles.helpButtonText}>Need Help Pairing?</Text>
+                <Text style={styles.helpButtonText}>{t("GlassesPairingGuideScreen.Need Help Pairing")}</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

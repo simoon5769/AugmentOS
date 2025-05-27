@@ -280,7 +280,7 @@ const Homepage: React.FC<HomepageProps> = ({ isDarkTheme, toggleTheme }) => {
                   <AnimatedSection>
                     <View style={currentThemeStyles.noAppsContainer}>
                       <Text style={currentThemeStyles.noAppsText}>
-                        Unable to load your apps.{'\n'}Please check your internet connection and try again.
+                        {t('Homepage.Unable to load your apps')}{'\n'}{t('Homepage.Please check your internet connection and try again')}
                       </Text>
                     </View>
                   </AnimatedSection>
@@ -288,7 +288,7 @@ const Homepage: React.FC<HomepageProps> = ({ isDarkTheme, toggleTheme }) => {
               ) : (
                 <AnimatedSection>
                   <Text style={currentThemeStyles.noAppsText}>
-                    Unable to load apps. Please check your cloud connection to view and manage your apps.
+                    {t('Homepage.Unable to load apps')}
                   </Text>
                 </AnimatedSection>
               )}

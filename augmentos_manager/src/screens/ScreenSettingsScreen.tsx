@@ -12,6 +12,7 @@ import { useStatus } from '../providers/AugmentOSStatusProvider.tsx';
 import coreCommunicator from '../bridge/CoreCommunicator';
 import { Slider } from 'react-native-elements';
 import showAlert from '../utils/AlertUtils.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface ScreenSettingsScreenProps {
   isDarkTheme: boolean;
@@ -36,6 +37,8 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
   navigation,
 }) => {
   const { status } = useStatus();
+
+  const { t } = useTranslation(['home']);
 
   // -- States --
   const [brightness, setBrightness] = useState<number | null>(null);
@@ -63,7 +66,7 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
   // -- Handlers --
   const changeBrightness = async (newBrightness: number) => {
     if (!status.glasses_info) {
-      showAlert('Glasses not connected', 'Please connect your smart glasses first.');
+      showAlert(t('ScreenSettingsScreen.Glasses not connected'), t('ScreenSettingsScreen.Please connect your smart glasses first'));
       return;
     }
 
@@ -139,7 +142,7 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
                 isDarkTheme ? styles.lightText : styles.darkText,
               ]}
             >
-              Auto Brightness
+              {t('ScreenSettingsScreen.Auto Brightness')}
             </Text>
             {status.glasses_info?.model_name && (
               <Text
@@ -148,7 +151,7 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
                   isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
                 ]}
               >
-                Automatically adjust the brightness of your smart glasses based on the ambient light.
+                {t('ScreenSettingsScreen.Automatically adjust the brightness')}
               </Text>
             )}
           </View>
@@ -171,7 +174,7 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
                   isDarkTheme ? styles.lightText : styles.darkText,
                   (!isBrightnessControlAvailable) && styles.disabledItem,
                 ]}>
-                Brightness
+                {t('ScreenSettingsScreen.Brightness')}
               </Text>
               <Text
                 style={[
@@ -180,10 +183,10 @@ const ScreenSettingsScreen: React.FC<ScreenSettingsScreenProps> = ({
                   (!isBrightnessControlAvailable) && styles.disabledItem,
                 ]}>
                 {isBrightnessControlAvailable 
-                  ? 'Adjust the brightness level of your smart glasses.'
+                  ? t('ScreenSettingsScreen.Adjust the brightness level of your smart glasses')
                   : !status.glasses_info?.model_name 
-                    ? 'Please connect your smart glasses first.'
-                    : 'Brightness control not supported for this device.'}
+                    ? t('ScreenSettingsScreen.Please connect your smart glasses first')
+                    : t('ScreenSettingsScreen.Brightness control not supported for this device')}
               </Text>
               <Slider {...sliderProps} />
             </View>

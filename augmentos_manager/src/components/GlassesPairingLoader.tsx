@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {getModelSpecificTips} from './GlassesTroubleshootingModal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTranslation } from 'react-i18next';
 
 interface GlassesPairingLoaderProps {
   glassesModelName: string;
@@ -36,7 +37,9 @@ const GlassesPairingLoader: React.FC<GlassesPairingLoaderProps> = ({
   const [currentTipIndex, setCurrentTipIndex] = React.useState(0);
   const progressValue = useRef(0);
   const tipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pingPongDirection = useRef(1); // 1 for right, -1 for left
+  const pingPongDirection = useRef(1); // 1 for right, -1 for left.getInstance();
+  
+  const { t } = useTranslation(['home']);
 
   let tips = getModelSpecificTips(glassesModelName);
 
@@ -308,7 +311,7 @@ const GlassesPairingLoader: React.FC<GlassesPairingLoaderProps> = ({
             styles.statusText,
             isDarkTheme ? styles.darkText : styles.lightText,
           ]}>
-          Pairing {glassesModelName}
+          {t('GlassesPairingLoader.Pairing glassesModelName', {glassesModelName: glassesModelName})}
         </Text>
       </View>
 

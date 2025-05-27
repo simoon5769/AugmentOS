@@ -35,6 +35,7 @@ import GlobalEventEmitter from '../logic/GlobalEventEmitter';
 import {useAppStatus} from '../providers/AppStatusProvider';
 import AppIcon from '../components/AppIcon';
 import SelectWithSearchSetting from '../components/settings/SelectWithSearchSetting';
+import { useTranslation } from 'react-i18next';
 
 type AppSettingsProps = NativeStackScreenProps<
   RootStackParamList,
@@ -53,6 +54,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
   const {packageName, appName} = route.params;
   const backendServerComms = BackendServerComms.getInstance();
   const [isUninstalling, setIsUninstalling] = useState(false);
+  const { t } = useTranslation(['home']);
 
   // State to hold the complete configuration from the server.
   const [serverAppInfo, setServerAppInfo] = useState<any>(null);
@@ -431,7 +433,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
     return (
       <View style={{flex: 1, backgroundColor: theme.backgroundColor}}>
         <LoadingOverlay
-          message={`Loading ${appName} settings...`}
+          message={t('AppSettings.Loading settings', {appName: appName})}
           isDarkTheme={isDarkTheme}
         />
       </View>
@@ -443,7 +445,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
       style={[styles.safeArea, {backgroundColor: theme.backgroundColor}]}>
       {isUninstalling && (
         <LoadingOverlay
-          message={`Uninstalling ${appInfo?.name || appName}...`}
+          message={t('AppSettings.Uninstalling', {appName: `${appInfo?.name || appName}`})}
           isDarkTheme={isDarkTheme}
         />
       )}

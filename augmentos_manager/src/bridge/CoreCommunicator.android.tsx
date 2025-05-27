@@ -10,6 +10,7 @@ import {
 import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import BleManager from 'react-native-ble-manager';
 import BackendServerComms from '../backend_comms/BackendServerComms';
+import i18n from '../i18n/config';
 
 // For checking if location services are enabled
 const {ServiceStarter} = NativeModules;
@@ -88,7 +89,7 @@ export class CoreCommunicator extends EventEmitter {
       return {
         isReady: false,
         message:
-          'Bluetooth is required to connect to glasses. Please enable Bluetooth and try again.',
+          i18n.t('CoreCommunicator.Bluetooth is required to connect to glasses', {ns: 'home'}),
       };
     }
 
@@ -106,7 +107,7 @@ export class CoreCommunicator extends EventEmitter {
         return {
           isReady: false,
           message:
-            'Location permission is required to scan for glasses on Android. Please grant location permission and try again.',
+            i18n.t('CoreCommunicator.Location permission is required to scan for glasses on Android', {ns: 'home'}),
         };
       }
 
@@ -118,7 +119,7 @@ export class CoreCommunicator extends EventEmitter {
         return {
           isReady: false,
           message:
-            'Location services are disabled. Please enable location services in your device settings and try again.',
+            i18n.t('CoreCommunicator.Location services are disabled', {ns: 'home'}),
         };
       }
     }

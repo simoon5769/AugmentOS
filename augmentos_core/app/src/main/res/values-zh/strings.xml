@@ -81,5 +81,5 @@
     <string name="HEADUP_ANGLE">headUp_Angle</string>
 
     <string name="SETTING_WILL_APPLY_ON_NEXT_GLASSES_CONNECTION">Setting will apply next time you connect to glasses</string>
-    <string name="Connect_glasses_to_update_brightness">Connect glasses to update brightness</string>
+    <string name="Connect_glasses_to_update_brightness">连接眼镜后，才能更新亮度</string>
 </resources>

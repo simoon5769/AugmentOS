@@ -1,17 +1,303 @@
 {
   "AugmentOS": "智能眼镜系统",
+  "OK": "确定",
+  "Yes": "是",
+  "No": "否",
+  "Success": "成功",
+  "Cancel": "取消",
+  "Error": "错误",
+  "Go to Settings": "前往“设置”",
+  "Continue": "继续",
+  "Select": "选择",
+  "Exit": "退出",
+  "Disconnect": "断开连接",
+  "Loading": "加载中",
+  "LoginScreen": {
+    "Success": "成功！",
+    "Authentication Error": "认证错误",
+    "Google sign in failed": "Google 登录失败。请重试。",
+    "Apple sign in failed": "Apple 登录失败。请重试。",
+    "Please check your inbox for email verification": "请检查您的收件箱以进行电子邮件验证！",
+    "Something went wrong": "出了点问题。请重试。",
+    "Leaving already": "已经离开？",
+    "Press back again to exit": "再次按返回退出",
+    "Connecting to your account": "正在连接到您的帐户...",
+    "The future of smart glasses starts here": "智能眼镜的未来从这里开始。",
+    "Email": "电子邮箱",
+    "Password": "密码",
+    "Enter your password": "请输入您的密码",
+    "Log in": "登录",
+    "Create Account": "创建账户",
+    "Back to Sign In Options": "返回登录选项",
+    "Continue with Google": "使用Google账户登录",
+    "Continue with Apple": "使用Apple账户登录",
+    "Sign up with Email": "使用电子邮箱注册",
+    "Or": "或",
+    "By continuing": "继续，即表示您同意我们的服务条款和隐私政策"
+  },
+  "WelcomePageComponent": {
+    "Welcome to AugmentOS": "欢迎进入智能眼镜系统",
+    "go through a quick tutorial": "让我们通过一个快速教程来帮助您开始使用智能眼镜系统。",
+    "Skip Onboarding": "跳过快速教程"
+  },
+  "App": {
+    "Select Glasses": "选择眼镜",
+    "Pairing Guide": "配对指南",
+    "Report an Error": "错误报告",
+    "Finding Glasses": "寻找眼镜",
+    "Notifications": "通知"
+  },
+  "GlassesPairingGuides": {
+    "Simulated Glasses": "虚拟眼镜",
+    "The Simulated Glasses allows you to run AugmentOS without physical smart glasses": "虚拟眼镜允许您在没有物理智能眼镜的情况下运行智能眼镜系统。",
+    "Make sure your Z100 is fully charged and turned on": "1. 确保您的 Z100 已充满电并且已打开。",
+    "Pair your Z100 with your device using the Vuzix Connect app": "2. 使用 Vuzix Connect 应用程序将 Z100 与您的设备配对。",
+    "Make sure your Mach1 is fully charged and turned on": "1. 确保您的 Mach1 已充满电并且已打开。",
+    "Pair your Mach1 with your device using the Vuzix Connect app": "2. 使用 Vuzix Connect 应用程序将您的 Mach1 与您的设备配对。",
+    "Make sure your Mentra Live is fully charged and turned on": "1. 确保您的 Mentra Live 已充满电并且已打开。",
+    "Make sure your Audio Wearable is fully charged and turned on": "1. 确保您的音频可穿戴设备已充满电并已打开。",
+    "Enable Bluetooth pairing mode on your Audio Wearable": "2. 在您的音频可穿戴设备上启用蓝牙配对模式。",
+    "Audio Wearables dont have displays": "3. 注意：音频可穿戴设备没有显示屏。所有视觉信息都将转换为语音。",
+    "Audio Wearables are smart glasses without displays": "音频可穿戴设备是没有显示屏的智能眼镜。它们使用文本转语音技术来提供通常以视觉方式显示的信息。这使得它们非常适合纯音频应用或喜欢听觉反馈的用户。",
+    "Disconnect your G1 from within the Even Realities app, or uninstall the Even Realities app": "1. 从 Even Realities 应用程序中断开 G1 的连接，或卸载 Even Realities 应用程序。",
+    "Place your G1 in the charging case with the lid open": "2. 将 G1 放入充电盒，并打开盖子。"
+  },
+  "SelectGlassesModelScreen": {
+    "you can select": "如果您还没有智能眼镜，您可以选择“虚拟眼镜”。"
+  },
   "RunningAppsList": {
     "Active Apps": "激活的应用",
     "Tap on an app below to start it": "点击下面的应用可以激活它。"
   },
   "YourAppsList": {
-    "Inactive Apps": "未激活的应用"
+    "Inactive Apps": "未激活的应用",
+    "Tap to start": "点击开始",
+    "Complete Onboarding": "完成入门教程",
+    "Please tap the Live Captions app to complete the onboarding process": "请点击“Live Captions”应用来完成注册流程。",
+    "Try Live Captions": "尝试“Live Captions”！",
+    "Start talking now to see your speech transcribed on your glasses in real-time": "立即开始讲话，实时在眼镜上查看您的讲话转录！"
   },
   "Homepage": {
-    "Loading your apps": "加载您的应用程序"
+    "Loading your apps": "加载您的应用程序",
+    "Unable to load your apps": "无法加载您的应用程序。",
+    "Please check your internet connection and try again": "请检查您的网络连接并重试。",
+    "Unable to load apps": "无法加载应用程序。\n请检查您的云连接以查看和管理您的应用程序。"
   },
   "ConnectedDeviceInfo": {
     "No Glasses Paired": "无可配对的眼镜",
-    "Connect Glasses": "连接眼镜"
+    "Connect Glasses": "连接眼镜",
+    "Connecting Glasses": "正在连接眼镜...",
+    "Searching for glasses": "正在寻找{{glassesModelName}}",
+    "Core service not connected": "未连接核心服务",
+    "Connect to Core": "连接至核心服务"
+  },
+  "SettingsPage": {
+    "Settings": "设置",
+    "Use Phone Microphone": "使用手机的麦克风",
+    "Always On Status Bar (Beta Feature)": "始终显示状态栏（测试版特性）",
+    "Privacy Settings": "隐私设置",
+    "Dashboard Settings": "仪表板设置",
+    "Screen Settings": "屏幕设置",
+    "Developer Settings": "开发者设置",
+    "Forget Glasses": "忘记眼镜",
+    "Sign Out": "退出登录",
+    "Yes": "确认",
+    "Are you sure you want to sign out": "您确定要退出吗？",
+    "Use the phone's microphone instead of the glasses' microphone (if applicable)": "使用手机的麦克风代替眼镜的麦克风（如果适用）。",
+    "Always show the time, date and battery level on your smart glasses": "智能眼镜上始终显示时间、日期和电池电量。",
+    "Configure the contextual dashboard and HeadUp settings": "配置上下文仪表板和顶部设置",
+    "Adjust brightness, auto-brightness, and other display settings": "调整亮度、自动亮度和其他显示设置",
+    "Are you sure you want to forget your glasses": "你确定要忘记你的眼镜吗？",
+    "This setting has no effect when using Simulated Glasses": "使用虚拟眼镜时此设置无效"
+  },
+  "PrivacySettingsScreen": {
+    "Additional Permissions": "附加权限",
+    "Notification Access": "通知",
+    "Allow AugmentOS to forward your phone notifications to your smart glasses": "允许智能眼镜系统将手机通知转发到智能眼镜",
+    "Calendar Access": "日历",
+    "Allow AugmentOS to display your calendar events on your smart glasses": "允许智能眼镜系统在您的智能眼镜上显示您的日历事件",
+    "Privacy Options": "隐私选项",
+    "Sensing": "传感器",
+    "Enable microphones & cameras": "启用麦克风和摄像头",
+    "Permission Management": "权限管理",
+    "To revoke calendar permission": "要撤销日历权限，请转到您的设备设置并修改应用程序权限。"
+  },
+  "DashboardSettingsScreen": {
+    "General Settings": "常规设置",
+    "Contextual Dashboard": "上下文仪表板",
+    "Display Settings": "显示设置",
+    "Adjust Head-Up Angle": "调整 Head-Up 角度",
+    "Adjust the angle at which the contextual dashboard appears when you look up": "调整上下文仪表板的显示角度",
+    "Select Dashboard Content": "选择仪表板内容"
+  },
+  "ScreenSettingsScreen": {
+    "Auto Brightness": "自动亮度",
+    "Brightness": "亮度",
+    "Battery": "电池",
+    "Glasses not connected": "未连接眼镜",
+    "Adjust the brightness level of your smart glasses": "调整智能眼镜的亮度级别。",
+    "Please connect your smart glasses first": "请先连接您的智能眼镜。",
+    "Brightness control not supported for this device": "此设备不支持亮度控制。",
+    "Automatically adjust the brightness": "根据环境光自动调节智能眼镜的亮度。"
+  },
+  "DeveloperSettingsScreen": {
+    "Bypass VAD for Debugging": "绕过 VAD 进行调试",
+    "Bypass Voice Activity Detection in case transcription stops working": "如果转录停止工作，则绕过语音活动检测",
+    "These settings may break the app": "警告：这些设置可能会导致应用崩溃。使用风险自负。",
+    "Custom Backend URL": "自定义后端 URL",
+    "Override the default backend server URL. Leave blank to use default": "覆盖默认后端服务器 URL。留空则使用默认值",
+    "Save Test URL": "保存 & 测试 URL",
+    "Testing": "测试中...",
+    "Reset": "重置",
+    "Production": "生产",
+    "Debug": "调试",
+    "Global": "全局",
+    "Empty URL": "空的 URL",
+    "Please enter a URL or reset to default": "请输入 URL 或重置为默认值。",
+    "OK": "确定",
+    "Invalid URL": "无效 URL",
+    "Please enter a valid URL starting with": "请输入以 http:// 或 https:// 开头的有效 URL",
+    "Success": "成功",
+    "Custom backend URL saved and verified": "自定义后端 URL 已保存并验证。它将在下次连接或应用重启时生效。",
+    "Verification Failed": "验证失败",
+    "The server responded, but with status": "服务器已响应，但状态为 {{status}}。请检查网址和服务器状态。",
+    "Backend URL reset to default.": "后端 URL 重置为默认值。"
+  },
+  "NotificationServiceUtils": {
+    "Enable Notification Access": "启用通知",
+    "AugmentOS needs permission to read your phone notifications": "智能眼镜系统需要获得权限才能读取您的手机通知，以便将其显示在您的智能眼镜上。\n\n在下一个屏幕上：\n1. 在列表中找到“智能眼镜系统管理器”\n2. 将开关切换至“开启”\n3. 出现提示时，点击“允许”",
+    "Later": "稍后处理",
+    "Go to Settings": "前往“设置”",
+    "Could not open notification settings": "无法打开通知设置。请在设备设置中手动启用通知。",
+    "There was a problem checking notification permissions": "检查通知权限时出现问题。请稍后重试。"
+  },
+  "Header": {
+    "Additional Features Available": "可用的附加功能",
+    "Enhance your AugmentOS experience by enabling additional permissions": "通过启用额外的权限来增强您的体验。"
+  },
+  "SplashScreen": {
+    "Please wait while we authenticate": "正在验证，请等待",
+    "Welcome Back": "欢迎回来！",
+    "Please log in to continue": "请登录"
+  },
+  "ConnectingToPuckComponent": {
+    "Connecting to AugmentOS": "正在连接到智能眼镜系统...",
+    "Connection Error": "连接错误",
+    "Connecting": "连接中...",
+    "Retry Connection": "重试连接",
+    "Connection to AugmentOS failed": "连接到智能眼镜系统失败。请检查您的连接并重试"
+  },
+  "VersionUpdateScreen": {
+    "Browser Error": "浏览器错误",
+    "Could not connect to the server": "无法连接到服务器。请检查您的连接并重试。",
+    "AugmentOS is outdated": "智能眼镜系统版本已过时。需要更新才能继续使用该应用程序。",
+    "Your AugmentOS is up to date": "您的智能眼镜系统已更新。正在返回主页...",
+    "Update Required": "需要更新",
+    "Up to Date": "最新",
+    "Could not open the installation website": "无法打开安装网站。请手动访问 https://augmentos.org/install",
+    "Checking for updates": "检查更新...",
+    "Updating": "更新中...",
+    "Update AugmentOS": "更新智能眼镜系统",
+    "Skip Update": "跳过更新"
+  },
+  "CloudConnection": {
+    "Connecting to cloud": "正在连接到云端...",
+    "Reconnecting to cloud": "正在重连到云端...",
+    "Disconnected from cloud": "已断开云端连接"
+  },
+  "GlassesMirror": {
+    "Glasses Mirror": "眼镜镜像",
+    "Glasses Mirror Fullscreen": "眼镜镜像全屏",
+    "Enter Fullscreen": "进入全屏",
+    "No display events available": "无可用的显示事件",
+    "Connect glasses to use the Glasses Mirror": "连接眼镜即可使用眼镜镜像",
+    "Back": "返回",
+    "Glasses Mirror Mockup": "眼镜镜像模型"
+  },
+  "AppStoreWebview": {
+    "Preparing App Store": "预加载应用商店...",
+    "Loading App Store": "正在加载应用商店..."
+  },
+  "AppStore": {
+    "AugmentOS Store": "智能眼镜应用商店",
+    "AugmentOS Store not yet available in": "智能眼镜应用商店2.0版本尚未推出。"
+  },
+  "BackendServerComms": {
+    "Could not connect to packageName": "无法连接到 {{packageName}}"
+  },
+  "ConnectedSimulatedGlassesInfo": {
+    "Simulated Glasses Display": "虚拟眼镜显示屏"
+  },
+  "MessageBanner": {
+    "Dismiss": "撤销"
+  },
+  "AppSettings": {
+    "Loading settings": "正在加载 {{appName}} 的设置...",
+    "Loading appName": "正在加载 {{appName}}...",
+    "Preparing secure access to": "准备安全访问 {{appName}}...",
+    "Uninstalling appName": "正在卸载 {{appName}}..."
+  },
+  "GlassesPairingLoader": {
+    "Pairing glassesModelName": "正在配对 {{glassesModelName}}"
+  },
+  "GlassesTroubleshootingModal": {
+    "Make sure you closed the G1s left arm FIRST before putting it in the case": "确保先关闭 G1 的左臂，然后再将其放入盒子中",
+    "Plug your G1 case into a charger during the pairing process": "在配对过程中将 G1 保护壳插入充电器",
+    "Try closing the charging case and opening it again": "尝试关闭充电盒并再次打开",
+    "Ensure no other app is currently connected to your G1": "确保当前没有其他应用程序连接到您的 G1",
+    "Restart your phones Bluetooth": "重启手机蓝牙",
+    "Make sure your phone is within 3 feet of your glasses & case": "确保您的手机距离眼镜和眼镜盒在 3 英尺以内",
+    "If your glasses were previously paired to a different phone": "如果您的眼镜之前已与其他手机配对，则必须在手机蓝牙设置中取消配对/忘记眼镜，然后才能重新尝试配对过程",
+
+    "Make sure your glasses are turned on": "确保您的眼镜已打开",
+    "Check that your glasses are paired in the Vuzix Connect app": "检查你的眼镜是否已在“Vuzix Connect”应用中配对",
+    "Try resetting your Bluetooth connection": "尝试重置蓝牙连接",
+
+    "Make sure your Mentra Live is fully charged": "确保您的 Mentra Live 已充满电",
+    "Check that your Mentra Live is in pairing mode": "检查您的 Mentra Live 是否处于配对模式",
+    "Ensure no other app is currently connected to your glasses": "确保当前没有其他应用程序连接到你的眼镜",
+    "Try restarting your glasses": "尝试重启您的眼镜",
+    "Check that your phones Bluetooth is enabled": "检查手机蓝牙是否已启用",
+
+    "Make sure your glasses are charged and turned on": "确保您的眼镜已充电并且已打开",
+    "Ensure no other device is connected to your glasses": "确保没有其他设备连接到您的眼镜",
+    "Try restarting both your glasses and phone": "尝试重启眼镜和手机",
+    "Make sure your phone is within range of your glasses": "确保您的手机在眼镜的覆盖范围内",
+
+    "Troubleshooting glassesModelName": "排除故障 {{glassesModelName}}",
+    "Having trouble pairing your glasses": "眼镜配对有困难？试试以下技巧：",
+    "Got it thanks": "明白了，谢谢！"
+  },
+  "GlassesPairingGuidePreparationScreen": {
+    "Permission Required": "权限许可",
+    "Bluetooth permissions are required but have been denied previously": "需要蓝牙权限，但之前已被拒绝。请在“设置”中启用它们以继续。",
+    "Bluetooth permissions are required to connect to glasses": "连接眼镜需要蓝牙权限",
+    "Open Settings": "打开设置",
+    "Connection Issue": "连接问题",
+    "Cannot connect to glasses": "无法连接眼镜 - 请检查蓝牙和位置设置",
+    "Failed to request necessary permissions": "请求必要的权限失败"
+  },
+  "CoreCommunicator": {
+    "Bluetooth is required to connect to glasses": "需要蓝牙才能连接眼镜。请启用蓝牙并重试。",
+    "Location permission is required to scan for glasses on Android": "在 Android 设备上扫描眼镜需要位置权限。请授予位置权限，然后重试。",
+    "Location services are disabled": "定位服务已禁用。请在设备设置中启用定位服务，然后重试。"
+  },
+  "SelectGlassesBluetoothScreen": {
+    "No modelName found": "没找到 {{modelName}}",
+    "Retry search": "重试搜索？",
+    "Location Permission Required": "需要位置权限",
+    "Location permission is required to scan for and connect to smart glasses on Android": "在 Android 上扫描并连接智能眼镜需要位置权限。这是 Android 蓝牙系统的要求。",
+    "Microphone Permission Required": "需要麦克风权限",
+    "Microphone permission is required to connect to smart glasses": "连接智能眼镜需要麦克风权限。语音控制和音频功能对于 AR 体验至关重要。"
+  },
+  "GlassesPairingGuideScreen": {
+    "Need Some Help": "需要帮助吗？",
+    "Having trouble pairing your glassesModelName": "配对 {{glassesModelName}} 时遇到问题？想看看一些技巧吗？",
+    "No thanks": "不，谢谢。",
+    "Help Me": "帮我！",
+    "Need Help Pairing": "需要配对帮助吗？"
+  },
+  "SensingDisabledWarning": {
+    "Sensing is disabled": "传感功能已禁用。麦克风和传感器在应用中无法使用。"
   }
 }

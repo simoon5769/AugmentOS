@@ -21,10 +21,19 @@ i18n
     },
     resources: {
       'en': {
+        translation: {
+         },
         'home': require('./locales/en/strings.json'),
       },
       'zh': {
+        translation: {
+         },
         'home': require('./locales/zh-CN/strings.json'),
+      },
+      'fr': {
+        translation: {
+         },
+        'home': require('./locales/fr/strings.json'),
       },
     },
     // React Native 可加载异步资源：

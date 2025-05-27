@@ -21,6 +21,7 @@ import coreCommunicator from '../bridge/CoreCommunicator';
 import HeadUpAngleComponent from '../components/HeadUpAngleComponent.tsx';
 import BackendServerComms from '../backend_comms/BackendServerComms';
 import { Slider } from 'react-native-elements';
+import { useTranslation } from 'react-i18next';
 
 interface DashboardSettingsScreenProps {
   navigation: any;
@@ -34,6 +35,7 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
   toggleTheme,
 }) => {
   const { status } = useStatus();
+  const { t } = useTranslation(['home']);
   const backendServerComms = BackendServerComms.getInstance();
 
   // -- States --
@@ -67,7 +69,7 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
 
   const onSaveHeadUpAngle = async (newHeadUpAngle: number) => {
     if (!status.glasses_info) {
-      Alert.alert('Glasses not connected', 'Please connect your smart glasses first.');
+      Alert.alert(t('ScreenSettingsScreen.Glasses not connected'), t('ScreenSettingsScreen.Please connect your smart glasses first'));
       return;
     }
     if (newHeadUpAngle == null) {
@@ -158,7 +160,7 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
         <View style={[styles.pickerContainer]}>
           <View style={styles.pickerHeader}>
             <Text style={styles.pickerTitle}>
-              Select Dashboard Content
+              {t('DashboardSettingsScreen.Select Dashboard Content')}
             </Text>
             <TouchableOpacity 
               onPress={() => !isUpdating && setShowContentPicker(false)}
@@ -217,12 +219,12 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
         {/* Contextual Dashboard */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            General Settings
+            {t('DashboardSettingsScreen.General Settings')}
           </Text>
           <View style={[styles.settingItem, styles.elevatedCard]}>
             <View style={styles.settingTextContainer}>
               <Text style={styles.label}>
-                Contextual Dashboard
+                {t('DashboardSettingsScreen.Contextual Dashboard')}
               </Text>
               {status.glasses_info?.model_name && (
                 <Text style={styles.value}>
@@ -287,7 +289,7 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
         {/* Display Settings Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
-            Display Settings
+            {t('DashboardSettingsScreen.Display Settings')}
           </Text>
           
           {/* Head-Up Angle Setting */}
@@ -302,10 +304,10 @@ const DashboardSettingsScreen: React.FC<DashboardSettingsScreenProps> = ({
           >
             <View style={styles.settingTextContainer}>
               <Text style={styles.label}>
-                Adjust Head-Up Angle
+                {t('DashboardSettingsScreen.Adjust Head-Up Angle')}
               </Text>
               <Text style={[styles.value, disableHeadUpAngle && styles.disabledItem]}>
-                Adjust the angle at which the contextual dashboard appears when you look up.
+                {t('DashboardSettingsScreen.Adjust the angle at which the contextual dashboard appears when you look up')}
               </Text>
             </View>
             <Icon name="chevron-right" size={16} color="#000000" />

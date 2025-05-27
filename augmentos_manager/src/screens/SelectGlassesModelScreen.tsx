@@ -19,6 +19,7 @@ import { SETTINGS_KEYS } from '../consts';
 import NavigationBar from '../components/NavigationBar';
 import { getGlassesImage } from '../logic/getGlassesImage';
 import GlobalEventEmitter from '../logic/GlobalEventEmitter';
+import { useTranslation } from 'react-i18next';
 
 interface SelectGlassesModelScreenProps {
     isDarkTheme: boolean;
@@ -34,17 +35,18 @@ const SelectGlassesModelScreen: React.FC<SelectGlassesModelScreenProps> = ({
     const { status } = useStatus();
     const [glassesModelNameToPair, setGlassesModelNameToPair] = useState<string | null>(null);
     const [isOnboarding, setIsOnboarding] = useState(false);
+    const { t } = useTranslation(['home']);
 
     // Platform-specific glasses options
     let glassesOptions = Platform.OS === 'ios'
         ? [
             // iOS only supports these two options
-            { modelName: 'Simulated Glasses', key: 'Simulated Glasses' }, // Moved to first position
+            { modelName: 'Simulated Glasses', key: t('GlassesPairingGuides.Simulated Glasses') }, // Moved to first position
             { modelName: 'Even Realities G1', key: 'evenrealities_g1' },
         ]
         : [
             // Android supports all options
-            { modelName: 'Simulated Glasses', key: 'Simulated Glasses' }, // Moved to first position
+            { modelName: 'Simulated Glasses', key: t('GlassesPairingGuides.Simulated Glasses') }, // Moved to first position
             { modelName: 'Vuzix Z100', key: 'vuzix-z100' },
             { modelName: 'Mentra Mach1', key: 'mentra_mach1' },
             { modelName: 'Even Realities G1', key: 'evenrealities_g1' },
@@ -113,7 +115,7 @@ const SelectGlassesModelScreen: React.FC<SelectGlassesModelScreenProps> = ({
                         fontSize: 16,
                         flex: 1
                     }}>
-                        If you don't have smart glasses yet, you can select "Simulated Glasses".
+                        {t("SelectGlassesModelScreen.you can select")}
                     </Text>
                 </View>
             )}
@@ -166,7 +168,7 @@ const SelectGlassesModelScreen: React.FC<SelectGlassesModelScreenProps> = ({
                         {isOnboarding && glasses.modelName === 'Simulated Glasses' ? (
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ color: '#2196F3', marginRight: 5, fontWeight: 'bold' }}>
-                                    Select
+                                    {t('Select')}
                                 </Text>
                                 <Icon
                                     name="angle-right"

@@ -81,11 +81,15 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   const handleNotificationAlert = () => {
     // Show explanation alert before navigating to privacy settings
     showAlert(
-      'Additional Features Available',
-      'Enhance your AugmentOS experience by enabling additional permissions.',
+      t('Header.Additional Features Available'),
+      t('Header.Enhance your AugmentOS experience by enabling additional permissions'),
       [
         {
-          text: 'Go to Settings',
+          text: t('Cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('Go to Settings'),
           onPress: () => {
             // Navigate to PrivacySettingsScreen after explaining
             if (navigation) {

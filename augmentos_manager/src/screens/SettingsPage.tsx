@@ -26,6 +26,7 @@ import {
 } from '../logic/PermissionsUtils';
 import showAlert from '../utils/AlertUtils';
 import SelectSetting from '../components/settings/SelectSetting.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface SettingsPageProps {
   isDarkTheme: boolean;
@@ -50,6 +51,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
   navigation,
 }) => {
   const {status} = useStatus();
+
+  const { t } = useTranslation(['home']);
 
   // -- Basic states from your original code --
   const [isDoNotDisturbEnabled, setDoNotDisturbEnabled] = useState(false);
@@ -150,11 +153,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
   const confirmForgetGlasses = () => {
     showAlert(
-      'Forget Glasses',
-      'Are you sure you want to forget your glasses?',
+      t('SettingsPage.Forget Glasses'),
+      t('SettingsPage.Are you sure you want to forget your glasses'),
       [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Yes', onPress: forgetGlasses},
+        {text: t('Cancel'), style: 'cancel'},
+        {text: t('SettingsPage.Yes'), onPress: forgetGlasses},
       ],
       {
         cancelable: false,
@@ -227,11 +230,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
   const confirmSignOut = () => {
     showAlert(
-      'Sign Out',
-      'Are you sure you want to sign out?',
+      t('SettingsPage.Sign Out'),
+      t('SettingsPage.Are you sure you want to sign out'),
       [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Yes', onPress: handleSignOut},
+        {text: t('Cancel'), style: 'cancel'},
+        {text: t('SettingsPage.Yes'), onPress: handleSignOut},
       ],
       {
         cancelable: false,
@@ -284,7 +287,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               styles.title,
               isDarkTheme ? styles.lightText : styles.darkText,
             ]}>
-            Settings
+            {t('SettingsPage.Settings')}
           </Text>
         </View>
 
@@ -299,7 +302,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   // (!status.core_info.puck_connected || !status.glasses_info?.model_name) &&
                   //   styles.disabledItem,
                 ]}>
-                Use Phone Microphone
+                {t('SettingsPage.Use Phone Microphone')}
               </Text>
               <Text
                 style={[
@@ -308,13 +311,12 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   // (!status.core_info.puck_connected || !status.glasses_info?.model_name) &&
                   //   styles.disabledItem,
                 ]}>
-                Use the phone's microphone instead of the glasses'
-                microphone (if applicable).
+                {t("SettingsPage.Use the phone's microphone instead of the glasses' microphone (if applicable)")}
               </Text>
               {status.glasses_info?.model_name === "Simulated Glasses" && (
                 <View style={styles.flagContainer}>
                   <Text style={[styles.flagText, { color: '#ff6b6b' }]}>
-                    This setting has no effect when using Simulated Glasses
+                    {t("SettingsPage.This setting has no effect when using Simulated Glasses")}
                   </Text>
                 </View>
               )}
@@ -338,15 +340,14 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                     styles.label,
                     isDarkTheme ? styles.lightText : styles.darkText,
                   ]}>
-                  Always On Status Bar (Beta Feature)
+                  {t('SettingsPage.Always On Status Bar (Beta Feature)')}
                 </Text>
                 <Text
                   style={[
                     styles.value,
                     isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
                   ]}>
-                  Always show the time, date and battery level on your smart
-                  glasses.
+                  {t("SettingsPage.Always show the time, date and battery level on your smart glasses")}
                 </Text>
               </View>
               <Switch
@@ -371,7 +372,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   styles.label,
                   isDarkTheme ? styles.lightText : styles.darkText,
                 ]}>
-                Privacy Settings
+                {t('SettingsPage.Privacy Settings')}
               </Text>
             </View>
             <Icon
@@ -397,14 +398,14 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   styles.label,
                   isDarkTheme ? styles.lightText : styles.darkText,
                 ]}>
-                Dashboard Settings
+                {t('SettingsPage.Dashboard Settings')}
               </Text>
               <Text
                 style={[
                   styles.value,
                   isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
                 ]}>
-                Configure the contextual dashboard and HeadUp settings
+                {t('SettingsPage.Configure the contextual dashboard and HeadUp settings')}
               </Text>
             </View>
             <Icon
@@ -428,14 +429,14 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   styles.label,
                   isDarkTheme ? styles.lightText : styles.darkText,
                 ]}>
-                Screen Settings
+                {t('SettingsPage.Screen Settings')}
               </Text>
               <Text
                 style={[
                   styles.value,
                   isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
                 ]}>
-                Adjust brightness, auto-brightness, and other display settings.
+                {t('SettingsPage.Adjust brightness, auto-brightness, and other display settings')}
               </Text>
             </View>
             <Icon
@@ -459,7 +460,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   styles.label,
                   isDarkTheme ? styles.lightText : styles.darkText,
                 ]}>
-                Developer Settings
+                {t('SettingsPage.Developer Settings')}
               </Text>
             </View>
             <Icon
@@ -497,7 +498,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                     status.core_info.default_wearable === '') &&
                     styles.disabledItem,
                 ]}>
-                Forget Glasses
+                {t('SettingsPage.Forget Glasses')}
               </Text>
             </View>
           </TouchableOpacity>
@@ -505,7 +506,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           {/* Sign Out */}
           <TouchableOpacity style={styles.settingItem} onPress={confirmSignOut}>
             <View style={styles.settingTextContainer}>
-              <Text style={[styles.label, styles.redText]}>Sign Out</Text>
+              <Text style={[styles.label, styles.redText]}>{t('SettingsPage.Sign Out')}</Text>
             </View>
           </TouchableOpacity>
         </ScrollView>

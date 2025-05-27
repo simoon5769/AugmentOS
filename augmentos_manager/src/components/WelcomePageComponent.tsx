@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
 import { saveSetting } from '../logic/SettingsHelper';
 import { SETTINGS_KEYS } from '../consts';
+import { useTranslation } from 'react-i18next';
 
 interface WelcomePageComponentProps {
   route: {
@@ -25,6 +26,8 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
                                                      }) => {
   const { isDarkTheme } = route.params;
   const navigation = useNavigation<NavigationProp<any>>();
+
+  const { t } = useTranslation(['home']);
 
   // Skip onboarding and go directly to home
   const handleSkip = () => {
@@ -72,7 +75,7 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
               styles.title,
               isDarkTheme ? styles.lightText : styles.darkText,
             ]}>
-            Welcome to AugmentOS
+            {t('WelcomePageComponent.Welcome to AugmentOS')}
           </Text>
 
           <Text
@@ -80,7 +83,7 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
               styles.description,
               isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
             ]}>
-            Let's go through a quick tutorial to get you started with AugmentOS.
+            {t("WelcomePageComponent.go through a quick tutorial")}
           </Text>
         </View>
 
@@ -90,7 +93,7 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
             isDarkTheme={isDarkTheme}
             iconName="arrow-right"
             disabled={false}>
-            Continue
+            {t("Continue")}
           </Button>
 
           <View style={styles.skipButtonContainer}>
@@ -100,7 +103,7 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
               iconName="skip-next"
               disabled={false}
             >
-              Skip Onboarding
+              {t("WelcomePageComponent.Skip Onboarding")}
             </Button>
           </View>
         </View>

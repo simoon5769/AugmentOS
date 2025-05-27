@@ -1,5 +1,6 @@
 import { Alert, NativeModules, Platform } from 'react-native';
 import showAlert from './AlertUtils';
+import i18n from '../i18n/config';
 
 const { NotificationAccess } = NativeModules;
 
@@ -20,19 +21,15 @@ export async function checkAndRequestNotificationAccessSpecialPermission() {
     const hasAccess = await NotificationAccess.hasNotificationAccess();
     if (!hasAccess) {
       showAlert(
-        'Enable Notification Access',
-        'AugmentOS needs permission to read your phone notifications to display them on your smart glasses.\n\n' +
-        'On the next screen:\n' +
-        '1. Find "AugmentOS Manager" in the list\n' +
-        '2. Toggle the switch to ON\n' +
-        '3. Tap ALLOW when prompted',
+        i18n.t('NotificationServiceUtils.Enable Notification Access', {ns: 'home'}),
+        i18n.t('NotificationServiceUtils.AugmentOS needs permission to read your phone notifications', {ns: 'home'}),
         [
           {
-            text: 'Later',
+            text: i18n.t('NotificationServiceUtils.Later', {ns: 'home'}),
             style: 'cancel',
           },
           {
-            text: 'Go to Settings',
+            text: i18n.t('NotificationServiceUtils.Go to Settings', {ns: 'home'}),
             onPress: () => {
               NotificationAccess.requestNotificationAccess()
                 .then(() => {
@@ -41,9 +38,9 @@ export async function checkAndRequestNotificationAccessSpecialPermission() {
                 .catch((err: any) => {
                   console.error('Error opening notification settings:', err);
                   showAlert(
-                    'Error',
-                    'Could not open notification settings. Please enable notification access manually in your device settings.',
-                    [{ text: 'OK' }]
+                    i18n.t('Error', {ns: 'home'}),
+                    i18n.t('NotificationServiceUtils.Could not open notification settings', {ns: 'home'}),
+                    [{ text: i18n.t('OK', {ns: 'home'}) }]
                   );
                 });
             },
@@ -59,9 +56,9 @@ export async function checkAndRequestNotificationAccessSpecialPermission() {
   } catch (error) {
     console.error('Failed to check notification listener permission:', error);
     showAlert(
-      'Error',
-      'There was a problem checking notification permissions. Please try again later.',
-      [{ text: 'OK' }]
+      i18n.t('Error', {ns: 'home'}),
+      i18n.t('NotificationServiceUtils.There was a problem checking notification permissions', {ns: 'home'}),
+      [{ text: i18n.t('OK', {ns: 'home'}) }]
     );
     return false;
   }

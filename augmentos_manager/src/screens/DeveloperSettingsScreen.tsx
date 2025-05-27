@@ -17,6 +17,7 @@ import {saveSetting, loadSetting} from '../logic/SettingsHelper';
 import {SETTINGS_KEYS} from '../consts';
 import axios from 'axios';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 
 interface DeveloperSettingsScreenProps {
   isDarkTheme: boolean;
@@ -36,6 +37,8 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
     isBypassAudioEncodingForDebuggingEnabled,
     setIsBypassAudioEncodingForDebuggingEnabled,
   ] = React.useState(status.core_info.bypass_audio_encoding_for_debugging);
+
+  const { t } = useTranslation(['home']);
 
   // State for custom URL management
   const [customUrlInput, setCustomUrlInput] = useState('');
@@ -79,18 +82,18 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
     // Basic validation
     if (!urlToTest) {
       showAlert(
-        'Empty URL',
-        'Please enter a URL or reset to default.',
-        [{text: 'OK'}],
+        t('DeveloperSettingsScreen.Empty URL'),
+        t('DeveloperSettingsScreen.Please enter a URL or reset to default', {abc: "ok..."}),
+        [{text: t('DeveloperSettingsScreen.OK')}],
         {isDarkTheme},
       );
       return;
     }
     if (!urlToTest.startsWith('http://') && !urlToTest.startsWith('https://')) {
       showAlert(
-        'Invalid URL',
-        'Please enter a valid URL starting with http:// or https://',
-        [{text: 'OK'}],
+        t('DeveloperSettingsScreen.Invalid URL'),
+        t('DeveloperSettingsScreen.Please enter a valid URL starting with'),
+        [{text: t('DeveloperSettingsScreen.OK')}],
         {isDarkTheme},
       );
       return;
@@ -112,18 +115,18 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
         await coreCommunicator.setServerUrl(urlToTest);
         setSavedCustomUrl(urlToTest);
         showAlert(
-          'Success',
-          'Custom backend URL saved and verified. It will be used on the next connection attempt or app restart.',
-          [{text: 'OK'}],
+          t('DeveloperSettingsScreen.Success'),
+          t('DeveloperSettingsScreen.Custom backend URL saved and verified'),
+          [{text: t('DeveloperSettingsScreen.OK')}],
           {isDarkTheme},
         );
       } else {
         // Handle non-2xx responses as errors
         console.error(`URL Test Failed: Status ${response.status}`);
         showAlert(
-          'Verification Failed',
-          `The server responded, but with status ${response.status}. Please check the URL and server status.`,
-          [{text: 'OK'}],
+          t('DeveloperSettingsScreen.Verification Failed'),
+          t('DeveloperSettingsScreen.The server responded, but with status', {status: response.status}),
+          [{text: t('DeveloperSettingsScreen.OK')}],
           {isDarkTheme},
         );
       }
@@ -159,7 +162,7 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
         errorMessage = `Server responded with error ${error.response.status}. Please check the URL and server status.`;
       }
 
-      showAlert('Verification Failed', errorMessage, [{text: 'OK'}], {
+      showAlert(t('DeveloperSettingsScreen.Verification Failed'), errorMessage, [{text: t('OK')}], {
         isDarkTheme,
       });
     } finally {
@@ -171,7 +174,10 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
     await saveSetting(SETTINGS_KEYS.CUSTOM_BACKEND_URL, null);
     setSavedCustomUrl(null);
     setCustomUrlInput('');
-    Alert.alert('Success', 'Backend URL reset to default.');
+    // Alert.alert(t('DeveloperSettingsScreen.Success'), t('DeveloperSettingsScreen.Backend URL reset to default.'));
+    showAlert(t('DeveloperSettingsScreen.Success'), t('DeveloperSettingsScreen.Backend URL reset to default.'), [{text: t('OK')}], {
+        isDarkTheme,
+      });
   };
 
   const switchColors = {
@@ -195,15 +201,14 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
                 styles.label,
                 isDarkTheme ? styles.lightText : styles.darkText,
               ]}>
-              Bypass VAD for Debugging
+              {t('DeveloperSettingsScreen.Bypass VAD for Debugging')}
             </Text>
             <Text
               style={[
                 styles.value,
                 isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
               ]}>
-              Bypass Voice Activity Detection in case transcription stops
-              working.
+              {t('DeveloperSettingsScreen.Bypass Voice Activity Detection in case transcription stops working')}
             </Text>
           </View>
           <Switch
@@ -217,7 +222,7 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
 
         <View style={styles.warningContainer}>
           <Text style={styles.warningText}>
-            Warning: These settings may break the app. Use at your own risk.
+            {t('DeveloperSettingsScreen.These settings may break the app')}
           </Text>
         </View>
 
@@ -228,15 +233,14 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
                 styles.label,
                 isDarkTheme ? styles.lightText : styles.darkText,
               ]}>
-              Custom Backend URL
+              {t('DeveloperSettingsScreen.Custom Backend URL')}
             </Text>
             <Text
               style={[
                 styles.value,
                 isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
               ]}>
-              Override the default backend server URL. Leave blank to use
-              default.
+              {t('DeveloperSettingsScreen.Override the default backend server URL. Leave blank to use default')}
               {savedCustomUrl && `\nCurrently using: ${savedCustomUrl}`}
             </Text>
             <TextInput
@@ -267,7 +271,7 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
                 onPress={handleSaveUrl}
                 disabled={isSavingUrl}>
                 <Text style={styles.buttonText}>
-                  {isSavingUrl ? 'Testing...' : 'Save & Test URL'}
+                  {isSavingUrl ? t('DeveloperSettingsScreen.Testing') : t('DeveloperSettingsScreen.Save Test URL') }
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -278,7 +282,7 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
                 ]}
                 onPress={handleResetUrl}
                 disabled={isSavingUrl}>
-                <Text style={styles.buttonText}>Reset</Text>
+                <Text style={styles.buttonText}>{t('DeveloperSettingsScreen.Reset')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -288,19 +292,19 @@ const DeveloperSettingsScreen: React.FC<DeveloperSettingsScreenProps> = ({
           <TouchableOpacity
             style={styles.button}
             onPress={() => setCustomUrlInput('https://prod.augmentos.cloud:443')}>
-            <Text style={styles.buttonText}>Production</Text>
+            <Text style={styles.buttonText}>{t('DeveloperSettingsScreen.Production')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => setCustomUrlInput('https://debug.augmentos.cloud:443')}>
-            <Text style={styles.buttonText}>Debug</Text>
+            <Text style={styles.buttonText}>{t('DeveloperSettingsScreen.Debug')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
               setCustomUrlInput('https://global.augmentos.cloud:443')
             }>
-            <Text style={styles.buttonText}>Global</Text>
+            <Text style={styles.buttonText}>{t('DeveloperSettingsScreen.Global')}</Text>
           </TouchableOpacity>
         </View>
 

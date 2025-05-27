@@ -196,7 +196,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
                     <View style={styles.statusInfo}>
                       {status.glasses_info?.battery_life != null && typeof status.glasses_info?.battery_life === 'number' &&
                         <>
-                          <Text style={[styles.statusLabel, { color: themeStyles.statusLabelColor }]}>Battery</Text>
+                          <Text style={[styles.statusLabel, { color: themeStyles.statusLabelColor }]}>{t('ScreenSettingsScreen.Battery')}</Text>
                           <View style={styles.batteryContainer}>
                           {status.glasses_info?.battery_life >= 0 &&
                             <Icon name={batteryIcon} size={16} color={batteryColor} style={styles.batteryIcon} />
@@ -214,7 +214,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
                     <View style={styles.statusInfo}>
                       {status.glasses_info?.brightness != null &&
                         <>
-                          <Text style={[styles.statusLabel, { color: themeStyles.statusLabelColor }]}>Brightness</Text>
+                          <Text style={[styles.statusLabel, { color: themeStyles.statusLabelColor }]}>{t('ScreenSettingsScreen.Brightness')}</Text>
                           <Text style={[styles.statusValue, { color: themeStyles.statusValueColor }]}>
                             {status.glasses_info
                               ? `${status.glasses_info.brightness}`
@@ -230,7 +230,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
                     >
                       <Icon name="power-off" size={18} color="white" style={styles.icon} />
                       <Text style={styles.disconnectText}>
-                        Disconnect
+                        {t('Disconnect')}
                       </Text>
                     </TouchableOpacity>
                   </Animated.View>
@@ -244,7 +244,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
                     disabled={isConnectButtonDisabled && !status.glasses_info?.is_searching}
                   >
                     <Text style={styles.buttonText}>
-                      {isConnectButtonDisabled || status.glasses_info?.is_searching ? 'Connecting Glasses...' : 'Connect Glasses'}
+                      {isConnectButtonDisabled || status.glasses_info?.is_searching ? t('ConnectedDeviceInfo.Connecting Glasses') : t('ConnectedDeviceInfo.Connect Glasses')}
                     </Text>
                     {status.glasses_info?.is_searching && (
                       <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 5 }} />
@@ -258,7 +258,7 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
               {status.glasses_info?.is_searching ? (
                 <View style={styles.disconnectedContent}>
                   <Text style={[styles.connectText, { color: themeStyles.textColor }]}>
-                    Searching for glasses
+                    {t("ConnectedDeviceInfo.Searching for glasses", {glassesModelName: "glasses"})}
                   </Text>
                   <ActivityIndicator size="small" color="#2196F3" />
                 </View>
@@ -276,11 +276,11 @@ const ConnectedDeviceInfo: React.FC<ConnectedDeviceInfoProps> = ({ isDarkTheme }
       ) : (
         <View style={styles.disconnectedContent}>
           <Text style={[styles.connectText, { color: themeStyles.textColor }]}>
-            {'Core service not connected'}
+            {t('ConnectedDeviceInfo.Core service not connected')}
           </Text>
           <TouchableOpacity style={styles.connectButton} onPress={handleConnectToCore}>
             <Icon name="wifi" size={16} color="white" style={styles.icon} />
-            <Text style={styles.buttonText}>Connect to Core</Text>
+            <Text style={styles.buttonText}>{t('ConnectedDeviceInfo.Connect to Core')}</Text>
           </TouchableOpacity>
         </View>
       )}

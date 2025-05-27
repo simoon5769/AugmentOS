@@ -47,6 +47,7 @@ import DeveloperSettingsScreen from './screens/DeveloperSettingsScreen.tsx';
 import DashboardSettingsScreen from './screens/DashboardSettingsScreen.tsx';
 import ScreenSettingsScreen from './screens/ScreenSettingsScreen.tsx';
 import NavigationBar from './components/NavigationBar';
+import { useTranslation } from 'react-i18next';
 
 const linking = {
   prefixes: [
@@ -76,6 +77,7 @@ const App: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [currentRouteName, setCurrentRouteName] = useState<string>('');
   const navigationRef = useNavigationContainerRef();
+  const { t } = useTranslation(['home']);
 
   // Reset ignoreVersionCheck setting on app start
   useEffect(() => {
@@ -190,7 +192,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="PrivacySettingsScreen"
-                              options={{ title: 'Privacy Settings' }}
+                              options={{ title: t('SettingsPage.Privacy Settings') }}
                             >
                               {props => (
                                 <PrivacySettingsScreen
@@ -201,7 +203,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="DeveloperSettingsScreen"
-                              options={{ title: 'Developer Settings' }}
+                              options={{ title: t('SettingsPage.Developer Settings') }}
                             >
                               {props => (
                                 <DeveloperSettingsScreen
@@ -212,7 +214,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="DashboardSettingsScreen"
-                              options={{ title: 'Dashboard Settings' }}
+                              options={{ title: t('SettingsPage.Dashboard Settings') }}
                             >
                               {props => (
                                 <DashboardSettingsScreen
@@ -223,7 +225,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="ScreenSettingsScreen"
-                              options={{ title: 'Screen Settings' }}
+                              options={{ title: t('SettingsPage.Screen Settings') }}
                             >
                               {props => (
                                 <ScreenSettingsScreen
@@ -310,7 +312,7 @@ const App: React.FC = () => {
                                       name="GlassesMirror"
                                       options={{
                                         headerShown: false,
-                                        title: 'Glasses Mirror',
+                                        title: t('GlassesMirror.Glasses Mirror'),
                                         headerStyle: {
                                           backgroundColor: isDarkTheme ? '#000000' : '#ffffff',
                                         },
@@ -322,7 +324,7 @@ const App: React.FC = () => {
                                       name="GlassesMirrorFullscreen"
                                       options={{
                                         headerShown: false,
-                                        title: 'Glasses Mirror Fullscreen',
+                                        title: t('GlassesMirror.Glasses Mirror Fullscreen'),
                                         gestureEnabled: false,
                                       }}>
                                       {() => <GlassesMirrorFullscreen isDarkTheme={isDarkTheme} />}
@@ -362,7 +364,7 @@ const App: React.FC = () => {
                                     </Stack.Screen>
                                     <Stack.Screen name="PhoneNotificationSettings"
                                       options={{
-                                        title: 'Notifications',
+                                        title: t('App.Notifications'),
                                         headerStyle: {
                                           backgroundColor: isDarkTheme ? '#000000' : '#ffffff',
                                         },
@@ -379,10 +381,10 @@ const App: React.FC = () => {
                                     <Stack.Screen
                                       name="ErrorReportScreen"
                                       component={ErrorReportScreen}
-                                      options={{ title: 'Report an Error' }}
+                                      options={{ title: t('App.Report an Error') }}
                                     />
                                     <Stack.Screen name="SelectGlassesModelScreen"
-                                      options={{ title: 'Select Glasses' }}
+                                      options={{ title: t('App.Select Glasses') }}
                                     >
                                       {props => (
                                         <SelectGlassesModelScreen
@@ -393,7 +395,7 @@ const App: React.FC = () => {
                                       )}
                                     </Stack.Screen>
                                     <Stack.Screen name="GlassesPairingGuideScreen"
-                                      options={{ title: 'Pairing Guide' }}
+                                      options={{ title: t('App.Pairing Guide') }}
                                     >
                                       {props => (
                                         <GlassesPairingGuideScreen
@@ -404,7 +406,7 @@ const App: React.FC = () => {
                                       )}
                                     </Stack.Screen>
                                     <Stack.Screen name="GlassesPairingGuidePreparationScreen"
-                                      options={{ title: 'Pairing Guide' }}
+                                      options={{ title: t('App.Pairing Guide') }}
                                     >
                                       {props => (
                                         <GlassesPairingGuidePreparationScreen
@@ -415,7 +417,7 @@ const App: React.FC = () => {
                                       )}
                                     </Stack.Screen>
                                     <Stack.Screen name="SelectGlassesBluetoothScreen"
-                                      options={{ title: 'Finding Glasses' }}
+                                      options={{ title: t('App.Finding Glasses') }}
                                     >
                                       {props => (
                                         <SelectGlassesBluetoothScreen

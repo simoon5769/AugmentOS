@@ -221,9 +221,9 @@ const YourAppsList: React.FC<YourAppsListProps> = ({isDarkTheme}) => {
         packageName !== 'cloud.augmentos.live-captions'
       ) {
         showAlert(
-          'Complete Onboarding',
-          'Please tap the Live Captions app to complete the onboarding process.',
-          [{text: 'OK'}],
+          t('YourAppsList.Complete Onboarding'),
+          t('YourAppsList.Please tap the Live Captions app to complete the onboarding process'),
+          [{text: t('OK')}],
           {
             isDarkTheme,
             iconName: 'information-outline',
@@ -294,9 +294,9 @@ const YourAppsList: React.FC<YourAppsListProps> = ({isDarkTheme}) => {
 
         setTimeout(() => {
           showAlert(
-            'Try Live Captions!',
-            'Start talking now to see your speech transcribed on your glasses in real-time!',
-            [{text: 'OK'}],
+            t('YourAppsList.Try Live Captions'),
+            t('YourAppsList.Start talking now to see your speech transcribed on your glasses in real-time'),
+            [{text: t('OK')}],
             {
               isDarkTheme,
               iconName: 'microphone',
@@ -368,7 +368,7 @@ const YourAppsList: React.FC<YourAppsListProps> = ({isDarkTheme}) => {
                   textShadowRadius: 2,
                 },
               ]}>
-              Tap to start
+              {t('YourAppsList.Tap to start')}
             </Text>
             <Icon
               name="gesture-tap"

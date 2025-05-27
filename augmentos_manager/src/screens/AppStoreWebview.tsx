@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { RootStackParamList } from '../components/types';
 import BackendServerComms from '../backend_comms/BackendServerComms';
+import { useTranslation } from 'react-i18next';
 
 // Define package name for the store webview
 const STORE_PACKAGE_NAME = 'org.augmentos.store';
@@ -23,6 +24,8 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
   const webViewRef = useRef<WebView>(null);
   const [canGoBack, setCanGoBack] = useState(false);
   const [appStoreUrl, setAppStoreUrl] = useState<string>('');
+
+  const { t } = useTranslation(['home']);
 
   // Theme colors
   const theme = {
@@ -102,7 +105,7 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
       <View style={[styles.loadingOverlay, { backgroundColor: theme.backgroundColor }]}>
         <ActivityIndicator size="large" color={theme.primaryColor} />
         <Text style={[styles.loadingText, { color: theme.textColor }]}>
-          Preparing App Store...
+           {t('AppStoreWebview.Preparing App Store')}
         </Text>
       </View>
     );
@@ -130,7 +133,7 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
               <View style={styles.loadingOverlay}>
                 <ActivityIndicator size="large" color={theme.primaryColor} />
                 <Text style={[styles.loadingText, { color: theme.textColor }]}>
-                  Loading App Store...
+                  {t('AppStoreWebview.Loading App Store')}
                 </Text>
               </View>
             )}
@@ -139,7 +142,7 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
             <View style={styles.loadingOverlay}>
               <ActivityIndicator size="large" color={theme.primaryColor} />
               <Text style={[styles.loadingText, { color: theme.textColor }]}>
-                Loading App Store...
+                {t('AppStoreWebview.Loading App Store')}
               </Text>
             </View>
           )} */}

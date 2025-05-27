@@ -24,6 +24,7 @@ import AppleIcon from '../icons/AppleIcon';
 import { supabase } from '../supabaseClient';
 import { Linking } from 'react-native';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 
 interface LoginScreenProps {
   navigation: any;
@@ -41,6 +42,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const translateY = useRef(new Animated.Value(20)).current;
   const formScale = useRef(new Animated.Value(0)).current;
   const authOverlayOpacity = useRef(new Animated.Value(0)).current;
+
+  const { t } = useTranslation(['home']);
 
   //pswd visibility
   const [showPassword, setShowPassword] = useState(false);
@@ -191,7 +194,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       // 2) If there's an error, handle it
       if (error) {
         console.error('Supabase Google sign-in error:', error);
-        showAlert('Authentication Error', error.message);
+        showAlert(t('LoginScreen.Authentication Error'), error.message);
         setIsAuthLoading(false);
         authOverlayOpacity.setValue(0);
         return;
@@ -210,7 +213,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
     } catch (err) {
       console.error('Google sign in failed:', err);
-      showAlert('Authentication Error', 'Google sign in failed. Please try again.');
+      showAlert(t('LoginScreen.Authentication Error'), t('LoginScreen.Google sign in failed. Please try again.'));
       setIsAuthLoading(false);
       authOverlayOpacity.setValue(0);
     }
@@ -232,7 +235,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       // If there's an error, handle it
       if (error) {
         console.error('Supabase Apple sign-in error:', error);
-        showAlert('Authentication Error', error.message);
+        showAlert(t('LoginScreen.Authentication Error'), error.message);
         return;
       }
 
@@ -251,7 +254,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
     } catch (err) {
       console.error('Apple sign in failed:', err);
-      showAlert('Authentication Error', 'Apple sign in failed. Please try again.');
+      showAlert(t('LoginScreen.Authentication Error'), t('LoginScreen.Apple sign in failed. Please try again.'));
     }
 
     console.log('signInWithOAuth for Apple finished');
@@ -276,16 +279,16 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       });
 
       if (error) {
-        showAlert("Error", error.message);
+        showAlert(t('Error'), error.message);
       } else if (!data.session) {
-        showAlert("Success!", "Please check your inbox for email verification!");
+        showAlert(t('LoginScreen.Success'), t('LoginScreen.Please check your inbox for email verification'));
       } else {
         console.log("Sign-up successful:", data);
         navigation.replace("SplashScreen");
       }
     } catch (err) {
       console.error("Error during sign-up:", err);
-      showAlert("Error", "Something went wrong. Please try again.");
+      showAlert(t('Error'), t('LoginScreen.Something went wrong'));
     } finally {
       setIsFormLoading(false);
     }
@@ -300,7 +303,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     });
 
     if (error) {
-      showAlert("Error", error.message);
+      showAlert(t('Error'), error.message);
       // Handle sign-in error
     } else {
       console.log('Sign-in successful:', data);
@@ -314,7 +317,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       if (backPressCount === 0) {
         setBackPressCount(1);
         setTimeout(() => setBackPressCount(0), 2000);
-        showAlert("Leaving already?", 'Press back again to exit');
+        showAlert(t('LoginScreen.Leaving already'), t('LoginScreen.Press back again to exit'));
         return true;
       } else {
         BackHandler.exitApp();
@@ -398,17 +401,17 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                   /> */}
                     <View style={styles.authLoadingLogoPlaceholder} />
                     <ActivityIndicator size="large" color="#2196F3" style={styles.authLoadingIndicator} />
-                    <Text style={styles.authLoadingText}>Connecting to your account...</Text>
+                    <Text style={styles.authLoadingText}>{t('LoginScreen.Connecting to your account')}</Text>
                   </View>
                 </Animated.View>
               )}
               <Animated.Text
                 style={[styles.title, { opacity, transform: [{ translateY }] }]}>
-                AugmentOS..
+                {t('AugmentOS')}
               </Animated.Text>
               <Animated.Text
                 style={[styles.subtitle, { opacity, transform: [{ translateY }] }]}>
-                The future of smart glasses starts here.
+                {t('LoginScreen.The future of smart glasses starts here')}
               </Animated.Text>
               {/* <Animated.View
             style={[styles.header, { opacity, transform: [{ translateY }] }]}>
@@ -426,7 +429,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
 
                     <View style={styles.inputGroup}>
-                      <Text style={styles.inputLabel}>Email</Text>
+                      <Text style={styles.inputLabel}>{t('LoginScreen.Email')}</Text>
                       <View style={styles.enhancedInputContainer}>
                         <Icon
                           name="envelope"
@@ -448,7 +451,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                     </View>
 
                     <View style={styles.inputGroup}>
-                      <Text style={styles.inputLabel}>Password</Text>
+                      <Text style={styles.inputLabel}>{t('LoginScreen.Password')}</Text>
                       <View style={styles.enhancedInputContainer}>
                         <Icon
                           name="lock"
@@ -458,7 +461,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                         />
                         <TextInput
                           style={styles.enhancedInput}
-                          placeholder="Enter your password"
+                          placeholder={t('LoginScreen.Enter your password')}
                           value={password}
                           onChangeText={setPassword}
                           secureTextEntry={!showPassword}
@@ -482,7 +485,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                         colors={['#2196F3', '#1E88E5']}
                         style={styles.buttonGradient}>
                         <Text style={styles.enhancedPrimaryButtonText}>
-                          Log in
+                          {t('LoginScreen.Log in')}
                         </Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -495,7 +498,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                         colors={['#2196F3', '#1E88E5']}
                         style={styles.buttonGradient}>
                         <Text style={styles.enhancedPrimaryButtonText}>
-                          Create Account
+                          {t('LoginScreen.Create Account')}
                         </Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -510,7 +513,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                         style={styles.backIcon}
                       />
                       <Text style={styles.enhancedGhostButtonText}>
-                        Back to Sign In Options
+                        {t('LoginScreen.Back to Sign In Options')}
                       </Text>
                     </TouchableOpacity>
                   </Animated.View>
@@ -523,7 +526,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                         <GoogleIcon />
                       </View>
                       <Text style={styles.socialButtonText}>
-                        Continue with Google
+                        {t('LoginScreen.Continue with Google')}
                       </Text>
                     </TouchableOpacity>
 
@@ -543,7 +546,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
                     <View style={styles.dividerContainer}>
                       <View style={styles.divider} />
-                      <Text style={styles.dividerText}>Or</Text>
+                      <Text style={styles.dividerText}>{t('LoginScreen.Or')}</Text>
                       <View style={styles.divider} />
                     </View>
 
@@ -560,7 +563,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                           style={styles.emailIcon}
                         />
                         <Text style={styles.enhancedEmailButtonText}>
-                          Sign up with Email
+                          {t('LoginScreen.Sign up with Email')}
                         </Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -569,7 +572,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               </Animated.View>
 
               <Animated.Text style={[styles.termsText, { opacity }]}>
-                By continuing, you agree to our Terms of Service and Privacy Policy
+                {t('LoginScreen.By continuing')}
               </Animated.Text>
             </View>
           </ScrollView>

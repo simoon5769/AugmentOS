@@ -14,6 +14,7 @@ import { useStatus } from '../providers/AugmentOSStatusProvider';
 import { useGlassesMirror } from '../providers/GlassesMirrorContext';
 import { requestFeaturePermissions, PermissionFeatures } from '../logic/PermissionsUtils';
 import { NavigationProps } from '../components/types';
+import { useTranslation } from 'react-i18next';
 
 interface GlassesMirrorFullscreenProps {
   isDarkTheme: boolean;
@@ -30,6 +31,7 @@ const GlassesMirrorFullscreen: React.FC<GlassesMirrorFullscreenProps> = ({ isDar
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const cameraRef = useRef<RNCamera | null>(null);
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation(['home']);
 
   // Helper to check if we have a glasses model name
   const isGlassesConnected = !!status.glasses_info?.model_name;
@@ -111,21 +113,21 @@ const GlassesMirrorFullscreen: React.FC<GlassesMirrorFullscreenProps> = ({ isDar
             style={styles.exitFullscreenButton}
             onPress={handleExitFullscreen}
           >
-            <Text style={styles.exitFullscreenText}>Exit</Text>
+            <Text style={styles.exitFullscreenText}>{t("Exit")}</Text>
           </TouchableOpacity>
         </>
       ) : (
         <View style={styles.fallbackContainer}>
           <Text style={styles.fallbackText}>
             {!isGlassesConnected 
-              ? "Connect glasses to use the Glasses Mirror" 
-              : "No display events available"}
+              ? t("GlassesMirror.Connect glasses to use the Glasses Mirror")
+              : t("GlassesMirror.No display events available")}
           </Text>
           <TouchableOpacity
             style={styles.exitFullscreenButton}
             onPress={handleExitFullscreen}
           >
-            <Text style={styles.exitFullscreenText}>Back</Text>
+            <Text style={styles.exitFullscreenText}>{t("GlassesMirror.Back")}</Text>
           </TouchableOpacity>
         </View>
       )}

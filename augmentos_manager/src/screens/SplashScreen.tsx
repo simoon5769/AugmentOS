@@ -7,6 +7,7 @@ import { useStatus } from '../providers/AugmentOSStatusProvider';
 import { doesHaveAllPermissions } from '../logic/PermissionsUtils';
 import { loadSetting } from '../logic/SettingsHelper';
 import { SETTINGS_KEYS } from '../consts';
+import { useTranslation } from 'react-i18next';
 
 interface SplashScreenProps {
   //navigation: any;
@@ -16,6 +17,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ }) => {
   const navigation = useNavigation<NavigationProps>();
   const { user, loading } = useAuth();
   const { status, initializeCoreConnection } = useStatus();
+  const { t } = useTranslation(['home']);
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -55,18 +57,18 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ }) => {
     <View style={styles.container}>
       {loading ? (
         <View>
-          <Text style={styles.text}>Loading...</Text>
-          <Text style={styles.subText}>Please wait while we authenticate</Text>
+          <Text style={styles.text}>{t('Loading')}...</Text>
+          <Text style={styles.subText}>{t('SplashScreen.Please wait while we authenticate')}</Text>
         </View>
       ) : user ? (
         <View>
-          <Text style={styles.text}>Welcome Back!</Text>
+          <Text style={styles.text}>{t('SplashScreen.Welcome Back')}</Text>
           <Text style={styles.subText}>{user.email}</Text>
         </View>
       ) : (
         <View>
-          <Text style={styles.text}>AugmentOS.</Text>
-          <Text style={styles.subText}>Please log in to continue</Text>
+          <Text style={styles.text}>{t('AugmentOS')}</Text>
+          <Text style={styles.subText}>{t('SplashScreen.Please log in to continue')}</Text>
         </View>
       )}
     </View>

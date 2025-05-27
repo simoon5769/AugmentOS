@@ -9,6 +9,7 @@ import { RootStackParamList } from '../components/types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BackendServerComms from '../backend_comms/BackendServerComms';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 
 type AppWebViewProps = NativeStackScreenProps<RootStackParamList, 'AppWebView'> & {
   isDarkTheme: boolean;
@@ -23,6 +24,7 @@ const AppWebView: React.FC<AppWebViewProps> = ({ route, navigation, isDarkTheme,
   const [isLoading, setIsLoading] = useState(true); // For WebView loading itself
   const [hasError, setHasError] = useState(false);
   const webViewRef = useRef<WebView>(null);
+  const { t } = useTranslation(['home']);
 
   const [finalUrl, setFinalUrl] = useState<string | null>(null);
   const [isLoadingToken, setIsLoadingToken] = useState(true);
@@ -143,7 +145,7 @@ const AppWebView: React.FC<AppWebViewProps> = ({ route, navigation, isDarkTheme,
     return (
       <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
         <LoadingOverlay
-          message={`Preparing secure access to ${appName}...`}
+          message={t('AppSettings.Preparing secure access to', {appName: appName})}
           isDarkTheme={isDarkTheme}
         />
       </View>
@@ -200,7 +202,7 @@ const AppWebView: React.FC<AppWebViewProps> = ({ route, navigation, isDarkTheme,
             renderLoading={() => (
               // Show loading overlay while WebView itself loads
               <LoadingOverlay
-                message={`Loading ${appName}...`}
+                message={t('AppSettings.Loading appName', {appName: appName})}
                 isDarkTheme={isDarkTheme}
               />
             )}
@@ -212,7 +214,7 @@ const AppWebView: React.FC<AppWebViewProps> = ({ route, navigation, isDarkTheme,
         )}
         {/* Show loading overlay specifically for the WebView loading phase */}
         {/* {isLoading && finalUrl && (
-           <LoadingOverlay message={`Loading ${appName}...`} isDarkTheme={isDarkTheme} />
+           <LoadingOverlay message={t('AppSettings.Loading appName', {appName: appName})} isDarkTheme={isDarkTheme} />
         )} */}
       </View>
     </SafeAreaView>

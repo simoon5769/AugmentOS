@@ -1538,7 +1538,7 @@ public class AugmentosService extends LifecycleService implements AugmentOsActio
             smartGlassesManager.windowManager.showAppLayer("system", () -> smartGlassesManager.sendReferenceCard(title, body), 6);
             smartGlassesManager.updateGlassesBrightness(brightness);
         } else {
-            blePeripheral.sendNotifyManager("Connect glasses to update brightness", "error");
+            blePeripheral.sendNotifyManager(this.getResources().getString(R.string.Connect_glasses_to_update_brightness), "error");
         }
     }
 
