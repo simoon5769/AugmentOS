@@ -21,9 +21,13 @@ i18n
     },
     resources: {
       'en': {
+        translation: {
+         },
         'home': require('./locales/en/strings.json'),
       },
       'zh': {
+        translation: {
+         },
         'home': require('./locales/zh-CN/strings.json'),
       },
     },

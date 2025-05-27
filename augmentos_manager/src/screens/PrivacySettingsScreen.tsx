@@ -34,6 +34,7 @@ import {
 } from '../utils/NotificationServiceUtils';
 import {NotificationService} from '../logic/NotificationServiceUtils';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 
 interface PrivacySettingsScreenProps {
   isDarkTheme: boolean;
@@ -47,6 +48,7 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
   navigation,
 }) => {
   const {status} = useStatus();
+  const { t } = useTranslation(['home']);
   const [isSensingEnabled, setIsSensingEnabled] = React.useState(
     status.core_info.sensing_enabled,
   );
@@ -257,12 +259,12 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
     if (calendarEnabled) {
       // We can't revoke the permission, but we can provide info and a way to open settings
       showAlert(
-        'Permission Management',
-        'To revoke calendar permission, please go to your device settings and modify app permissions.',
+        t('PrivacySettingsScreen.Permission Management'),
+        t('PrivacySettingsScreen.To revoke calendar permission'),
         [
-          {text: 'Cancel', style: 'cancel'},
+          {text: t('Cancel'), style: 'cancel'},
           {
-            text: 'Go to Settings',
+            text: t('Go to Settings'),
             onPress: () => {
               Linking.openSettings();
             },
@@ -339,7 +341,7 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
             styles.sectionHeader,
             isDarkTheme ? styles.lightText : styles.darkText,
           ]}>
-          Additional Permissions
+          {t('PrivacySettingsScreen.Additional Permissions')}
         </Text>
 
         {/* Notification Permission - Android Only */}
@@ -357,15 +359,14 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
                   styles.label,
                   isDarkTheme ? styles.lightText : styles.darkText,
                 ]}>
-                Notification Access
+                {t('PrivacySettingsScreen.Notification Access')}
               </Text>
               <Text
                 style={[
                   styles.value,
                   isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
                 ]}>
-                Allow AugmentOS to forward your phone notifications to your
-                smart glasses.
+                {t('PrivacySettingsScreen.Allow AugmentOS to forward your phone notifications to your smart glasses')}
               </Text>
             </View>
             <Switch
@@ -386,15 +387,14 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
                 styles.label,
                 isDarkTheme ? styles.lightText : styles.darkText,
               ]}>
-              Calendar Access
+              {t('PrivacySettingsScreen.Calendar Access')}
             </Text>
             <Text
               style={[
                 styles.value,
                 isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
               ]}>
-              Allow AugmentOS to display your calendar events on your smart
-              glasses.
+              {t('PrivacySettingsScreen.Allow AugmentOS to display your calendar events on your smart glasses')}
             </Text>
           </View>
           <Switch
@@ -414,7 +414,7 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
             styles.sectionHeaderWithMargin,
             isDarkTheme ? styles.lightText : styles.darkText,
           ]}>
-          Privacy Options
+          {t('PrivacySettingsScreen.Privacy Options')}
         </Text>
 
         <View style={[styles.settingItem, styles.lastItemInSection]}>
@@ -424,14 +424,14 @@ const PrivacySettingsScreen: React.FC<PrivacySettingsScreenProps> = ({
                 styles.label,
                 isDarkTheme ? styles.lightText : styles.darkText,
               ]}>
-              Sensing
+              {t('PrivacySettingsScreen.Sensing')}
             </Text>
             <Text
               style={[
                 styles.value,
                 isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
               ]}>
-              Enable microphones & cameras.
+              {t('PrivacySettingsScreen.Enable microphones & cameras')}
             </Text>
           </View>
           <Switch

@@ -1,11 +1,15 @@
 {
   "AugmentOS": "AugmentOS",
+  "OK": "OK",
+  "Cancel": "Cancel",
+  "Error": "Error",
+  "Go to Settings": "Go to Settings",
   "RunningAppsList": {
-    "Active Apps": "Active Apps - English",
+    "Active Apps": "Active Apps",
     "Tap on an app below to start it": "Tap on an app below to start it."
   },
   "YourAppsList": {
-    "Inactive Apps": "Inactive Apps - English"
+    "Inactive Apps": "Inactive Apps"
   },
   "Homepage": {
     "Loading your apps": "Loading your apps"
@@ -13,5 +17,101 @@
   "ConnectedDeviceInfo": {
     "No Glasses Paired": "No Glasses Paired",
     "Connect Glasses": "Connect Glasses"
+  },
+  "SettingsPage": {
+    "Settings": "Settings",
+    "Use Phone Microphone": "Use Phone Microphone",
+    "Always On Status Bar (Beta Feature)": "Always On Status Bar (Beta Feature)",
+    "Privacy Settings": "Privacy Settings",
+    "Dashboard Settings": "Dashboard Settings",
+    "Screen Settings": "Screen Settings",
+    "Developer Settings": "Developer Settings",
+    "Forget Glasses": "Forget Glasses",
+    "Sign Out": "Sign Out",
+    "Use the phone's microphone instead of the glasses' microphone (if applicable)": "Use the phone's microphone instead of the glasses' microphone (if applicable).",
+    "Always show the time, date and battery level on your smart glasses": "Always show the time, date and battery level on your smart glasses.",
+    "Configure the contextual dashboard and HeadUp settings": "Configure the contextual dashboard and HeadUp settings.",
+    "Adjust brightness, auto-brightness, and other display settings": "Adjust brightness, auto-brightness, and other display settings."
+  },
+  "PrivacySettingsScreen": {
+    "Additional Permissions": "Additional Permissions",
+    "Notification Access": "Notification Access",
+    "Allow AugmentOS to forward your phone notifications to your smart glasses": "Allow AugmentOS to forward your phone notifications to your smart glasses.",
+    "Calendar Access": "Calendar Access",
+    "Allow AugmentOS to display your calendar events on your smart glasses": "Allow AugmentOS to display your calendar events on your smart glasses.",
+    "Privacy Options": "Privacy Options",
+    "Sensing": "Sensing",
+    "Enable microphones & cameras": "Enable microphones & cameras.",
+    "Permission Management": "Permission Management",
+    "To revoke calendar permission": "To revoke calendar permission, please go to your device settings and modify app permissions."
+  },
+  "DashboardSettingsScreen": {
+    "General Settings": "General Settings",
+    "Contextual Dashboard": "Contextual Dashboard",
+    "Display Settings": "Display Settings",
+    "Adjust Head-Up Angle": "Adjust Head-Up Angle",
+    "Adjust the angle at which the contextual dashboard appears when you look up": "Adjust the angle at which the contextual dashboard appears when you look up.",
+    "Select Dashboard Content": "Select Dashboard Content"
+  },
+  "ScreenSettingsScreen": {
+    "Auto Brightness": "Auto Brightness",
+    "Brightness": "Brightness",
+    "Glasses not connected": "Glasses not connected",
+    "Adjust the brightness level of your smart glasses": "Adjust the brightness level of your smart glasses.",
+    "Please connect your smart glasses first": "Please connect your smart glasses first.",
+    "Brightness control not supported for this device": "Brightness control not supported for this device.",
+    "Automatically adjust the brightness": "Automatically adjust the brightness of your smart glasses based on the ambient light."
+  },
+  "DeveloperSettingsScreen": {
+    "Bypass VAD for Debugging": "Bypass VAD for Debugging",
+    "Bypass Voice Activity Detection in case transcription stops working": "Bypass Voice Activity Detection in case transcription stops working.",
+    "These settings may break the app": "Warning: These settings may break the app. Use at your own risk.",
+    "Custom Backend URL": "Custom Backend URL",
+    "Override the default backend server URL. Leave blank to use default": "Override the default backend server URL. Leave blank to use default.",
+    "Save Test URL": "Save & Test URL",
+    "Testing": "Testing...",
+    "Reset": "Reset",
+    "Production": "Production",
+    "Debug": "Debug",
+    "Global": "Global",
+    "Empty URL": "Empty URL",
+    "Please enter a URL or reset to default": "Please enter a URL or reset to default.",
+    "OK": "OK",
+    "Invalid URL": "Invalid URL",
+    "Please enter a valid URL starting with": "Please enter a valid URL starting with http:// or https://",
+    "Success": "Success",
+    "Custom backend URL saved and verified": "Custom backend URL saved and verified. It will be used on the next connection attempt or app restart.",
+    "Verification Failed": "Verification Failed",
+    "The server responded, but with status": "The server responded, but with status {{status}}. Please check the URL and server status.",
+    "Backend URL reset to default.": "Backend URL reset to default."
+  },
+  "NotificationServiceUtils": {
+    "Enable Notification Access": "Enable Notification Access",
+    "AugmentOS needs permission to read your phone notifications": "AugmentOS needs permission to read your phone notifications to display them on your smart glasses.\n\nOn the next screen:\n1. Find \"AugmentOS Manager\" in the list\n2. Toggle the switch to ON\n3. Tap ALLOW when prompted",
+    "Later": "Later",
+    "Go to Settings": "Go to Settings",
+    "Could not open notification settings": "Could not open notification settings. Please enable notification access manually in your device settings.",
+    "There was a problem checking notification permissions": "There was a problem checking notification permissions. Please try again later."
+  },
+  "Header": {
+    "Additional Features Available": "Additional Features Available",
+    "Enhance your AugmentOS experience by enabling additional permissions": "Enhance your AugmentOS experience by enabling additional permissions."
+  },
+  "SplashScreen": {
+    "Loading": "Loading...",
+    "Please wait while we authenticate": "Please wait while we authenticate",
+    "Welcome Back": "Welcome Back!",
+    "Please log in to continue": "Please log in to continue"
+  },
+  "ConnectingToPuckComponent": {
+    "Connecting to AugmentOS": "Connecting to AugmentOS...",
+    "Connection Error": "Connection Error",
+    "Connecting": "Connecting...",
+    "Retry Connection": "Retry Connection"
+  },
+  "CloudConnection": {
+    "Connecting to cloud": "Connecting to cloud...",
+    "Reconnecting to cloud": "Reconnecting to cloud...",
+    "Disconnected from cloud": "Disconnected from cloud"
   }
 }

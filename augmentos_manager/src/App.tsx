@@ -47,6 +47,7 @@ import DeveloperSettingsScreen from './screens/DeveloperSettingsScreen.tsx';
 import DashboardSettingsScreen from './screens/DashboardSettingsScreen.tsx';
 import ScreenSettingsScreen from './screens/ScreenSettingsScreen.tsx';
 import NavigationBar from './components/NavigationBar';
+import { useTranslation } from 'react-i18next';
 
 const linking = {
   prefixes: [
@@ -76,6 +77,7 @@ const App: React.FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [currentRouteName, setCurrentRouteName] = useState<string>('');
   const navigationRef = useNavigationContainerRef();
+  const { t } = useTranslation(['home']);
 
   // Reset ignoreVersionCheck setting on app start
   useEffect(() => {
@@ -190,7 +192,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="PrivacySettingsScreen"
-                              options={{ title: 'Privacy Settings' }}
+                              options={{ title: t('SettingsPage.Privacy Settings') }}
                             >
                               {props => (
                                 <PrivacySettingsScreen
@@ -201,7 +203,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="DeveloperSettingsScreen"
-                              options={{ title: 'Developer Settings' }}
+                              options={{ title: t('SettingsPage.Developer Settings') }}
                             >
                               {props => (
                                 <DeveloperSettingsScreen
@@ -212,7 +214,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="DashboardSettingsScreen"
-                              options={{ title: 'Dashboard Settings' }}
+                              options={{ title: t('SettingsPage.Dashboard Settings') }}
                             >
                               {props => (
                                 <DashboardSettingsScreen
@@ -223,7 +225,7 @@ const App: React.FC = () => {
                               )}
                             </Stack.Screen>
                             <Stack.Screen name="ScreenSettingsScreen"
-                              options={{ title: 'Screen Settings' }}
+                              options={{ title: t('SettingsPage.Screen Settings') }}
                             >
                               {props => (
                                 <ScreenSettingsScreen

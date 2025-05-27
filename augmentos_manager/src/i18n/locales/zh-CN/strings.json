@@ -1,5 +1,9 @@
 {
   "AugmentOS": "智能眼镜系统",
+  "OK": "确定",
+  "Cancel": "取消",
+  "Error": "错误",
+  "Go to Settings": "前往“设置”",
   "RunningAppsList": {
     "Active Apps": "激活的应用",
     "Tap on an app below to start it": "点击下面的应用可以激活它。"
@@ -13,5 +17,101 @@
   "ConnectedDeviceInfo": {
     "No Glasses Paired": "无可配对的眼镜",
     "Connect Glasses": "连接眼镜"
+  },
+  "SettingsPage": {
+    "Settings": "设置",
+    "Use Phone Microphone": "使用手机的麦克风",
+    "Always On Status Bar (Beta Feature)": "始终显示状态栏（测试版特性）",
+    "Privacy Settings": "隐私设置",
+    "Dashboard Settings": "仪表板设置",
+    "Screen Settings": "屏幕设置",
+    "Developer Settings": "开发者设置",
+    "Forget Glasses": "忘记眼镜",
+    "Sign Out": "退出登录",
+    "Use the phone's microphone instead of the glasses' microphone (if applicable)": "使用手机的麦克风代替眼镜的麦克风（如果适用）。",
+    "Always show the time, date and battery level on your smart glasses": "智能眼镜上始终显示时间、日期和电池电量。",
+    "Configure the contextual dashboard and HeadUp settings": "配置上下文仪表板和顶部设置",
+    "Adjust brightness, auto-brightness, and other display settings": "调整亮度、自动亮度和其他显示设置"
+  },
+  "PrivacySettingsScreen": {
+    "Additional Permissions": "附加权限",
+    "Notification Access": "通知",
+    "Allow AugmentOS to forward your phone notifications to your smart glasses": "允许智能眼镜系统将手机通知转发到智能眼镜",
+    "Calendar Access": "日历",
+    "Allow AugmentOS to display your calendar events on your smart glasses": "允许智能眼镜系统在您的智能眼镜上显示您的日历事件",
+    "Privacy Options": "隐私选项",
+    "Sensing": "传感器",
+    "Enable microphones & cameras": "启用麦克风和摄像头",
+    "Permission Management": "权限管理",
+    "To revoke calendar permission": "要撤销日历权限，请转到您的设备设置并修改应用程序权限。"
+  },
+  "DashboardSettingsScreen": {
+    "General Settings": "常规设置",
+    "Contextual Dashboard": "上下文仪表板",
+    "Display Settings": "显示设置",
+    "Adjust Head-Up Angle": "调整 Head-Up 角度",
+    "Adjust the angle at which the contextual dashboard appears when you look up": "调整上下文仪表板的显示角度",
+    "Select Dashboard Content": "选择仪表板内容"
+  },
+  "ScreenSettingsScreen": {
+    "Auto Brightness": "自动亮度",
+    "Brightness": "亮度",
+    "Glasses not connected": "未连接眼镜",
+    "Adjust the brightness level of your smart glasses": "调整智能眼镜的亮度级别。",
+    "Please connect your smart glasses first": "请先连接您的智能眼镜。",
+    "Brightness control not supported for this device": "此设备不支持亮度控制。",
+    "Automatically adjust the brightness": "根据环境光自动调节智能眼镜的亮度。"
+  },
+  "DeveloperSettingsScreen": {
+    "Bypass VAD for Debugging": "绕过 VAD 进行调试",
+    "Bypass Voice Activity Detection in case transcription stops working": "如果转录停止工作，则绕过语音活动检测",
+    "These settings may break the app": "警告：这些设置可能会导致应用崩溃。使用风险自负。",
+    "Custom Backend URL": "自定义后端 URL",
+    "Override the default backend server URL. Leave blank to use default": "覆盖默认后端服务器 URL。留空则使用默认值",
+    "Save Test URL": "保存 & 测试 URL",
+    "Testing": "测试中...",
+    "Reset": "重置",
+    "Production": "生产",
+    "Debug": "调试",
+    "Global": "全局",
+    "Empty URL": "空的 URL",
+    "Please enter a URL or reset to default": "请输入 URL 或重置为默认值。",
+    "OK": "确定",
+    "Invalid URL": "无效 URL",
+    "Please enter a valid URL starting with": "请输入以 http:// 或 https:// 开头的有效 URL",
+    "Success": "成功",
+    "Custom backend URL saved and verified": "自定义后端 URL 已保存并验证。它将在下次连接或应用重启时生效。",
+    "Verification Failed": "验证失败",
+    "The server responded, but with status": "服务器已响应，但状态为 {{status}}。请检查网址和服务器状态。",
+    "Backend URL reset to default.": "后端 URL 重置为默认值。"
+  },
+  "NotificationServiceUtils": {
+    "Enable Notification Access": "启用通知",
+    "AugmentOS needs permission to read your phone notifications": "智能眼镜系统需要获得权限才能读取您的手机通知，以便将其显示在您的智能眼镜上。\n\n在下一个屏幕上：\n1. 在列表中找到“智能眼镜系统管理器”\n2. 将开关切换至“开启”\n3. 出现提示时，点击“允许”",
+    "Later": "稍后处理",
+    "Go to Settings": "前往“设置”",
+    "Could not open notification settings": "无法打开通知设置。请在设备设置中手动启用通知。",
+    "There was a problem checking notification permissions": "检查通知权限时出现问题。请稍后重试。"
+  },
+  "Header": {
+    "Additional Features Available": "可用的附加功能",
+    "Enhance your AugmentOS experience by enabling additional permissions": "通过启用额外的权限来增强您的体验。"
+  },
+  "SplashScreen": {
+    "Loading": "加载中...",
+    "Please wait while we authenticate": "正在验证，请等待",
+    "Welcome Back": "欢迎回来！",
+    "Please log in to continue": "请登录"
+  },
+  "ConnectingToPuckComponent": {
+    "Connecting to AugmentOS": "正在连接到智能眼镜系统...",
+    "Connection Error": "连接错误",
+    "Connecting": "连接中...",
+    "Retry Connection": "重试连接"
+  },
+  "CloudConnection": {
+    "Connecting to cloud": "正在连接到云端...",
+    "Reconnecting to cloud": "正在重连到云端...",
+    "Disconnected from cloud": "已断开云端连接"
   }
 }
