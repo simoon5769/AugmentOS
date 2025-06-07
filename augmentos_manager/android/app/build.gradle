@@ -108,6 +108,9 @@ dependencies {
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-webview')
     implementation project(':react-native-localize')
+    implementation project(':react-native-view-shot')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-background-timer')
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     
     implementation(project(':react-native-camera')) {
