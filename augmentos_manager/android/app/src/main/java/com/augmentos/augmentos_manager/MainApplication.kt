@@ -26,6 +26,9 @@ import org.reactnative.camera.RNCameraPackage
 import com.augmentos.augmentos_manager.logcapture.LogcatCapturePackage
 import com.reactnativecommunity.webview.RNCWebViewPackage
 import com.zoontek.rnlocalize.RNLocalizePackage
+import fr.greweb.reactnativeviewshot.RNViewShotPackage
+import com.rnfs.RNFSPackage
+import com.ocetnik.timer.BackgroundTimerPackage
 
 // import com.augmentos.augmentos_manager.NotificationServicePackage
 
@@ -40,6 +43,10 @@ class MainApplication : Application(), ReactApplication {
             return listOf(
                 MainReactPackage(),
                 RNLocalizePackage(),
+                RNViewShotPackage(),
+                RNFSPackage(),
+                BackgroundTimerPackage(),
+                ScreenshotPackage(),
                 RNBluetoothClassicPackage(),
                 BleManagerPackage(),
                 ReanimatedPackage(),

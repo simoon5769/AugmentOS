@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {
   View,
   Text,
@@ -27,6 +27,10 @@ import {
 import showAlert from '../utils/AlertUtils';
 import SelectSetting from '../components/settings/SelectSetting.tsx';
 import { useTranslation } from 'react-i18next';
+import ViewShot from "react-native-view-shot";
+import RNFS from 'react-native-fs';
+import BackgroundTimer from 'react-native-background-timer';
+import { NativeModules } from 'react-native';
 
 interface SettingsPageProps {
   isDarkTheme: boolean;
@@ -53,6 +57,64 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
   const {status} = useStatus();
 
   const { t } = useTranslation(['home']);
+
+  const intervalRef = useRef(null);
+
+  const viewShotRef = useRef<ViewShot>(null);
+
+  const saveBinaryFile = async (uri) => {
+    try {
+      const fileName = uri.split("/").pop();
+      const destPath = "/storage/emulated/0/Download/" + fileName;
+      await RNFS.copyFile(uri, destPath);
+      console.log("copy binary file successfully. save to:", destPath)
+    } catch(e) {
+      console.error("copy binary file error:", e);
+    }
+  };
+
+  const onCapture = async () => {
+    if (viewShotRef == null || !viewShotRef.current) {
+      console.error("viewShotRef is null");
+      return;
+    }
+    try {
+      const uri = await viewShotRef.current.capture();
+      await saveBinaryFile(uri);
+    } catch(e) {
+      console.error("capture error:", e);
+    }
+  };
+  
+  const takeNativeScreenshot = async () => {
+    try {
+      const uri = await NativeModules.ScreenshotModule.takeScreenshot();
+      // await saveBinaryFile(uri);
+      return uri;
+    } catch (e) {
+      console.error('take screen shot error:', e);
+      return null;
+    }
+  };
+
+  // 启动定时截屏
+  const startTimedScreenshots = (interval = 5000) => {
+    if (!intervalRef.current) {
+      intervalRef.current = BackgroundTimer.setInterval(() => {
+        takeNativeScreenshot();
+      }, interval);
+    }
+  };
+
+  // 停止截屏
+  const stopTimedScreenshots = () => {
+    if (intervalRef.current) {
+      BackgroundTimer.clearInterval(intervalRef.current);
+      intervalRef.current = null
+    }
+  };
+
+  // startTimedScreenshots(5000);
 
   // -- Basic states from your original code --
   const [isDoNotDisturbEnabled, setDoNotDisturbEnabled] = useState(false);
@@ -103,6 +165,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             iconColor: '#2196F3',
           },
         );
+        await takeNativeScreenshot()
         return;
       }
     }
@@ -110,6 +173,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
     const newVal = !forceCoreOnboardMic;
     await coreCommunicator.sendToggleForceCoreOnboardMic(newVal);
     setForceCoreOnboardMic(newVal);
+    await takeNativeScreenshot()
   };
 
   const setMic = async (val: string) => {
@@ -293,6 +357,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
         <ScrollView style={styles.scrollViewContainer}>
           {/* Force Onboard Microphone */}
+          <ViewShot ref={viewShotRef} options={{ fileName: "view-shot-capture-", format: "jpg", quality: 0.9 }}>
           <View style={styles.settingItem}>
             <View style={styles.settingTextContainer}>
               <Text
@@ -330,6 +395,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               ios_backgroundColor={switchColors.ios_backgroundColor}
             />
           </View>
+          </ViewShot>
 
           {/* Always on time, date and battery */}
           {Platform.OS === 'android' && (

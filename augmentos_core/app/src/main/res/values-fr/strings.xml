@@ -80,6 +80,6 @@
 <!--    <string name="BYPASS_VAD_ENABLED">bypass_vad_enabled</string>-->
     <string name="HEADUP_ANGLE">headUp_Angle</string>
 
-    <string name="SETTING_WILL_APPLY_ON_NEXT_GLASSES_CONNECTION">本次设置将在下次连接眼镜时生效</string>
-    <string name="Connect_glasses_to_update_brightness">连接眼镜后，才能更新亮度</string>
+    <string name="SETTING_WILL_APPLY_ON_NEXT_GLASSES_CONNECTION">Le paramètre s\'appliquera la prochaine fois que vous vous connecterez aux lunettes</string>
+    <string name="Connect_glasses_to_update_brightness">Connectez les lunettes pour mettre à jour la luminosité</string>
 </resources>
