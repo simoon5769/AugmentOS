@@ -1,0 +1,23 @@
+{
+  "name": "my-first-augmentos-app",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "bun run index.js",
+    "dev": "bun --watch index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.15.29",
+    "tsx": "^4.19.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@augmentos/sdk": "^1.1.11",
+    "react-native-view-shot": "^4.0.3"
+  }
+}

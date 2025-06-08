@@ -1,0 +1,15 @@
+{
+  "name": "Memory Companion",
+  "description": "Record your wonderful life",
+  "publicUrl": "https://gazelle-heroic-mentally.ngrok-free.app",
+  "logoURL": "https://gazelle-heroic-mentally.ngrok-free.app/logo.png",
+  "permissions": [
+    {
+      "type": "MICROPHONE",
+      "description": "Used for voice commands and speech recognition"
+    }
+  ],
+  "settings": [],
+  "tools": [],
+  "webviewURL": "https://gazelle-heroic-mentally.ngrok-free.app/webview"
+}
