@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTranslation } from 'react-i18next';
 
 interface InternetConnectionFallbackComponentProps {
   isDarkTheme: boolean;
@@ -13,6 +14,7 @@ const InternetConnectionFallbackComponent: React.FC<InternetConnectionFallbackCo
     selectedChipBg: isDarkTheme ? '#666666' : '#333333',
     selectedChipText: isDarkTheme ? '#FFFFFF' : '#FFFFFF',
   };
+  const { t } = useTranslation(['home']);
 
   return (
     <View style={styles.fallbackContainer}>
@@ -22,7 +24,7 @@ const InternetConnectionFallbackComponent: React.FC<InternetConnectionFallbackCo
         color={theme.textColor}
       />
       <Text style={[styles.fallbackText, { color: theme.textColor }]}>
-        AugmentOS Store not yet available in 2.0.
+        {t('AppStore.AugmentOS Store not yet available in')}
       </Text>
       {/*<TouchableOpacity*/}
       {/*  style={[styles.retryButton, { backgroundColor: theme.selectedChipBg }]}*/}

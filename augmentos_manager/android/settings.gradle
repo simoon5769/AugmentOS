@@ -1,7 +1,16 @@
-pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+pluginManagement { 
+	includeBuild("../node_modules/@react-native/gradle-plugin") 
+
+    repositories {
+	    maven { url 'https://maven.aliyun.com/repository/public' } // 阿里云公共仓库
+	    maven { url 'https://mirrors.tuna.tsinghua.edu.cn/maven/' } // 清华大学镜像
+	    gradlePluginPortal()
+    }
+}
+
 plugins { id("com.facebook.react.settings") }
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
-rootProject.name = 'AugmentOS'
+rootProject.name = 'AugmentOS_Manager'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
 
@@ -51,14 +60,5 @@ project(':react-native-config').projectDir = new File(rootProject.projectDir, '.
 include ':react-native-webview'
 project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
 
-include ':react-native-fs'
-project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
-
-include ':react-native-video'
-project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
-
-include ':react-native-view-shot'
-project(':react-native-view-shot').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-shot/android')
-
-include ':react-native-create-thumbnail'
-project(':react-native-create-thumbnail').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-create-thumbnail/android')
+include ':react-native-localize'
+project(':react-native-localize').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localize/android')

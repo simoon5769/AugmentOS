@@ -58,10 +58,6 @@ ios/.xcode.env.local
 /fastlane/test_output/
 *.log
 
-# Deployment keys
-android/credentials/*
-ios/credentials/*
-
 # Buck
 /buck-out/
 /\.buckd/
@@ -113,6 +109,3 @@ ios/credentials/*
 *.pem
 *.key
 *.crt
-
-# testing
-/coverage

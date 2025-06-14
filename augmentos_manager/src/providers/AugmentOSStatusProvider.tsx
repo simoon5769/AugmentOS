@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode, useCallback, use
 import { Platform } from 'react-native';
 import { AugmentOSParser, AugmentOSMainStatus } from '../AugmentOSStatusParser.tsx';
 import { INTENSE_LOGGING, MOCK_CONNECTION } from '../consts.tsx';
-import GlobalEventEmitter from "../logic/GlobalEventEmitter.tsx";
+import GlobalEventEmitter from '../logic/GlobalEventEmitter.tsx';
 import BackendServerComms from '../backend_comms/BackendServerComms';
 import { useAuth } from '../AuthContext';
 import coreCommunicator from '../bridge/CoreCommunicator';
@@ -23,13 +23,17 @@ export const StatusProvider = ({ children }: { children: ReactNode }) => {
     });
     const [isInitialized, setIsInitialized] = useState(false);
     const [screenMirrorItems, setScreenMirrorItems] = useState<{ id: string; name: string }[]>([]);
-    
+
     const refreshStatus = useCallback((data: any) => {
+        console.log('AugmentOSStatusProvider refreshStatus data= ', data);
+
         if (!(data && 'status' in data)) {return;}
 
         const parsedStatus = AugmentOSParser.parseStatus(data);
 
         const forceUpdate = parsedStatus.force_update;
+
+        console.log('1111 Parsed status:', parsedStatus);
 
         if (INTENSE_LOGGING)
             console.log('Parsed status:', parsedStatus);
@@ -97,19 +101,19 @@ export const StatusProvider = ({ children }: { children: ReactNode }) => {
         coreCommunicator.initialize();
         setIsInitialized(true);
     }, []);
-    
+
     // Helper to get coreToken (directly returns from BackendServerComms)
     const getCoreToken = useCallback(() => {
         return BackendServerComms.getInstance().getCoreToken();
     }, []);
 
     return (
-        <AugmentOSStatusContext.Provider value={{ 
+        <AugmentOSStatusContext.Provider value={{
             initializeCoreConnection,
-            screenMirrorItems, 
-            status, 
+            screenMirrorItems,
+            status,
             refreshStatus,
-            getCoreToken
+            getCoreToken,
         }}>
             {children}
         </AugmentOSStatusContext.Provider>

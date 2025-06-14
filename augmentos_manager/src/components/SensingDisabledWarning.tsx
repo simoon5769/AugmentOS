@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from './types';
+import { useTranslation } from 'react-i18next';
 
 interface SensingDisabledWarningProps {
     isSensingEnabled: boolean;
@@ -11,6 +12,7 @@ interface SensingDisabledWarningProps {
 
 const SensingDisabledWarning: React.FC<SensingDisabledWarningProps> = ({ isSensingEnabled }) => {
     const navigation = useNavigation<NavigationProps>();
+    const { t } = useTranslation(['home']);
 
     if (isSensingEnabled) {
         return null;
@@ -24,7 +26,7 @@ const SensingDisabledWarning: React.FC<SensingDisabledWarningProps> = ({ isSensi
             <View style={styles.warningContent}>
                 <Icon name="microphone-off" size={22} color="#FF9800" />
                 <Text style={styles.warningText}>
-                    Sensing is disabled. Microphone and sensors won't work in apps.
+                    {t('SensingDisabledWarning.Sensing is disabled')}
                 </Text>
             </View>
             <TouchableOpacity 

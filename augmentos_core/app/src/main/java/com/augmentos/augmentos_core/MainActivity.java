@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
   private static final int READ_CONTACTS_PERMISSIONS_REQUEST = 2;
 
   public SmartGlassesDevice selectedDevice;
-  private static final String TARGET_PACKAGE = "com.augmentos.augmentos";
+  private static final String TARGET_PACKAGE = "com.augmentos.augmentos_manager";
 
 
   public boolean gettingPermissions = false;

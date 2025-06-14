@@ -1,0 +1,317 @@
+{
+  "AugmentOS": "AugmentOS",
+  "OK": "OK",
+  "Yes": "Yes",
+  "No": "No",
+  "Success": "Success",
+  "Cancel": "Cancel",
+  "Error": "Error",
+  "Go to Settings": "Go to Settings",
+  "Continue": "Continue",
+  "Select": "Select",
+  "Exit": "Exit",
+  "Disconnect": "Disconnect",
+  "Loading": "Loading",
+  "LoginScreen": {
+    "Success": "Success!",
+    "Authentication Error": "Authentication Error",
+    "Google sign in failed": "Google sign in failed. Please try again.",
+    "Apple sign in failed": "Apple sign in failed. Please try again.",
+    "Please check your inbox for email verification": "Please check your inbox for email verification!",
+    "Something went wrong": "Something went wrong. Please try again.",
+    "Leaving already": "Leaving already?",
+    "Press back again to exit": "Press back again to exit",
+    "Connecting to your account": "Connecting to your account...",
+    "The future of smart glasses starts here": "The future of smart glasses starts here.",
+    "Email": "Email",
+    "Password": "Password",
+    "Enter your password": "Enter your password",
+    "Log in": "Log in",
+    "Create Account": "Create Account",
+    "Back to Sign In Options": "Back to Sign In Options",
+    "Continue with Google": "Continue with Google",
+    "Continue with Apple": "Continue with Apple",
+    "Sign up with Email": "Sign up with Email",
+    "Or": "Or",
+    "By continuing": "By continuing, you agree to our Terms of Service and Privacy Policy"
+  },
+  "WelcomePageComponent": {
+    "Welcome to AugmentOS": "Welcome to AugmentOS",
+    "go through a quick tutorial": "Let's go through a quick tutorial to get you started with AugmentOS.",
+    "Skip Onboarding": "Skip Onboarding"
+  },
+  "App": {
+    "Select Glasses": "Select Glasses",
+    "Pairing Guide": "Pairing Guide",
+    "Report an Error": "Report an Error",
+    "Finding Glasses": "Finding Glasses",
+    "Notifications": "Notifications"
+  },
+  "GlassesPairingGuides": {
+    "Simulated Glasses": "Simulated Glasses",
+    "The Simulated Glasses allows you to run AugmentOS without physical smart glasses": "The Simulated Glasses allows you to run AugmentOS without physical smart glasses.",
+    "Make sure your Z100 is fully charged and turned on": "1. Make sure your Z100 is fully charged and turned on.",
+    "Pair your Z100 with your device using the Vuzix Connect app": "2. Pair your Z100 with your device using the Vuzix Connect app.",
+    "Make sure your Mach1 is fully charged and turned on": "1. Make sure your Mach1 is fully charged and turned on.",
+    "Pair your Mach1 with your device using the Vuzix Connect app": "2. Pair your Mach1 with your device using the Vuzix Connect app.",
+    "Make sure your Mentra Live is fully charged and turned on": "1. Make sure your Mentra Live is fully charged and turned on.",
+    "Make sure your Audio Wearable is fully charged and turned on": "1. Make sure your Audio Wearable is fully charged and turned on.",
+    "Enable Bluetooth pairing mode on your Audio Wearable": "2. Enable Bluetooth pairing mode on your Audio Wearable.",
+    "Audio Wearables dont have displays": "3. Note: Audio Wearables don't have displays. All visual information will be converted to speech.",
+    "Audio Wearables are smart glasses without displays": "Audio Wearables are smart glasses without displays. They use text-to-speech to provide information\nthat would normally be shown visually. This makes them ideal for audio-only applications or for users\nwho prefer auditory feedback.",
+    "Disconnect your G1 from within the Even Realities app, or uninstall the Even Realities app": "1. Disconnect your G1 from within the Even Realities app, or uninstall the Even Realities app.",
+    "Place your G1 in the charging case with the lid open": "2. Place your G1 in the charging case with the lid open."
+  },
+  "SelectGlassesModelScreen": {
+    "you can select": "If you don't have smart glasses yet, you can select \"Simulated Glasses\"."
+  },
+  "RunningAppsList": {
+    "Active Apps": "Active Apps",
+    "Tap on an app below to start it": "Tap on an app below to start it."
+  },
+  "YourAppsList": {
+    "Inactive Apps": "Inactive Apps",
+    "Tap to start": "Tap to start",
+    "Complete Onboarding": "Complete Onboarding",
+    "Please tap the Live Captions app to complete the onboarding process": "Please tap the Live Captions app to complete the onboarding process.",
+    "Try Live Captions": "Try Live Captions!",
+    "Start talking now to see your speech transcribed on your glasses in real-time": "Start talking now to see your speech transcribed on your glasses in real-time!",
+    "Start Live Captions": "Start Live Captions",
+    "start the Live Captions app": "To continue, start the Live Captions app."
+  },
+  "Homepage": {
+    "Loading your apps": "Loading your apps",
+    "Unable to load your apps": "Unable to load your apps.",
+    "Please check your internet connection and try again": "Please check your internet connection and try again.",
+    "Unable to load apps": "Unable to load apps. Please check your cloud connection to view and manage your apps."
+  },
+  "ConnectedDeviceInfo": {
+    "No Glasses Paired": "No Glasses Paired",
+    "Connect Glasses": "Connect Glasses",
+    "Connecting Glasses": "Connecting Glasses...",
+    "Searching for glasses": "Searching for {{glassesModelName}}",
+    "Core service not connected": "Core service not connected",
+    "Connect to Core": "Connect to Core"
+  },
+  "SettingsPage": {
+    "Settings": "Settings",
+    "Use Phone Microphone": "Use Phone Microphone",
+    "Always On Status Bar (Beta Feature)": "Always On Status Bar (Beta Feature)",
+    "Privacy Settings": "Privacy Settings",
+    "Dashboard Settings": "Dashboard Settings",
+    "Screen Settings": "Screen Settings",
+    "Developer Settings": "Developer Settings",
+    "Forget Glasses": "Forget Glasses",
+    "Sign Out": "Sign Out",
+    "Yes": "Yes",
+    "Are you sure you want to sign out": "Are you sure you want to sign out?",
+    "Use the phone's microphone instead of the glasses' microphone (if applicable)": "Use the phone's microphone instead of the glasses' microphone (if applicable).",
+    "Always show the time, date and battery level on your smart glasses": "Always show the time, date and battery level on your smart glasses.",
+    "Configure the contextual dashboard and HeadUp settings": "Configure the contextual dashboard and HeadUp settings.",
+    "Adjust brightness, auto-brightness, and other display settings": "Adjust brightness, auto-brightness, and other display settings.",
+    "Are you sure you want to forget your glasses": "Are you sure you want to forget your glasses?",
+    "This setting has no effect when using Simulated Glasses": "This setting has no effect when using Simulated Glasses"
+  },
+  "PrivacySettingsScreen": {
+    "Additional Permissions": "Additional Permissions",
+    "Notification Access": "Notification Access",
+    "Allow AugmentOS to forward your phone notifications to your smart glasses": "Allow AugmentOS to forward your phone notifications to your smart glasses.",
+    "Calendar Access": "Calendar Access",
+    "Allow AugmentOS to display your calendar events on your smart glasses": "Allow AugmentOS to display your calendar events on your smart glasses.",
+    "Privacy Options": "Privacy Options",
+    "Sensing": "Sensing",
+    "Enable microphones & cameras": "Enable microphones & cameras.",
+    "Permission Management": "Permission Management",
+    "To revoke calendar permission": "To revoke calendar permission, please go to your device settings and modify app permissions."
+  },
+  "DashboardSettingsScreen": {
+    "General Settings": "General Settings",
+    "Contextual Dashboard": "Contextual Dashboard",
+    "Display Settings": "Display Settings",
+    "Adjust Head-Up Angle": "Adjust Head-Up Angle",
+    "Adjust the angle at which the contextual dashboard appears when you look up": "Adjust the angle at which the contextual dashboard appears when you look up.",
+    "Select Dashboard Content": "Select Dashboard Content",
+    "Show a summary of your phone notifications when you look up": "Show a summary of your phone notifications when you look up.",
+    "Show a summary of your phone notifications when you tap your smart glasses": "Show a summary of your phone notifications when you tap your smart glasses.",
+    "Content Settings": "Content Settings",
+    "Dashboard Content": "Dashboard Content",
+    "Choose what additional content to display in your dashboard along with your notifications": "Choose what additional content to display in your dashboard along with your notifications.",
+    "Notification Summary": "Notification Summary",
+    "None": "None",
+    "Fun Facts": "Fun Facts",
+    "Famous Quotes": "Famous Quotes",
+    "Chinese Words": "Chinese Words",
+    "Gratitude Ping": "Gratitude Ping",
+    "Failed to update dashboard content": "Failed to update dashboard content"
+  },
+  "ScreenSettingsScreen": {
+    "Auto Brightness": "Auto Brightness",
+    "Brightness": "Brightness",
+    "Battery": "Battery",
+    "Glasses not connected": "Glasses not connected",
+    "Adjust the brightness level of your smart glasses": "Adjust the brightness level of your smart glasses.",
+    "Please connect your smart glasses first": "Please connect your smart glasses first.",
+    "Brightness control not supported for this device": "Brightness control not supported for this device.",
+    "Automatically adjust the brightness": "Automatically adjust the brightness of your smart glasses based on the ambient light."
+  },
+  "DeveloperSettingsScreen": {
+    "Bypass VAD for Debugging": "Bypass VAD for Debugging",
+    "Bypass Voice Activity Detection in case transcription stops working": "Bypass Voice Activity Detection in case transcription stops working.",
+    "These settings may break the app": "Warning: These settings may break the app. Use at your own risk.",
+    "Custom Backend URL": "Custom Backend URL",
+    "Override the default backend server URL. Leave blank to use default": "Override the default backend server URL. Leave blank to use default.",
+    "Save Test URL": "Save & Test URL",
+    "Testing": "Testing...",
+    "Reset": "Reset",
+    "Production": "Production",
+    "Debug": "Debug",
+    "Global": "Global",
+    "Empty URL": "Empty URL",
+    "Please enter a URL or reset to default": "Please enter a URL or reset to default.",
+    "OK": "OK",
+    "Invalid URL": "Invalid URL",
+    "Please enter a valid URL starting with": "Please enter a valid URL starting with http:// or https://",
+    "Success": "Success",
+    "Custom backend URL saved and verified": "Custom backend URL saved and verified. It will be used on the next connection attempt or app restart.",
+    "Verification Failed": "Verification Failed",
+    "The server responded, but with status": "The server responded, but with status {{status}}. Please check the URL and server status.",
+    "Backend URL reset to default.": "Backend URL reset to default."
+  },
+  "NotificationServiceUtils": {
+    "Enable Notification Access": "Enable Notification Access",
+    "AugmentOS needs permission to read your phone notifications": "AugmentOS needs permission to read your phone notifications to display them on your smart glasses.\n\nOn the next screen:\n1. Find \"AugmentOS Manager\" in the list\n2. Toggle the switch to ON\n3. Tap ALLOW when prompted",
+    "Later": "Later",
+    "Go to Settings": "Go to Settings",
+    "Could not open notification settings": "Could not open notification settings. Please enable notification access manually in your device settings.",
+    "There was a problem checking notification permissions": "There was a problem checking notification permissions. Please try again later."
+  },
+  "Header": {
+    "Additional Features Available": "Additional Features Available",
+    "Enhance your AugmentOS experience by enabling additional permissions": "Enhance your AugmentOS experience by enabling additional permissions."
+  },
+  "SplashScreen": {
+    "Please wait while we authenticate": "Please wait while we authenticate",
+    "Welcome Back": "Welcome Back!",
+    "Please log in to continue": "Please log in to continue"
+  },
+  "ConnectingToPuckComponent": {
+    "Connecting to AugmentOS": "Connecting to AugmentOS...",
+    "Connection Error": "Connection Error",
+    "Connecting": "Connecting...",
+    "Retry Connection": "Retry Connection",
+    "Connection to AugmentOS failed": "Connection to AugmentOS failed. Please check your connection and try again."
+  },
+  "VersionUpdateScreen": {
+    "Browser Error": "Browser Error",
+    "Could not connect to the server": "Could not connect to the server. Please check your connection and try again.",
+    "AugmentOS is outdated": "AugmentOS is outdated. An update is required to continue using the application.",
+    "Your AugmentOS is up to date": "Your AugmentOS is up to date. Returning to home...",
+    "Update Required": "Update Required",
+    "Up to Date": "Up to Date",
+    "Could not open the installation website": "Could not open the installation website. Please visit https://augmentos.org/install manually.",
+    "Checking for updates": "Checking for updates...",
+    "Updating": "Updating...",
+    "Update AugmentOS": "Update AugmentOS",
+    "Skip Update": "Skip Update"
+  },
+  "CloudConnection": {
+    "Connecting to cloud": "Connecting to cloud...",
+    "Reconnecting to cloud": "Reconnecting to cloud...",
+    "Disconnected from cloud": "Disconnected from cloud"
+  },
+  "GlassesMirror": {
+    "Glasses Mirror": "Glasses Mirror",
+    "Glasses Mirror Fullscreen": "Glasses Mirror Fullscreen",
+    "Enter Fullscreen": "Enter Fullscreen",
+    "No display events available": "No display events available",
+    "Connect glasses to use the Glasses Mirror": "Connect glasses to use the Glasses Mirror",
+    "Back": "Back",
+    "Glasses Mirror Mockup": "Glasses Mirror Mockup"
+  },
+  "AppStoreWebview": {
+    "Preparing App Store": "Preparing App Store...",
+    "Loading App Store": "Loading App Store..."
+  },
+  "AppStore": {
+    "AugmentOS Store": "AugmentOS Store",
+    "AugmentOS Store not yet available in": "AugmentOS Store not yet available in 2.0."
+  },
+  "BackendServerComms": {
+    "Could not connect to packageName": "Could not connect to {{packageName}}"
+  },
+  "ConnectedSimulatedGlassesInfo": {
+    "Simulated Glasses Display": "Simulated Glasses Display"
+  },
+  "MessageBanner": {
+    "Dismiss": "Dismiss"
+  },
+  "AppSettings": {
+    "Loading settings": "Loading {{appName}} settings...",
+    "Loading appName": "Loading {{appName}}...",
+    "Preparing secure access to": "Preparing secure access to {{appName}}...",
+    "Uninstalling appName": "Uninstalling {{appName}}..."
+  },
+  "GlassesPairingLoader": {
+    "Pairing glassesModelName": "Pairing {{glassesModelName}}"
+  },
+  "GlassesTroubleshootingModal": {
+    "Make sure you closed the G1s left arm FIRST before putting it in the case": "Make sure you closed the G1's left arm FIRST before putting it in the case",
+    "Plug your G1 case into a charger during the pairing process": "Plug your G1 case into a charger during the pairing process",
+    "Try closing the charging case and opening it again": "Try closing the charging case and opening it again",
+    "Ensure no other app is currently connected to your G1": "Ensure no other app is currently connected to your G1",
+    "Restart your phones Bluetooth": "Restart your phone's Bluetooth",
+    "Make sure your phone is within 3 feet of your glasses & case": "Make sure your phone is within 3 feet of your glasses & case",
+    "If your glasses were previously paired to a different phone": "If your glasses were previously paired to a different phone, you must unpair/forget the glasses in your phone's Bluetooth settings before retrying the pairing process",
+
+    "Make sure your glasses are turned on": "Make sure your glasses are turned on",
+    "Check that your glasses are paired in the Vuzix Connect app": "Check that your glasses are paired in the 'Vuzix Connect' app",
+    "Try resetting your Bluetooth connection": "Try resetting your Bluetooth connection",
+
+    "Make sure your Mentra Live is fully charged": "Make sure your Mentra Live is fully charged",
+    "Check that your Mentra Live is in pairing mode": "Check that your Mentra Live is in pairing mode",
+    "Ensure no other app is currently connected to your glasses": "Ensure no other app is currently connected to your glasses",
+    "Try restarting your glasses": "Try restarting your glasses",
+    "Check that your phones Bluetooth is enabled": "Check that your phone's Bluetooth is enabled",
+
+    "Make sure your glasses are charged and turned on": "Make sure your glasses are charged and turned on",
+    "Ensure no other device is connected to your glasses": "Ensure no other device is connected to your glasses",
+    "Try restarting both your glasses and phone": "Try restarting both your glasses and phone",
+    "Make sure your phone is within range of your glasses": "Make sure your phone is within range of your glasses",
+
+    "Troubleshooting glassesModelName": "Troubleshooting {{glassesModelName}}",
+    "Having trouble pairing your glasses": "Having trouble pairing your glasses? Try these tips:",
+    "Got it thanks": "Got it, thanks!"
+  },
+  "GlassesPairingGuidePreparationScreen": {
+    "Permission Required": "Permission Required",
+    "Bluetooth permissions are required but have been denied previously": "Bluetooth permissions are required but have been denied previously. Please enable them in Settings to continue.",
+    "Bluetooth permissions are required to connect to glasses": "Bluetooth permissions are required to connect to glasses",
+    "Open Settings": "Open Settings",
+    "Connection Issue": "Connection Issue",
+    "Cannot connect to glasses": "Cannot connect to glasses - check Bluetooth and Location settings",
+    "Failed to request necessary permissions": "Failed to request necessary permissions"
+  },
+  "CoreCommunicator": {
+    "Bluetooth is required to connect to glasses": "Bluetooth is required to connect to glasses. Please enable Bluetooth and try again.",
+    "Location permission is required to scan for glasses on Android": "Location permission is required to scan for glasses on Android. Please grant location permission and try again.",
+    "Location services are disabled": "Location services are disabled. Please enable location services in your device settings and try again."
+  },
+  "SelectGlassesBluetoothScreen": {
+    "No modelName found": "No {{modelName}} found",
+    "Retry search": "Retry search?",
+    "Location Permission Required": "Location Permission Required",
+    "Location permission is required to scan for and connect to smart glasses on Android": "Location permission is required to scan for and connect to smart glasses on Android. This is a requirement of the Android Bluetooth system.",
+    "Microphone Permission Required": "Microphone Permission Required",
+    "Microphone permission is required to connect to smart glasses": "Microphone permission is required to connect to smart glasses. Voice control and audio features are essential for the AR experience."
+  },
+  "GlassesPairingGuideScreen": {
+    "Need Some Help": "Need Some Help?",
+    "Having trouble pairing your glassesModelName": "Having trouble pairing your {{glassesModelName}}? Wanna see some tips?",
+    "No thanks": "No, thanks.",
+    "Help Me": "Help Me!",
+    "Need Help Pairing": "Need Help Pairing?"
+  },
+  "SensingDisabledWarning": {
+    "Sensing is disabled": "Sensing is disabled. Microphone and sensors won't work in apps."
+  }
+}

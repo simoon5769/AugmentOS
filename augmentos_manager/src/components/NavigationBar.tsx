@@ -27,13 +27,13 @@ const NavigationBar: React.FC<NavigationBarProps> = React.memo(({
   const iconSets = {
     v1: {
       home: 'home-variant-outline',
-      mirror: 'glasses',
+      mirror: 'cast-variant',
       apps: 'grid',
       settings: 'cog-outline',
     },
     v2: {
       home: 'home-minus-outline',
-      mirror: 'glasses',
+      mirror: 'monitor-screenshot',
       apps: 'apps',
       settings: 'settings-helper',
     },
@@ -45,7 +45,7 @@ const NavigationBar: React.FC<NavigationBarProps> = React.memo(({
     },
     v4: {
       home: 'home-modern',
-      mirror: 'glasses',
+      mirror: 'mirror',
       apps: 'grid-large',
       settings: 'dots-horizontal',
     },
@@ -56,11 +56,11 @@ const NavigationBar: React.FC<NavigationBarProps> = React.memo(({
 
   // Handle iOS safe area insets for the navigation bar
   const isIOS = Platform.OS === 'ios';
-  
+
   return (
     <View style={styles.container}>
       <View style={[
-        styles.navBarContainer, 
+        styles.navBarContainer,
         {backgroundColor}
       ]}>
         {/* Home Icon */}
@@ -99,6 +99,7 @@ const NavigationBar: React.FC<NavigationBarProps> = React.memo(({
         {/* Settings Icon */}
         <TouchableOpacity
           onPress={() => navigation.navigate({name: 'SettingsPage', params: undefined})}
+          onLongPress={() => navigation.navigate({name: 'Testing', params: undefined})}// super secret testing page
           style={styles.iconWrapper}>
           <MaterialCommunityIcons
             name={icons.settings}

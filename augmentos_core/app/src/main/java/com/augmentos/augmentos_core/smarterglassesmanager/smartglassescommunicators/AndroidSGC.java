@@ -664,7 +664,7 @@ public class AndroidSGC extends SmartGlassesCommunicator {
     @Override
     public void findCompatibleDeviceNames() {
         EventBus.getDefault().post(new GlassesBluetoothSearchDiscoverEvent(smartGlassesDevice.deviceModelName,"NOTREQUIREDSKIP"));
-        this.destroy();
+//        this.destroy();
     }
 
     public void displayBulletList(String title, String [] bullets){

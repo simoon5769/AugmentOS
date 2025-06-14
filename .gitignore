@@ -1,14 +1,7 @@
 K900_server_sdk/*
 AugmentOS-Cloud-Example-App/*
 server/config.json
-K900_server_sdk/*
-K900Server_open/*
-.claude/*
-aar_extract/*
-aar-extract/*
-temp_extract/*
-augmentos_asg_client/temp/*
-augmentos_asg_client/app/libs/temp_check/*
+
 ### REACT
 .idea/
 .vscode/
@@ -83,7 +76,6 @@ dist
 docs/_build/
 eggs
 htmlcov
-include/
 lib/
 man/
 nosetests.xml
@@ -313,4 +305,3 @@ server/auth/serviceAccountKey.json
 .env.development
 .env.production
 .env.staging
-augmentos_asg_client/StreamPackLite/

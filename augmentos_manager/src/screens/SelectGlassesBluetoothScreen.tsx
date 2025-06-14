@@ -1,6 +1,6 @@
 // SelectGlassesBluetoothScreen.tsx
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -25,6 +25,7 @@ import GlobalEventEmitter from '../logic/GlobalEventEmitter';
 import { useSearchResults } from '../providers/SearchResultsContext';
 import { requestFeaturePermissions, PermissionFeatures } from '../logic/PermissionsUtils';
 import showAlert from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
 // import NavigationBar from '../components/NavigationBar'; // if needed
 
 interface SelectGlassesBluetoothScreenProps {
@@ -41,6 +42,7 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
   const { glassesModelName } = route.params as { glassesModelName: string };
   const navigation = useNavigation<NavigationProps>();
   const { searchResults, setSearchResults } = useSearchResults();
+  const { t } = useTranslation(['home']);
 
  // Create a ref to track the current state of searchResults
  const searchResultsRef = useRef<string[]>(searchResults);
@@ -93,16 +95,16 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
       console.log(JSON.stringify(searchResults));
       if (searchResultsRef.current.length === 0) {
         showAlert(
-          "No " + modelName + " found",
-          "Retry search?",
+          t("SelectGlassesBluetoothScreen.No modelName found", {modelName: modelName}),
+          t("SelectGlassesBluetoothScreen.Retry search"),
           [
             {
-              text: "No",
+              text: t("No"),
               onPress: () => navigation.goBack(), // Navigate back if user chooses "No"
               style: "cancel",
             },
             {
-              text: "Yes",
+              text: t("Yes"),
               onPress: () =>
                 coreCommunicator.sendSearchForCompatibleDeviceNames(glassesModelName), // Retry search
             },
@@ -132,11 +134,13 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
       console.log('Searching for compatible devices for: ', glassesModelName);
       setSearchResults([]);
       
+      // For iOS, make sure BleManager is initialized before searching
+      if (Platform.OS === 'ios') {
+        // Using any type since we don't have direct access to the private method
+        await (coreCommunicator as any).initializeBleManager?.();
+      }
+      
       coreCommunicator.sendSearchForCompatibleDeviceNames(glassesModelName);
-      // todo: remove this once we figure out why it's not working w/o it (ios / core communicator isn't fully initialized or something)
-      setTimeout(() => {
-        coreCommunicator.sendSearchForCompatibleDeviceNames(glassesModelName);
-      }, 1000);
     };
     
     initializeAndSearchForDevices();
@@ -165,9 +169,9 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
       if (!hasLocationPermission) {
         // Inform the user that location permission is required for Bluetooth scanning
         showAlert(
-          'Location Permission Required',
-          'Location permission is required to scan for and connect to smart glasses on Android. This is a requirement of the Android Bluetooth system.',
-          [{ text: 'OK' }]
+          t('SelectGlassesBluetoothScreen.Location Permission Required'),
+          t('SelectGlassesBluetoothScreen.Location permission is required to scan for and connect to smart glasses on Android'),
+          [{ text: t('OK') }]
         );
         return; // Stop the connection process
       }
@@ -180,21 +184,15 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
     if (!hasMicPermission) {
       // Inform the user that microphone permission is required
       showAlert(
-        'Microphone Permission Required',
-        'Microphone permission is required to connect to smart glasses. Voice control and audio features are essential for the AR experience.',
-        [{ text: 'OK' }]
+        t('SelectGlassesBluetoothScreen.Microphone Permission Required'),
+        t('SelectGlassesBluetoothScreen.Microphone permission is required to connect to smart glasses'),
+        [{ text: t('OK') }]
       );
       return; // Stop the connection process
     }
-
-    // update the preferredmic to be the phone mic:
-    coreCommunicator.sendSetPreferredMic("phone");
     
     // All permissions granted, proceed with connecting to the wearable
-    setTimeout(() => {
-      // give some time to show the loader (otherwise it's a bit jarring)
-      coreCommunicator.sendConnectWearable(glassesModelName, deviceName);
-    }, 2000);
+    coreCommunicator.sendConnectWearable(glassesModelName, deviceName);
     navigation.navigate('GlassesPairingGuideScreen', {
       glassesModelName: glassesModelName,
     });
@@ -213,8 +211,6 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
     selectedChipBg: isDarkTheme ? '#666666' : '#333333',
     selectedChipText: isDarkTheme ? '#FFFFFF' : '#FFFFFF',
   };
-
-  const glassesImage = useMemo(() => getGlassesImage(glassesModelName), [glassesModelName]);
 
   return (
     <View style={[styles.container, isDarkTheme ? styles.darkBackground : styles.lightBackground]}>
@@ -241,7 +237,7 @@ const SelectGlassesBluetoothScreen: React.FC<SelectGlassesBluetoothScreenProps> 
                   }}
                 >
                   <Image
-                    source={glassesImage}
+                    source={getGlassesImage(glassesModelName)}
                     style={styles.glassesImage}
                   />
                   <View style={styles.settingTextContainer}>

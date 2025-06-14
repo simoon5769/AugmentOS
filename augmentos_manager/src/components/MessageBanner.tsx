@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Animated } from "react-native
 import { MOCK_CONNECTION } from "../consts";
 import GlobalEventEmitter from "../logic/GlobalEventEmitter";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import i18n from '../i18n/config';
 
 export default function MessageBanner() {
   const [message, setMessage] = useState<string | null>(null);
@@ -73,7 +74,7 @@ export default function MessageBanner() {
       ]}>
       <Text style={styles.text}>{message}</Text>
       <TouchableOpacity onPress={() => setMessage(null)}>
-        <Text style={styles.dismiss}>Dismiss</Text>
+        <Text style={styles.dismiss}>{i18n.t('MessageBanner.Dismiss', {ns: 'home'})}</Text>
       </TouchableOpacity>
     </Animated.View>
     // </SafeAreaView>

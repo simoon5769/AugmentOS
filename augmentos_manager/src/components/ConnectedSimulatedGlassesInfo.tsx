@@ -4,6 +4,7 @@ import coreCommunicator from '../bridge/CoreCommunicator';
 import { useStatus } from '../providers/AugmentOSStatusProvider';
 import { useGlassesMirror } from '../providers/GlassesMirrorContext';
 import GlassesDisplayMirror from './GlassesDisplayMirror';
+import { useTranslation } from 'react-i18next';
 
 interface ConnectedSimulatedGlassesInfoProps {
   isDarkTheme: boolean;
@@ -14,6 +15,7 @@ const ConnectedSimulatedGlassesInfo: React.FC<ConnectedSimulatedGlassesInfoProps
   const scaleAnim = useRef(new Animated.Value(0.8)).current;
   const { status } = useStatus();
   const { events } = useGlassesMirror();
+  const { t } = useTranslation(['home']);
   
   // Get the last event to display in the mirror
   const lastEvent = events.length > 0 ? events[events.length - 1] : null;
@@ -71,7 +73,7 @@ const ConnectedSimulatedGlassesInfo: React.FC<ConnectedSimulatedGlassesInfoProps
         >
           <GlassesDisplayMirror 
             layout={lastEvent?.layout}
-            fallbackMessage="Simulated Glasses Display"
+            fallbackMessage={t('ConnectedSimulatedGlassesInfo.Simulated Glasses Display')}
             containerStyle={styles.mirrorContainer}
           />
         </Animated.View>
@@ -80,7 +82,7 @@ const ConnectedSimulatedGlassesInfo: React.FC<ConnectedSimulatedGlassesInfoProps
       {/* Bottom Bar with "Simulated Glasses" text and disconnect button */}
       <View style={styles.bottomBar}>
         <Text style={[styles.simulatedGlassesText, { color: themeStyles.textColor }]}>
-          Simulated Glasses
+          {t('GlassesPairingGuides.Simulated Glasses')}
         </Text>
         
         <TouchableOpacity
@@ -88,7 +90,7 @@ const ConnectedSimulatedGlassesInfo: React.FC<ConnectedSimulatedGlassesInfoProps
           onPress={sendDisconnectWearable}
         >
           <Text style={styles.disconnectText}>
-            Disconnect
+            {t('Disconnect')}
           </Text>
         </TouchableOpacity>
       </View>

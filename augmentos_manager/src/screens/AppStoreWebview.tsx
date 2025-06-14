@@ -7,8 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { RootStackParamList } from '../components/types';
 import BackendServerComms from '../backend_comms/BackendServerComms';
-import { useAppStatus } from '../providers/AppStatusProvider';
-import { useAppStoreWebviewPrefetch } from '../providers/AppStoreWebviewPrefetchProvider';
+import { useTranslation } from 'react-i18next';
 
 // Define package name for the store webview
 const STORE_PACKAGE_NAME = 'org.augmentos.store';
@@ -22,9 +21,11 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
   const [webviewLoading, setWebviewLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const packageName = route?.params?.packageName;
+  const webViewRef = useRef<WebView>(null);
   const [canGoBack, setCanGoBack] = useState(false);
-  const { appStoreUrl, webviewLoading: prefetchedWebviewLoading, webViewRef: prefetchedWebviewRef } = useAppStoreWebviewPrefetch();
-  const {refreshAppStatus} = useAppStatus();
+  const [appStoreUrl, setAppStoreUrl] = useState<string>('');
+
+  const { t } = useTranslation(['home']);
 
   // Theme colors
   const theme = {
@@ -38,6 +39,41 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
     primaryColor: '#0088FF'
   };
 
+  // Initialize the URL with a temporary token
+  useEffect(() => {
+    const initUrl = async () => {
+      try {
+        // Get the base URL for the store
+        const baseUrl = Config.AUGMENTOS_APPSTORE_URL || 'https://store.augmentos.org/webview';
+        
+        // Generate a temporary token for the store
+        const backendComms = BackendServerComms.getInstance();
+        const tempToken = await backendComms.generateWebviewToken(STORE_PACKAGE_NAME);
+        
+        // Create the URL with the token
+        const urlWithToken = new URL(baseUrl);
+        urlWithToken.searchParams.append('aos_temp_token', tempToken);
+        
+        // Add package name if provided (for direct navigation to app details)
+        if (packageName) {
+          urlWithToken.pathname = `/package/${packageName}`;
+        }
+        
+        setAppStoreUrl(urlWithToken.toString());
+        setWebviewLoading(false);
+      } catch (error) {
+        console.error('Error generating temporary token for store:', error);
+        // Fallback to using the base URL without token
+        const baseUrl = Config.AUGMENTOS_APPSTORE_URL || 'https://store.augmentos.org/webview';
+        const url = packageName ? `${baseUrl}/package/${packageName}` : baseUrl;
+        setAppStoreUrl(url);
+        setWebviewLoading(false);
+      }
+    };
+
+    initUrl();
+  }, [packageName]);
+
   // Handle WebView loading events
   const handleLoadStart = () => setWebviewLoading(true);
   const handleLoadEnd = () => setWebviewLoading(false);
@@ -50,8 +86,8 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        if (prefetchedWebviewRef.current && canGoBack) {
-          prefetchedWebviewRef.current.goBack();
+        if (webViewRef.current && canGoBack) {
+          webViewRef.current.goBack();
           return true; // Prevent default back action
         }
         return false; // Allow default back action (close screen)
@@ -60,31 +96,21 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
       const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
       return () => subscription.remove(); // Cleanup listener on blur
-    }, [canGoBack, prefetchedWebviewRef]) // Re-run effect if canGoBack or ref changes
-  );
-
-  // propagate any changes in app lists when this screen is unmounted:
-  useFocusEffect(
-    useCallback(() => {
-      return async () => {
-        await refreshAppStatus();
-      };
-    }, []),
+    }, [canGoBack]) // Re-run effect if canGoBack changes
   );
 
   // Show loading state while getting the URL
   if (!appStoreUrl) {
     return (
-      <View style={[styles.loadingOverlay, { backgroundColor: '#fff' }]}>
+      <View style={[styles.loadingOverlay, { backgroundColor: theme.backgroundColor }]}>
         <ActivityIndicator size="large" color={theme.primaryColor} />
         <Text style={[styles.loadingText, { color: theme.textColor }]}>
-          Preparing App Store...
+           {t('AppStoreWebview.Preparing App Store')}
         </Text>
       </View>
     );
   }
 
-  // If the prefetched WebView is ready, show it in the correct style
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {hasError ? (
@@ -92,27 +118,34 @@ const AppStoreWeb: React.FC<AppStoreWebProps> = ({ isDarkTheme, route }) => {
           retry={() => setHasError(false)} isDarkTheme={false} />
       ) : (
         <View style={styles.webViewContainer}>
-          {/* Show the prefetched WebView, but now visible and full size */}
           <WebView
-            ref={prefetchedWebviewRef}
+            ref={webViewRef}
             source={{ uri: appStoreUrl }}
             style={styles.webView}
-            onLoadStart={() => setWebviewLoading(true)}
-            onLoadEnd={() => setWebviewLoading(false)}
+            onLoadStart={handleLoadStart}
+            onLoadEnd={handleLoadEnd}
             onError={handleError}
             onNavigationStateChange={navState => setCanGoBack(navState.canGoBack)}
             javaScriptEnabled={true}
             domStorageEnabled={true}
             startInLoadingState={true}
             renderLoading={() => (
-              <View style={[styles.loadingOverlay, { backgroundColor: '#fff' }]}>
+              <View style={styles.loadingOverlay}>
                 <ActivityIndicator size="large" color={theme.primaryColor} />
                 <Text style={[styles.loadingText, { color: theme.textColor }]}>
-                  Loading App Store...
+                  {t('AppStoreWebview.Loading App Store')}
                 </Text>
               </View>
             )}
           />
+          {/* {webviewLoading && (
+            <View style={styles.loadingOverlay}>
+              <ActivityIndicator size="large" color={theme.primaryColor} />
+              <Text style={[styles.loadingText, { color: theme.textColor }]}>
+                {t('AppStoreWebview.Loading App Store')}
+              </Text>
+            </View>
+          )} */}
         </View>
       )}
     </SafeAreaView>

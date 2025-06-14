@@ -26,6 +26,8 @@ import {
   handlePreviouslyDeniedPermission
 } from '../logic/PermissionsUtils';
 import { showAlert } from '../utils/AlertUtils';
+import { useTranslation } from 'react-i18next';
+
 interface GlassesPairingGuidePreparationScreenProps {
   isDarkTheme: boolean;
   toggleTheme: () => void;
@@ -44,6 +46,7 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
   const route = useRoute();
   const { glassesModelName } = route.params as { glassesModelName: string };
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation(['home']);
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('beforeRemove', (e) => {
@@ -82,82 +85,72 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
         
         // Bluetooth permissions only for physical glasses
         if (needsBluetoothPermissions) {
-        const bluetoothPermissions: any[] = [];
-        
-        // Bluetooth permissions based on Android version
-        if (typeof Platform.Version === 'number' && Platform.Version >= 30 && Platform.Version < 31) {
-          bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH);
-          bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADMIN);
-        }
-        if (typeof Platform.Version === 'number' && Platform.Version >= 31) {
-          bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN);
-          bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT);
-          bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE);
+          const bluetoothPermissions: any[] = [];
           
-          // Add NEARBY_DEVICES permission for Android 12+ (API 31+)
-          if (PermissionsAndroid.PERMISSIONS.NEARBY_DEVICES) {
-            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.NEARBY_DEVICES);
+          // Bluetooth permissions based on Android version
+          if (typeof Platform.Version === 'number' && Platform.Version >= 30 && Platform.Version < 31) {
+            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH);
+            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADMIN);
           }
-        }
-        
-        // Request Bluetooth permissions directly
-        if (bluetoothPermissions.length > 0) {
-          const results = await PermissionsAndroid.requestMultiple(bluetoothPermissions);
-          const allGranted = Object.values(results).every(
-            (value) => value === PermissionsAndroid.RESULTS.GRANTED
-          );
+          if (typeof Platform.Version === 'number' && Platform.Version >= 31) {
+            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN);
+            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT);
+            bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE);
+            
+            // Add NEARBY_DEVICES permission for Android 12+ (API 31+)
+            if (PermissionsAndroid.PERMISSIONS.NEARBY_DEVICES) {
+              bluetoothPermissions.push(PermissionsAndroid.PERMISSIONS.NEARBY_DEVICES);
+            }
+          }
           
-          // Since we now handle NEVER_ASK_AGAIN in requestFeaturePermissions,
-          // we just need to check if all are granted
-          if (!allGranted) {
-            // Check if any are NEVER_ASK_AGAIN to show proper dialog
-            const anyNeverAskAgain = Object.values(results).some(
-              (value) => value === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN
+          // Request Bluetooth permissions directly
+          if (bluetoothPermissions.length > 0) {
+            const results = await PermissionsAndroid.requestMultiple(bluetoothPermissions);
+            const allGranted = Object.values(results).every(
+              (value) => value === PermissionsAndroid.RESULTS.GRANTED
             );
             
-            if (anyNeverAskAgain) {
-              // Show "previously denied" dialog for Bluetooth
-              showAlert(
-                'Permission Required',
-                'Bluetooth permissions are required but have been denied previously. Please enable them in Settings to continue.',
-                [
-                  { 
-                    text: 'Open Settings', 
-                    onPress: () => Linking.openSettings() 
-                  },
-                  {
-                    text: 'Cancel',
-                    style: 'cancel'
-                  }
-                ]
+            // Since we now handle NEVER_ASK_AGAIN in requestFeaturePermissions,
+            // we just need to check if all are granted
+            if (!allGranted) {
+              // Check if any are NEVER_ASK_AGAIN to show proper dialog
+              const anyNeverAskAgain = Object.values(results).some(
+                (value) => value === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN
               );
-            } else {
-              // Show standard permission required dialog
+              
+              if (anyNeverAskAgain) {
+                // Show "previously denied" dialog for Bluetooth
+                showAlert(
+                t('GlassesPairingGuidePreparationScreen.Permission Required'),
+                t('GlassesPairingGuidePreparationScreen.Bluetooth permissions are required but have been denied previously'),
+                  [
+                    { 
+                    text: t('GlassesPairingGuidePreparationScreen.Open Settings'), 
+                      onPress: () => Linking.openSettings() 
+                    },
+                    {
+                    text: t('Cancel'),
+                      style: 'cancel'
+                    }
+                  ]
+                );
+              } else {
+                // Show standard permission required dialog
               showAlert(
-                'Permission Required',
-                'Bluetooth permissions are required to connect to glasses',
-                [{ text: 'OK' }]
-              );
+                t('GlassesPairingGuidePreparationScreen.Permission Required'),
+                t('GlassesPairingGuidePreparationScreen.Bluetooth permissions are required to connect to glasses'),
+                [{ text: t('OK') }]
+                );
+              }
+              return;
             }
-            return;
           }
-        }
         
-        // Phone state permission already requested above for all Android devices
+          // Phone state permission already requested above for all Android devices
         } // End of Bluetooth permissions block
       } // End of Android-specific permissions block
       
       // Cross-platform permissions needed for both iOS and Android
-
-      const hasBluetoothPermission = await requestFeaturePermissions(PermissionFeatures.BLUETOOTH);
-      if (!hasBluetoothPermission) {
-        showAlert(
-          'Bluetooth Permission Required',
-          'Bluetooth permission is required to connect to smart glasses.',
-          [{ text: 'OK' }]
-        );
-        return; // Stop the connection process
-      }
       
       // Request microphone permission (needed for both platforms)
       console.log("Requesting microphone permission...");
@@ -189,9 +182,9 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
     } catch (error) {
       console.error('Error requesting permissions:', error);
       showAlert(
-        'Error',
-        'Failed to request necessary permissions',
-        [{ text: 'OK' }]
+        t('Error'),
+        t('GlassesPairingGuidePreparationScreen.Failed to request necessary permissions'),
+        [{ text: t('OK') }]
       );
       return;
     }
@@ -202,18 +195,15 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
       if (!requirementsCheck.isReady) {
         // Show alert about missing requirements
         showAlert(
-          'Connection Issue',
-          requirementsCheck.message || 'Cannot connect to glasses - check Bluetooth and Location settings',
-          [{ text: 'OK' }]
+          t('GlassesPairingGuidePreparationScreen.Connection Issue'),
+          requirementsCheck.message || t('GlassesPairingGuidePreparationScreen.Cannot connect to glasses'),
+          [{ text: t('OK') }]
         );
         
         return;
       }
     }
 
-    console.log("needsBluetoothPermissions", needsBluetoothPermissions);
-
-    // slight delay for bluetooth perms
     navigation.navigate('SelectGlassesBluetoothScreen', {
       glassesModelName: glassesModelName,
     });
@@ -228,7 +218,7 @@ const GlassesPairingGuidePreparationScreen: React.FC<GlassesPairingGuidePreparat
       </ScrollView>
       <View style={styles.buttonContainer}>
         <Button onPress={advanceToPairing} disabled={false}>
-          <Text>Continue</Text>
+          <Text>{t('Continue')}</Text>
         </Button>
       </View>
     </View>
@@ -240,19 +230,18 @@ export default GlassesPairingGuidePreparationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 20,
   },
   scrollViewContainer: {
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttonContainer: {
     alignItems: 'center',
-    marginBottom: 64,
-    marginTop: 16,
+    marginBottom: 65,
   },
   text: {
     fontSize: 16,

@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from './types';
 import showAlert from '../utils/AlertUtils';
 import BackendServerComms from '../backend_comms/BackendServerComms';
+import { useTranslation } from 'react-i18next';
 
 interface RunningAppsListProps {
   isDarkTheme: boolean;
@@ -21,6 +22,8 @@ const RunningAppsList: React.FC<RunningAppsListProps> = ({isDarkTheme}) => {
   const textColor = isDarkTheme ? '#FFFFFF' : '#000000';
   const navigation = useNavigation<NavigationProps>();
   const scrollViewRef = useRef<ScrollView>(null);
+
+  const { t } = useTranslation(['home']);
 
   const stopApp = async (packageName: string) => {
     console.log('STOP APP');
@@ -61,7 +64,7 @@ const RunningAppsList: React.FC<RunningAppsListProps> = ({isDarkTheme}) => {
   return (
     <View style={styles.appsContainer}>
       <Text style={[styles.sectionTitle, {color: textColor}]}>
-        Active Apps
+        {t('RunningAppsList.Active Apps')} ({runningApps.length})
       </Text>
       <View style={styles.listContainer}>
         {runningApps.length > 0 ? (
@@ -104,7 +107,7 @@ const RunningAppsList: React.FC<RunningAppsListProps> = ({isDarkTheme}) => {
             >
               <View style={styles.noAppsContent}>
                 <Text style={[styles.noAppsText, {color: '#000000'}]}>
-                  Tap on an app below to start it.
+                  {t("RunningAppsList.Tap on an app below to start it")}
                 </Text>
               </View>
             </LinearGradient>

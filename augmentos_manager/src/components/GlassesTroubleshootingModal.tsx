@@ -8,6 +8,7 @@ import {
   Modal,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import i18n from '../i18n/config';
 
 interface TroubleshootingModalProps {
   isVisible: boolean;
@@ -16,49 +17,47 @@ interface TroubleshootingModalProps {
   isDarkTheme: boolean;
 }
 
-export const getModelSpecificTips = (model: string) => {
-  switch (model) {
-    case 'Even Realities G1':
-      return [
-        "Make sure you closed the G1's left arm FIRST before putting it in the case",
-        "Plug your G1 case into a charger during the pairing process",
-        "Try closing the charging case and opening it again",
-        "Ensure no other app is currently connected to your G1",
-        "Restart your phone's Bluetooth",
-        "Make sure your phone is within 3 feet of your glasses & case",
-        "If your glasses were previously paired to a different phone, you must unpair/forget the glasses in your phone's Bluetooth settings before retrying the pairing process"
-      ];
-    case 'Mentra Mach1':
-    case 'Vuzix Z100':
-      return [
-        "Make sure your glasses are turned on",
-        "Check that your glasses are paired in the 'Vuzix Connect' app",
-        "Try resetting your Bluetooth connection"
-      ];
-    case 'Mentra Live':
-      return [
-        "Make sure your Mentra Live is fully charged",
-        "Check that your Mentra Live is in pairing mode",
-        "Ensure no other app is currently connected to your glasses",
-        "Try restarting your glasses",
-        "Check that your phone's Bluetooth is enabled"
-      ];
-    default:
-      return [
-        "Make sure your glasses are charged and turned on",
-        "Ensure no other device is connected to your glasses",
-        "Try restarting both your glasses and phone",
-        "Make sure your phone is within range of your glasses"
-      ];
-  }
-};
-
 const GlassesTroubleshootingModal: React.FC<TroubleshootingModalProps> = ({ 
   isVisible, 
   onClose, 
   glassesModelName, 
   isDarkTheme 
 }) => {
+  const getModelSpecificTips = (model: string) => {
+    switch (model) {
+      case 'Even Realities G1':
+        return [
+        i18n.t("GlassesTroubleshootingModal.Make sure you closed the G1's left arm FIRST before putting it in the case", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Plug your G1 case into a charger during the pairing process", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Try closing the charging case and opening it again", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Ensure no other app is currently connected to your G1", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Restart your phone's Bluetooth", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Make sure your phone is within 3 feet of your glasses & case", {ns: 'home'}),
+        ];
+      case 'Mentra Mach1':
+      case 'Vuzix Z100':
+        return [
+        i18n.t("GlassesTroubleshootingModal.Make sure your glasses are turned on", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Check that your glasses are paired in the Vuzix Connect app", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Try resetting your Bluetooth connection", {ns: 'home'})
+        ];
+      case 'Mentra Live':
+        return [
+        i18n.t("GlassesTroubleshootingModal.Make sure your Mentra Live is fully charged", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Check that your Mentra Live is in pairing mode", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Ensure no other app is currently connected to your glasses", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Try restarting your glasses", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Check that your phone's Bluetooth is enabled", {ns: 'home'})
+        ];
+      default:
+        return [
+        i18n.t("GlassesTroubleshootingModal.Make sure your glasses are charged and turned on", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Ensure no other device is connected to your glasses", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Try restarting both your glasses and phone", {ns: 'home'}),
+        i18n.t("GlassesTroubleshootingModal.Make sure your phone is within range of your glasses", {ns: 'home'})
+        ];
+    }
+  };
 
   const themeColors = {
     background: isDarkTheme ? '#2d2d2d' : '#ffffff',
@@ -77,7 +76,7 @@ const GlassesTroubleshootingModal: React.FC<TroubleshootingModalProps> = ({
         <View style={[styles.modalContent, { backgroundColor: themeColors.background }]}>
           <View style={styles.modalHeader}>
             <Text style={[styles.modalHeaderText, { color: themeColors.text }]}>
-              Troubleshooting {glassesModelName}
+              {i18n.t("home:GlassesTroubleshootingModal.Troubleshooting glassesModelName", {glassesModelName: glassesModelName})}
             </Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
               <MaterialIcons name="close" size={24} color={themeColors.text} />
@@ -85,7 +84,7 @@ const GlassesTroubleshootingModal: React.FC<TroubleshootingModalProps> = ({
           </View>
           
           <Text style={[styles.modalSubText, { color: themeColors.text }]}>
-            Having trouble pairing your glasses? Try these tips:
+            {i18n.t("GlassesTroubleshootingModal.Having trouble pairing your glasses", {ns: 'home'})}
           </Text>
           
           <ScrollView style={styles.tipsContainer}>
@@ -108,7 +107,7 @@ const GlassesTroubleshootingModal: React.FC<TroubleshootingModalProps> = ({
             style={[styles.closeModalButton, { backgroundColor: themeColors.buttonBackground }]} 
             onPress={onClose}
           >
-            <Text style={styles.closeModalButtonText}>Got it, thanks!</Text>
+            <Text style={styles.closeModalButtonText}>{i18n.t("GlassesTroubleshootingModal.Got it thanks", {ns: 'home'})}</Text>
           </TouchableOpacity>
         </View>
       </View>

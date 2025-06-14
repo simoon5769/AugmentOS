@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from './Button';
 import { loadSetting } from '../logic/SettingsHelper.tsx';
 import { SETTINGS_KEYS } from '../consts.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface ConnectingToPuckComponentProps {
   isDarkTheme?: boolean;
@@ -37,6 +38,8 @@ const ConnectingToPuckComponent = ({
   const [errorMessage, setErrorMessage] = useState('Connection to AugmentOS failed. Please check your connection and try again.');
   const hasAttemptedConnection = useRef(false);
   const loadingOverlayOpacity = useRef(new Animated.Value(1)).current;
+
+  const { t } = useTranslation(['home']);
 
   const handleTokenExchange = async () => {
     if (isLoading) return;
@@ -83,7 +86,7 @@ const ConnectingToPuckComponent = ({
       }
     } catch (err) {
       // Don't log the error to console
-      setErrorMessage('Connection to AugmentOS failed. Please check your connection and try again.');
+      setErrorMessage(t('ConnectingToPuckComponent.Connection to AugmentOS failed'));
       setConnectionError(true);
       setIsLoading(false);
     }
@@ -147,7 +150,7 @@ const ConnectingToPuckComponent = ({
             {/* Logo placeholder instead of image */}
             <View style={styles.authLoadingLogoPlaceholder} />
             <ActivityIndicator size="large" color="#2196F3" style={styles.authLoadingIndicator} />
-            <Text style={styles.authLoadingText}>Connecting to AugmentOS...</Text>
+            <Text style={styles.authLoadingText}>{t('ConnectingToPuckComponent.Connecting to AugmentOS')}</Text>
           </View>
         </Animated.View>
       </View>
@@ -178,7 +181,7 @@ const ConnectingToPuckComponent = ({
               isDarkTheme ? styles.lightText : styles.darkText,
             ]}
           >
-            Connection Error
+            {t('ConnectingToPuckComponent.Connection Error')}
           </Text>
 
           <Text
@@ -198,7 +201,7 @@ const ConnectingToPuckComponent = ({
             disabled={isLoading}
             iconName="reload"
           >
-            {isLoading ? "Connecting..." : "Retry Connection"}
+            {isLoading ? t('ConnectingToPuckComponent.Connecting') : t('ConnectingToPuckComponent.Retry Connection')}
           </Button>
         </View>
       </View>

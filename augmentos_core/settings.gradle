@@ -1,0 +1,29 @@
+pluginManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' } // 阿里云公共仓库
+        maven { url 'https://mirrors.tuna.tsinghua.edu.cn/maven/' } // 清华大学镜像
+
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://mirrors.tuna.tsinghua.edu.cn/maven/' }
+
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "AugmentOS Core"
+include ':app'
+
+include ':AugmentOSLib'
+project(':AugmentOSLib').projectDir = new File(rootProject.projectDir, '../augmentos_android_library/AugmentOSLib')
+
+include ':SmartGlassesManager'
+project(':SmartGlassesManager').projectDir = new File(rootProject.projectDir, '../SmartGlassesManager/SGM_android/SmartGlassesManager')

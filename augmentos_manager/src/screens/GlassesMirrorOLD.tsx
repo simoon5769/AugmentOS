@@ -11,6 +11,7 @@ import {
 import {useFocusEffect} from '@react-navigation/native';
 import NavigationBar from '../components/NavigationBar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTranslation } from 'react-i18next';
 
 interface Card {
   id: number;
@@ -223,7 +224,8 @@ const GlassesMirrorOLD: React.FC<GlassesMirrorOLDProps> = ({isDarkTheme}) => {
   const searchSlideAnim = useRef(new Animated.Value(-20)).current;
   const [fadeAnims] = useState(() => cards.map(() => new Animated.Value(0)));
   const [slideAnims] = useState(() => cards.map(() => new Animated.Value(50)));
-
+  const { t } = useTranslation(['home']);
+  
   // Animation Functions
   const startPulseAnimation = React.useCallback(() => {
     pulseAnimation.setValue(1);
@@ -500,7 +502,7 @@ const GlassesMirrorOLD: React.FC<GlassesMirrorOLDProps> = ({isDarkTheme}) => {
               transform: [{translateY: titleSlideAnim}],
             },
           ]}>
-          Glasses Mirror Mockup
+          {t("GlassesMirror.Glasses Mirror Mockup")}
         </Animated.Text>
 
         <Animated.View

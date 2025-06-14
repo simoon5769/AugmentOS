@@ -1,42 +1,33 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NavigationProp} from '@react-navigation/native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
-import {saveSetting} from '../logic/SettingsHelper';
-import {SETTINGS_KEYS} from '../consts';
-import {useAppStatus} from '../providers/AppStatusProvider';
-import BackendServerComms from '../backend_comms/BackendServerComms';
+import { saveSetting } from '../logic/SettingsHelper';
+import { SETTINGS_KEYS } from '../consts';
+import { useTranslation } from 'react-i18next';
 
 interface WelcomePageComponentProps {
   route: {
     params: {
       isDarkTheme: boolean;
-    };
+    }
   };
 }
 
-const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({route}) => {
-  const {isDarkTheme} = route.params;
+const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({
+                                                       route
+                                                     }) => {
+  const { isDarkTheme } = route.params;
   const navigation = useNavigation<NavigationProp<any>>();
-  const {appStatus, optimisticallyStopApp, clearPendingOperation, refreshAppStatus} = useAppStatus();
 
-  const backendComms = BackendServerComms.getInstance();
-
-  const stopAllApps = async () => {
-    const runningApps = appStatus.filter(app => app.is_running);
-    for (const runningApp of runningApps) {
-      optimisticallyStopApp(runningApp.packageName);
-      try {
-        await backendComms.stopApp(runningApp.packageName);
-        clearPendingOperation(runningApp.packageName);
-      } catch (error) {
-        console.error('stop app error:', error);
-        refreshAppStatus();
-      }
-    }
-  };
+  const { t } = useTranslation(['home']);
 
   // Skip onboarding and go directly to home
   const handleSkip = () => {
@@ -45,31 +36,30 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({route}) => {
 
     navigation.reset({
       index: 0,
-      routes: [{name: 'Home'}],
+      routes: [{ name: 'Home' }],
     });
   };
 
   // Continue to glasses selection screen
-  const handleContinue = async () => {
+  const handleContinue = () => {
     // Mark that onboarding should be shown on Home screen
     saveSetting(SETTINGS_KEYS.ONBOARDING_COMPLETED, false);
 
-    // deactivate all running apps:
-    await stopAllApps();
-
     navigation.reset({
       index: 0,
-      routes: [
-        {
-          name: 'SelectGlassesModelScreen',
-          params: {isDarkTheme: isDarkTheme},
-        },
-      ],
+      routes: [{ 
+        name: 'SelectGlassesModelScreen',
+        params: { isDarkTheme: isDarkTheme }
+      }],
     });
   };
 
   return (
-    <View style={[styles.container, isDarkTheme ? styles.darkBackground : styles.lightBackground]}>
+    <View
+      style={[
+        styles.container,
+        isDarkTheme ? styles.darkBackground : styles.lightBackground,
+      ]}>
       <View style={styles.mainContainer}>
         {/* <View style={styles.logoContainer}>
           <Icon
@@ -80,21 +70,40 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({route}) => {
         </View> */}
 
         <View style={styles.infoContainer}>
-          <Text style={[styles.title, isDarkTheme ? styles.lightText : styles.darkText]}>Welcome to AugmentOS</Text>
+          <Text
+            style={[
+              styles.title,
+              isDarkTheme ? styles.lightText : styles.darkText,
+            ]}>
+            {t('WelcomePageComponent.Welcome to AugmentOS')}
+          </Text>
 
-          <Text style={[styles.description, isDarkTheme ? styles.lightSubtext : styles.darkSubtext]}>
-            Let's go through a quick tutorial to get you started with AugmentOS.
+          <Text
+            style={[
+              styles.description,
+              isDarkTheme ? styles.lightSubtext : styles.darkSubtext,
+            ]}>
+            {t("WelcomePageComponent.go through a quick tutorial")}
           </Text>
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button onPress={handleContinue} isDarkTheme={isDarkTheme} iconName="arrow-right" disabled={false}>
-            Continue
+          <Button
+            onPress={handleContinue}
+            isDarkTheme={isDarkTheme}
+            iconName="arrow-right"
+            disabled={false}>
+            {t("Continue")}
           </Button>
 
           <View style={styles.skipButtonContainer}>
-            <Button onPress={handleSkip} isDarkTheme={isDarkTheme} iconName="skip-next" disabled={false}>
-              Skip Onboarding
+            <Button
+              onPress={handleSkip}
+              isDarkTheme={isDarkTheme}
+              iconName="skip-next"
+              disabled={false}
+            >
+              {t("WelcomePageComponent.Skip Onboarding")}
             </Button>
           </View>
         </View>
@@ -105,7 +114,7 @@ const WelcomePageComponent: React.FC<WelcomePageComponentProps> = ({route}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   mainContainer: {
     flex: 1,

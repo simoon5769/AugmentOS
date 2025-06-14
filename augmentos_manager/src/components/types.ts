@@ -19,8 +19,6 @@ export type RootStackParamList = {
   ProfileSettings: undefined;
   GlassesMirror: undefined;
   GlassesMirrorFullscreen: undefined;
-  GlassesRecordingsGallery: undefined;
-  VideoPlayerScreen: { filePath: string; fileName?: string };
   Reviews: { appId: string; appName: string };
   ConnectingToPuck: undefined;
   PhoneNotificationSettings: undefined;
@@ -42,7 +40,6 @@ export type RootStackParamList = {
   AppSettings: { packageName: string, appName: string, fromWebView?: boolean };
   AppWebView: { webviewURL: string, appName: string, packageName?: string, fromSettings?: boolean };
   ErrorReportScreen: undefined;
-  GlassesWifiSetupScreen: { deviceModel: string };
 };
 
 

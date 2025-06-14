@@ -28,8 +28,7 @@ public class MyNotificationListeners extends NotificationListenerService {
             "com.android.systemui",
             "com.samsung.android.app.smartcapture",
             "com.sec.android.app.camera",
-            "com.sec.android.gallery3d",
-            "com.github.welldomax.tunnelshare"
+            "com.sec.android.gallery3d"
     );
 
     private final List<String> categoryBlacklist = Arrays.asList(

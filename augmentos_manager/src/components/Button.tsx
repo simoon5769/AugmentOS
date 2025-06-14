@@ -1,58 +1,27 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ButtonProps {
   onPress: (event: GestureResponderEvent) => void;
-  title?: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   isDarkTheme?: boolean;
   iconName?: string;
-  disabled?: boolean;
-  type?: 'primary' | 'secondary';
-  style?: ViewStyle;
+  disabled: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ 
-  onPress, 
-  disabled = false, 
-  children, 
-  title, 
-  isDarkTheme, 
-  iconName, 
-  type = 'primary',
-  style,
-  ...props 
-}) => {
+const Button: React.FC<ButtonProps> = ({ onPress, disabled, children, isDarkTheme, iconName, ...props }) => {
   return (
     <TouchableOpacity
-      style={[
-        styles.button, 
-        isDarkTheme && styles.buttonDark,
-        type === 'secondary' && styles.buttonSecondary,
-        disabled && styles.buttonDisabled,
-        style
-      ]}
+      style={[styles.button, isDarkTheme && styles.buttonDark]}
       onPress={onPress}
       disabled={disabled}
       {...props}>
       {iconName && (
-        <Icon 
-          name={iconName} 
-          size={16}           
-          color={disabled ? '#999' : (type === 'secondary' ? '#2196F3' : 'white')} 
-          style={styles.buttonIcon} 
-        />
+        <Icon name={iconName} size={16}           color={disabled ? '#999' : 'white'} 
+        style={styles.buttonIcon} />
       )}
-      <Text 
-        style={[
-          styles.buttonText, 
-          disabled && styles.buttonTextDisabled,
-          type === 'secondary' && styles.buttonTextSecondary
-        ]}
-      >
-        {title || children}
-      </Text>
+      <Text style={[styles.buttonText, disabled && styles.buttonTextDisabled]}>{children}</Text>
     </TouchableOpacity>
   );
 };
@@ -76,13 +45,6 @@ const styles = StyleSheet.create({
   buttonDark: {
     backgroundColor: '#1976D2',
   },
-  buttonSecondary: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#2196F3',
-    elevation: 0,
-    shadowOpacity: 0,
-  },
   buttonIcon: {
     marginRight: 8,
   },
@@ -92,12 +54,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Montserrat-Bold',
   },
-  buttonTextSecondary: {
-    color: '#2196F3',
-  },
   buttonDisabled: {
     backgroundColor: '#cccccc',
-    borderColor: '#cccccc',
     elevation: 0,
     shadowOpacity: 0,
   },

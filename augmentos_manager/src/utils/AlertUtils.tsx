@@ -18,8 +18,8 @@ let modalRef: {
     title: string,
     message: string,
     buttons?: AlertButton[],
-    options?: { 
-      isDarkTheme?: boolean; 
+    options?: {
+      isDarkTheme?: boolean;
       iconName?: string;
       iconSize?: number;
       iconColor?: string;
@@ -35,7 +35,7 @@ export const setModalRef = (ref: typeof modalRef) => {
 // Converts a React Native AlertButton to our ModalButton format
 const convertToModalButton = (button: AlertButton, index: number, totalButtons: number): ModalButton => {
   let style: ButtonStyle = 'default';
-  
+
   // Heuristics to determine button style based on text and position
   if (button.style === 'cancel' || button.style === 'destructive') {
     // Use RN's native styles if provided
@@ -48,7 +48,7 @@ const convertToModalButton = (button: AlertButton, index: number, totalButtons: 
     // Last button is usually confirm/primary
     style = 'default';
   }
-  
+
   return {
     text: button.text || '',
     onPress: button.onPress,
@@ -75,12 +75,12 @@ export const ModalProvider: React.FC<{ isDarkTheme?: boolean }> = ({ isDarkTheme
       showModal: (title, message, alertButtons = [], opts = {}) => {
         setTitle(title);
         setMessage(message);
-        
+
         // Convert all buttons to our ModalButton format with style hints
         const modalButtons = alertButtons.length > 0 
           ? alertButtons.map((btn, idx) => convertToModalButton(btn, idx, alertButtons.length))
           : [{ text: 'OK' }];
-        
+
         setButtons(modalButtons);
 
         // Set options with fallback to component's props
@@ -124,8 +124,8 @@ export const showAlert = (
   title: string,
   message: string,
   buttons: AlertButton[] = [{ text: 'OK' }],
-  options?: { 
-    cancelable?: boolean; 
+  options?: {
+    cancelable?: boolean;
     onDismiss?: () => void;
     useNativeAlert?: boolean;
     isDarkTheme?: boolean;

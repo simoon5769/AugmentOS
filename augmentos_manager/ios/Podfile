@@ -14,7 +14,6 @@ node_require('react-native-permissions/scripts/setup.rb')
 
 # platform :ios, min_ios_version_supported
 platform :ios, '13.4'
-project 'AugmentOS.xcodeproj'
 prepare_react_native_project!
 
 # All required permissions must be uncommented here
@@ -27,7 +26,7 @@ setup_permissions([
   # 'Contacts',
   # 'FaceID',
   'LocationAccuracy',
-  # 'LocationAlways',
+  'LocationAlways',
   'LocationWhenInUse',
   # 'MediaLibrary',
   'Microphone',
@@ -49,7 +48,7 @@ end
 
 #use_modular_headers!
 
-target 'AugmentOS' do
+target 'AugmentOS_Manager' do
   config = use_native_modules!
 
   use_react_native!(
@@ -58,7 +57,7 @@ target 'AugmentOS' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'AugmentOSTests' do
+  target 'AugmentOS_ManagerTests' do
     inherit! :complete
     # Pods for testing
   end

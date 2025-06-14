@@ -54,18 +54,18 @@ const MessageModal: React.FC<MessageModalProps> = ({
     if (buttons.length === 0) {
       // Fallback to default button
       return (
-        <TouchableOpacity
-          style={[styles.modalButton, styles.singleButton]}
+        <TouchableOpacity 
+          style={styles.modalButton}
           onPress={() => handleButtonPress(undefined)}
         >
           <Text style={styles.modalButtonText}>OK</Text>
         </TouchableOpacity>
       );
     } else if (buttons.length === 1) {
-      // Single button - full width with minimum width
+      // Single button - full width
       return (
-        <TouchableOpacity
-          style={[styles.modalButton, styles.singleButton]}
+        <TouchableOpacity 
+          style={styles.modalButton}
           onPress={() => handleButtonPress(buttons[0].onPress)}
         >
           <Text style={styles.modalButtonText}>{buttons[0].text}</Text>
@@ -194,10 +194,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  singleButton: {
-    width: '100%', // Use full width for single buttons
-    marginHorizontal: 0, // No horizontal margins
   },
   buttonFullWidth: {
     width: '100%',

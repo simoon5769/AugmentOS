@@ -1,5 +1,8 @@
 pluginManagement {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' } // 阿里云公共仓库
+        maven { url 'https://mirrors.tuna.tsinghua.edu.cn/maven/' } // 清华大学镜像
+
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -8,9 +11,12 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://mirrors.tuna.tsinghua.edu.cn/maven/' }
+
+        maven { url 'https://jitpack.io' }
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "AugmentOS ASG Client"
@@ -24,10 +30,3 @@ project(':SmartGlassesManager').projectDir = new File(rootProject.projectDir, '.
 
 include ':augmentos_core'
 project(':augmentos_core').projectDir = new File(rootProject.projectDir, '../augmentos_core/app')
-
-// StreamPackLite modules
-include ':core'
-project(':core').projectDir = new File(rootProject.projectDir, 'StreamPackLite/core')
-
-include ':extension-rtmp'
-project(':extension-rtmp').projectDir = new File(rootProject.projectDir, 'StreamPackLite/extensions/rtmp')

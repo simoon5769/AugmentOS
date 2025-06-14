@@ -16,6 +16,7 @@ import { RootStackParamList, AppStoreItem } from '../components/types';
 import AppItem from '../components/AppStore/AppItem';
 import InternetConnectionFallbackComponent from '../components/InternetConnectionFallbackComponent';
 import LoadingComponent from '../components/LoadingComponent';
+import { useTranslation } from 'react-i18next';
 
 interface AppStoreProps {
   isDarkTheme: boolean;
@@ -31,6 +32,7 @@ const AppStore: React.FC<AppStoreProps> = ({ isDarkTheme }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredApps, setFilteredApps] = useState<AppStoreItem[]>([]);
   const [selectedCategory] = useState<string | null>(null);
+  const { t } = useTranslation(['home']);
 
   // New state for handling connection errors
   const [isError, setIsError] = useState(false);
@@ -173,7 +175,7 @@ const AppStore: React.FC<AppStoreProps> = ({ isDarkTheme }) => {
                 isDarkTheme ? styles.headerTextDark : styles.headerTextLight,
               ]}
             >
-              AugmentOS Store
+              {t('AppStore.AugmentOS Store')}
             </Text>
             <View
               style={[

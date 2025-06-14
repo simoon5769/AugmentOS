@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { checkNotificationAccessSpecialPermission } from '../utils/NotificationServiceUtils';
 import { checkFeaturePermissions, PermissionFeatures } from '../logic/PermissionsUtils';
 import { showAlert } from '../utils/AlertUtils';
-import { useRoute } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 interface HeaderProps {
   isDarkTheme: boolean;
@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   const [hasNotificationListenerPermission, setHasNotificationListenerPermission] = useState(true);
   const [hasCalendarPermission, setHasCalendarPermission] = useState(true);
   const [appState, setAppState] = useState(AppState.currentState);
-  const route = useRoute();
+  const { t } = useTranslation(['home']);
 
   // Check permissions when component mounts
   // and when app comes back to foreground
@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
     return () => {
       subscription.remove();
     };
-  }, [appState, route.name]);
+  }, [appState]);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -79,11 +79,15 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   const handleNotificationAlert = () => {
     // Show explanation alert before navigating to privacy settings
     showAlert(
-      'Additional Features Available',
-      'Enhance your AugmentOS experience by enabling additional permissions.',
+      t('Header.Additional Features Available'),
+      t('Header.Enhance your AugmentOS experience by enabling additional permissions'),
       [
         {
-          text: 'Go to Settings',
+          text: t('Cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('Go to Settings'),
           onPress: () => {
             // Navigate to PrivacySettingsScreen after explaining
             if (navigation) {
@@ -108,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ isDarkTheme, navigation }) => {
   return (
     <View style={styles.headerContainer}>
       <Text style={[styles.title, { color: textColor }]} numberOfLines={1}>
-        AugmentOS
+        {t('AugmentOS')}
       </Text>
       
       {(!hasNotificationListenerPermission || !hasCalendarPermission) && (

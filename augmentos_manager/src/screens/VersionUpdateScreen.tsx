@@ -16,10 +16,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
 import InstallApkModule from '../bridge/InstallApkModule';
-import { saveSetting, loadSetting } from '../logic/SettingsHelper';
+import { saveSetting } from '../logic/SettingsHelper';
 import { Linking } from 'react-native';
 import showAlert from '../utils/AlertUtils';
-import { SETTINGS_KEYS } from '../consts';
+import { useTranslation } from 'react-i18next';
 
 interface VersionUpdateScreenProps {
   route: {
@@ -43,7 +43,8 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
   const [isVersionMismatch, setIsVersionMismatch] = useState(!!initialLocalVersion && !!initialCloudVersion);
   const [localVersion, setLocalVersion] = useState<string | null>(initialLocalVersion || null);
   const [cloudVersion, setCloudVersion] = useState<string | null>(initialCloudVersion || null);
-  const [customBackendUrl, setCustomBackendUrl] = useState<string | null>(null);
+  
+  const { t } = useTranslation(['home']);
 
   // Prevent navigation using the hardware back button
   useFocusEffect(
@@ -153,21 +154,12 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
     .catch((error) => {
       console.error('Error opening installation website:', error);
       showAlert(
-        "Browser Error",
-        "Could not open the installation website. Please visit https://augmentos.org/install manually.",
-        [{ text: "OK", onPress: () => {} }]
+        t("VersionUpdateScreen.Browser Error"),
+        t("VersionUpdateScreen.Could not open the installation website"),
+        [{ text: t("OK"), onPress: () => {} }]
       );
     });
   };
-
-  // Load custom backend URL on mount
-  useEffect(() => {
-    const fetchCustomBackendUrl = async () => {
-      const url = await loadSetting(SETTINGS_KEYS.CUSTOM_BACKEND_URL, null);
-      setCustomBackendUrl(url);
-    };
-    fetchCustomBackendUrl();
-  }, []);
 
   // Only check cloud version on mount if we don't have initial data
   useEffect(() => {
@@ -177,23 +169,6 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
       setIsLoading(false);
     }
   }, []);
-
-  const handleResetBackendUrl = async () => {
-    await saveSetting(SETTINGS_KEYS.CUSTOM_BACKEND_URL, null);
-    setCustomBackendUrl(null);
-    showAlert(
-      'Backend URL Reset',
-      'Backend URL has been reset to default. The app will use the default backend on the next connection attempt or app restart.',
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            checkCloudVersion();
-          },
-        },
-      ]
-    );
-  };
 
   // Loading state
   if (isLoading) {
@@ -213,7 +188,7 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             isDarkTheme ? styles.lightText : styles.darkText,
           ]}
         >
-          Checking for updates...
+          {t("VersionUpdateScreen.Checking for updates")}
         </Text>
       </View>
     );
@@ -257,10 +232,10 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             ]}
           >
             {connectionError
-              ? 'Connection Error'
+              ? t('ConnectingToPuckComponent.Connection Error')
               : isVersionMismatch
-                ? 'Update Required'
-                : 'Up to Date'}
+                ? t('VersionUpdateScreen.Update Required')
+                : t('VersionUpdateScreen.Up to Date')}
           </Text>
 
           <Text
@@ -270,10 +245,10 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
             ]}
           >
             {connectionError
-              ? 'Could not connect to the server. Please check your connection and try again.'
+              ? t('VersionUpdateScreen.Could not connect to the server')
               : isVersionMismatch
-                ? 'AugmentOS is outdated. An update is required to continue using the application.'
-                : 'Your AugmentOS is up to date. Returning to home...'}
+                ? t('VersionUpdateScreen.AugmentOS is outdated')
+                : t('VersionUpdateScreen.Your AugmentOS is up to date')}
           </Text>
         </View>
 
@@ -286,44 +261,32 @@ const VersionUpdateScreen: React.FC<VersionUpdateScreenProps> = ({
               iconName={connectionError ? 'reload' : 'download'}
             >
               {isUpdating
-                ? 'Updating...'
+                ? t('VersionUpdateScreen.Updating...')
                 : connectionError
-                  ? 'Retry Connection'
-                  : 'Update AugmentOS'}
+                  ? t('ConnectingToPuckComponent.Retry Connection')
+                  : t('VersionUpdateScreen.Update AugmentOS')}
             </Button>
-            {/* Show Reset Backend URL button if connection error and custom backend is set */}
-            {connectionError && customBackendUrl && (
-              <View style={{ marginTop: 16, width: '100%', alignItems: 'center' }}>
-                <Button
-                  onPress={handleResetBackendUrl}
-                  isDarkTheme={isDarkTheme}
-                  iconName="restore"
-                  disabled={false}
-                >
-                  Reset Backend URL
-                </Button>
-              </View>
-            )}
-            {isVersionMismatch &&
-              <View style={styles.skipButtonContainer}>
-                <Button
-                  onPress={() => {
-                    // Save setting to ignore version checks until next app restart
-                    saveSetting('ignoreVersionCheck', true);
-                    console.log('Version check skipped until next app restart');
-                    // Skip directly to Home screen
-                    navigation.reset({
-                      index: 0,
-                      routes: [{ name: 'Home' }],
-                    });
-                  }}
-                  isDarkTheme={isDarkTheme}
-                  iconName="skip-next"
-                  disabled={false}>
-                  Skip Update
-                </Button>
-              </View>
-            }
+
+          {isVersionMismatch &&
+            <View style={styles.skipButtonContainer}>
+             <Button
+               onPress={() => {
+                 // Save setting to ignore version checks until next app restart
+                 saveSetting('ignoreVersionCheck', true);
+                 console.log('Version check skipped until next app restart');
+                 // Skip directly to Home screen
+                 navigation.reset({
+                   index: 0,
+                   routes: [{ name: 'Home' }],
+                 });
+               }}
+               isDarkTheme={isDarkTheme}
+               iconName="skip-next"
+               disabled={false}>
+               {t('VersionUpdateScreen.Skip Update')}
+             </Button>
+            </View>
+            }                                                
           </View>    
         )}
       </View>

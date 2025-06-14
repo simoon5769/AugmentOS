@@ -92,4 +92,5 @@ public class DeviceInformation {
                 ", batteryLevel='" + batteryLevel + '\'' +
                 '}';
     }
+
 }

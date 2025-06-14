@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GoogleIcon from '../icons/GoogleIcon';
 import AppleIcon from '../icons/AppleIcon';
+import { useTranslation } from 'react-i18next';
 
 interface IntroScreenProps {
   navigation: any;
@@ -26,6 +27,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(20)).current;
   const formScale = useRef(new Animated.Value(0)).current;
+
+  const { t } = useTranslation(['home']);
 
   useEffect(() => {
     Animated.parallel([
@@ -94,11 +97,11 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
         <View style={styles.card}>
           <Animated.Text
             style={[styles.title, {opacity, transform: [{translateY}]}]}>
-            AugmentOS
+            {t('AugmentOS')}
           </Animated.Text>
           <Animated.Text
             style={[styles.subtitle, {opacity, transform: [{translateY}]}]}>
-            The future of smart glasses starts here.
+            {t('LoginScreen.The future of smart glasses starts here')}
           </Animated.Text>
           <Animated.View
             style={[styles.header, {opacity, transform: [{translateY}]}]}>
@@ -163,7 +166,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                     colors={['#2196F3', '#1E88E5']}
                     style={styles.buttonGradient}>
                     <Text style={styles.enhancedPrimaryButtonText}>
-                      Create Account
+                      {t('LoginScreen.Create Account')}
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
@@ -178,7 +181,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                     style={styles.backIcon}
                   />
                   <Text style={styles.enhancedGhostButtonText}>
-                    Back to Sign In Options
+                    {t('LoginScreen.Back to Sign In Options')}
                   </Text>
                 </TouchableOpacity>
               </Animated.View>
@@ -191,7 +194,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                     <GoogleIcon />
                   </View>
                   <Text style={styles.socialButtonText}>
-                    Continue with Google
+                    {t('LoginScreen.Continue with Google')}
                   </Text>
                 </TouchableOpacity>
 
@@ -203,7 +206,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                   </View>
                   <Text
                     style={[styles.socialButtonText, styles.appleButtonText]}>
-                    Continue with Apple
+                    {t('LoginScreen.Continue with Apple')}
                   </Text>
                 </TouchableOpacity>
 
@@ -226,7 +229,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
                       style={styles.emailIcon}
                     />
                     <Text style={styles.enhancedEmailButtonText}>
-                      Sign up with Email
+                      {t('LoginScreen.Sign up with Email')}
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
@@ -235,7 +238,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({navigation}) => {
           </Animated.View>
 
           <Animated.Text style={[styles.termsText, {opacity}]}>
-            By continuing, you agree to our Terms of Service and Privacy Policy
+            {t('LoginScreen.By continuing')}
           </Animated.Text>
         </View>
       </SafeAreaView>

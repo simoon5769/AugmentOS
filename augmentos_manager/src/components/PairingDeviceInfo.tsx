@@ -7,6 +7,7 @@ import { useStatus } from '../providers/AugmentOSStatusProvider';
 import { NavigationProps } from './types';
 import { useNavigation } from '@react-navigation/native';
 import { getGlassesImage } from '../logic/getGlassesImage';
+import { useTranslation } from 'react-i18next';
 
 
 interface PairingDeviceInfoProps {
@@ -21,6 +22,7 @@ const PairingDeviceInfo: React.FC<PairingDeviceInfoProps> = ({ isDarkTheme, glas
   const [connectedGlasses, setConnectedGlasses] = useState('');
   const { status, refreshStatus } = useStatus();
   const navigation = useNavigation<NavigationProps>();
+  const { t } = useTranslation(['home']);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -57,7 +59,7 @@ const PairingDeviceInfo: React.FC<PairingDeviceInfoProps> = ({ isDarkTheme, glas
 
 
   const themeStyles = {
-    backgroundColor: isDarkTheme ? '#333333' : '#6750A414',
+    backgroundColor: isDarkTheme ? '#333333' : '#F2F2F7',
     textColor: isDarkTheme ? '#FFFFFF' : '#333333',
     statusLabelColor: isDarkTheme ? '#CCCCCC' : '#666666',
     statusValueColor: isDarkTheme ? '#FFFFFF' : '#333333',
@@ -74,9 +76,9 @@ const PairingDeviceInfo: React.FC<PairingDeviceInfoProps> = ({ isDarkTheme, glas
           style={styles.glassesImage}
         />
         <Text style={[styles.connectText, { color: themeStyles.textColor }]}>
-          {`Searching for ${glassesModelName}`}
+          {t("ConnectedDeviceInfo.Searching for glasses", {glassesModelName: glassesModelName})}
         </Text>
-        {status.core_info.is_searching && (
+        {status.glasses_info?.is_searching && (
           <ActivityIndicator size="small" color="#2196F3" />
         )}
       </View>
@@ -89,7 +91,7 @@ const PairingDeviceInfo: React.FC<PairingDeviceInfoProps> = ({ isDarkTheme, glas
 const styles = StyleSheet.create({
   deviceInfoContainer: {
     padding: 10,
-    borderRadius: 16,
+    borderRadius: 10,
     width: '100%',
     minHeight: 250,
     justifyContent: 'center',

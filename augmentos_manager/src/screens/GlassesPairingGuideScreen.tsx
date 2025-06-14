@@ -1,3 +1,5 @@
+// GlassesPairingGuideScreen.tsx
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
@@ -14,8 +16,8 @@ import coreCommunicator from '../bridge/CoreCommunicator';
 import { NavigationProps } from '../components/types';
 import PairingDeviceInfo from '../components/PairingDeviceInfo';
 import GlassesTroubleshootingModal from '../components/GlassesTroubleshootingModal';
-import GlassesPairingLoader from '../components/GlassesPairingLoader';
 import { getPairingGuide } from '../logic/getPairingGuide';
+import { useTranslation } from 'react-i18next';
 
 interface GlassesPairingGuideScreenProps {
   isDarkTheme: boolean;
@@ -32,16 +34,15 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
     const navigation = useNavigation<NavigationProps>();
     const [showTroubleshootingModal, setShowTroubleshootingModal] = useState(false);
     const [showHelpAlert, setShowHelpAlert] = useState(false);
-    const [pairingInProgress, setPairingInProgress] = useState(true);
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const hasAlertShownRef = useRef(false);
+    const { t } = useTranslation(['home']);
 
     // Timer to show help message after 30 seconds
     useEffect(() => {
       // Reset state when entering screen
       hasAlertShownRef.current = false;
       setShowHelpAlert(false);
-      setPairingInProgress(true);
       
       // Set timer for showing help popup
       timerRef.current = setTimeout(() => {
@@ -49,6 +50,8 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
         if (!status.glasses_info?.model_name && !hasAlertShownRef.current) {
           setShowHelpAlert(true);
           hasAlertShownRef.current = true;
+
+          coreCommunicator.sendRequestStatus();
         }
       }, 30000); // 30 seconds
 
@@ -64,16 +67,16 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
     useEffect(() => {
       if (showHelpAlert) {
         Alert.alert(
-          "Need Some Help?",
-          `Having trouble pairing your ${glassesModelName}? Wanna see some tips?`,
+          t("GlassesPairingGuideScreen.Need Some Help"),
+          t("GlassesPairingGuideScreen.Having trouble pairing your glassesModelName", {glassesModelName: glassesModelName}),
           [
             {
-              text: "No, thanks.",
+              text: t("GlassesPairingGuideScreen.No thanks"),
               style: "cancel",
               onPress: () => setShowHelpAlert(false)
             },
             {
-              text: "Help Me!",
+              text: t("GlassesPairingGuideScreen.Help Me"),
               onPress: () => {
                 setShowTroubleshootingModal(true);
                 setShowHelpAlert(false);
@@ -110,57 +113,27 @@ const GlassesPairingGuideScreen: React.FC<GlassesPairingGuideScreenProps> = ({
         }
         navigation.navigate('Home');
       }
+
+      console.log('GlassesPairingGuideScreen status= ', status);
     }, [status]);
 
 
     return (
       <View style={[styles.container, isDarkTheme ? styles.darkBackground : styles.lightBackground]}>
-        {pairingInProgress ? (
-          // Show the beautiful animated loader while pairing is in progress
-          <GlassesPairingLoader 
-            glassesModelName={glassesModelName} 
-            isDarkTheme={isDarkTheme} 
-          />
-        ) : (
-          // Show pairing guide if user chooses to view instructions
-          <ScrollView style={styles.scrollViewContainer}>
-            <View style={styles.contentContainer}>
-              <PairingDeviceInfo glassesModelName={glassesModelName} isDarkTheme={isDarkTheme} />
-              {getPairingGuide(glassesModelName, isDarkTheme)}
-              
-              <TouchableOpacity 
-                style={[styles.helpButton, { backgroundColor: isDarkTheme ? '#3b82f6' : '#007BFF' }]}
-                onPress={() => setShowTroubleshootingModal(true)}
-              >
-                <Icon name="question-circle" size={16} color="#FFFFFF" style={styles.helpIcon} />
-                <Text style={styles.helpButtonText}>Need Help Pairing?</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        )}
-        
-        {/* {pairingInProgress && (
-          <TouchableOpacity 
-            style={[styles.instructionsButton, isDarkTheme ? styles.darkButton : styles.lightButton]}
-            onPress={() => setPairingInProgress(false)}
-          >
-            <Text style={[styles.instructionsButtonText, isDarkTheme ? styles.darkText : styles.lightText]}>
-              View Manual Pairing Instructions
-            </Text>
-          </TouchableOpacity>
-        )}
-        
-
-        {!pairingInProgress && (
-          <TouchableOpacity 
-            style={[styles.instructionsButton, isDarkTheme ? styles.darkButton : styles.lightButton]}
-            onPress={() => setPairingInProgress(true)}
-          >
-            <Text style={[styles.instructionsButtonText, isDarkTheme ? styles.darkText : styles.lightText]}>
-              Return to Pairing Animation
-            </Text>
-          </TouchableOpacity>
-        )} */}
+        <ScrollView style={styles.scrollViewContainer}>
+          <View style={styles.contentContainer}>
+            <PairingDeviceInfo glassesModelName={glassesModelName} isDarkTheme={isDarkTheme} />
+            {getPairingGuide(glassesModelName, isDarkTheme)}
+            
+            <TouchableOpacity 
+              style={[styles.helpButton, { backgroundColor: isDarkTheme ? '#3b82f6' : '#007BFF' }]}
+              onPress={() => setShowTroubleshootingModal(true)}
+            >
+              <Icon name="question-circle" size={16} color="#FFFFFF" style={styles.helpIcon} />
+                <Text style={styles.helpButtonText}>{t("GlassesPairingGuideScreen.Need Help Pairing")}</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
         
         <GlassesTroubleshootingModal 
           isVisible={showTroubleshootingModal}
@@ -227,23 +200,5 @@ const styles = StyleSheet.create({
   helpIcon: {
     marginRight: 8,
   },
-  instructionsButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    marginTop: 10,
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
-  darkButton: {
-    backgroundColor: '#333333',
-  },
-  lightButton: {
-    backgroundColor: '#e5e7eb',
-  },
-  instructionsButtonText: {
-    fontSize: 14,
-    fontWeight: '500',
-    fontFamily: 'Montserrat-Regular',
-  },
 });
+
